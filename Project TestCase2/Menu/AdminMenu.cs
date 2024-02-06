@@ -22,6 +22,7 @@ namespace Project_TestCase2.Menu
         OnStart onStart = new();
         public void MainMenu()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             bool isContinue = true;
             while (isContinue)
             {
@@ -34,18 +35,23 @@ namespace Project_TestCase2.Menu
                 {
                     choice = num;
                 }
+                Console.ForegroundColor = ConsoleColor.Blue;
                 switch (choice)
                 {
                     case 1:
+                        Console.WriteLine("\t======REGISTRATION======");
                         Register();
                         break;
                     case 2:
+                        Console.WriteLine("\t======LOGIN======");
                         Login();
                         break;
                     case 0:
+                        Console.ForegroundColor = ConsoleColor.Gray;
                         isContinue = false;
                         break;
                     default:
+                        Console.ForegroundColor = ConsoleColor.Gray;
                         Console.WriteLine("Invalid Input!!!");
                         break;
                 }
@@ -54,6 +60,7 @@ namespace Project_TestCase2.Menu
 
         private void Register()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.Write("Enter your first name: ");
             string firstName = Console.ReadLine();
             Console.Write("Enter your last name: ");
@@ -72,6 +79,7 @@ namespace Project_TestCase2.Menu
 
         private void Login()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.Write("Enter your email: ");
             string email = Console.ReadLine();
             Console.Write("Enter your password: ");
@@ -108,27 +116,35 @@ namespace Project_TestCase2.Menu
                 {
                     choice = num;
                 }
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 switch (choice)
                 {
                     case 1:
+                        Console.WriteLine("\t======REGISTERING HOTEL======");
                         RegisterHotel();
                         break;
                     case 2:
+                        Console.WriteLine("\t======VIEWING HOTEL DETAILS======");
                         ViewHotelDetails();
                         break;
                     case 3:
+                        Console.WriteLine("\t======UPDATING HOTEL DETAILS======");
                         UpdateHotelDetails();
                         break;
                     case 4:
+                        Console.WriteLine("\t======REMOVING HOTEL======");
                         RemoveHotel();
                         break;
                     case 5:
+                        Console.WriteLine("\t======DELETING ACCOUNT======");
                         DeleteAccount();
                         break;
                     case 0:
+                        Console.ForegroundColor = ConsoleColor.Gray;
                         isContinue = false;
                         break;
                     default:
+                        Console.ForegroundColor = ConsoleColor.Gray;
                         Console.WriteLine("Invalid Input!!!");
                         break;
 
@@ -138,6 +154,7 @@ namespace Project_TestCase2.Menu
 
         private void RegisterHotel()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.Write("Enter name of hotel: ");
             string name = Console.ReadLine().ToUpper();
             Console.WriteLine("Enter types of rooms in hotel: ");
@@ -152,7 +169,19 @@ namespace Project_TestCase2.Menu
             foreach (string room in roomTypes)
             {
                 Console.Write($"{room}:  ");
-                double price = double.Parse(Console.ReadLine());
+                double price = -1;
+                while (price < 0)
+                {
+                    if (double.TryParse(Console.ReadLine(), out double num))
+                    {
+                        price = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
                 roomPrices.Add(price);
             }
             Console.WriteLine("Enter amount of types of rooms in hotel: ");
@@ -160,7 +189,19 @@ namespace Project_TestCase2.Menu
             foreach (string room in roomTypes)
             {
                 Console.Write($"{room}:  ");
-                int amount = int.Parse(Console.ReadLine());
+                int amount = -1;
+                while (amount < 0)
+                {
+                    if (int.TryParse(Console.ReadLine(), out int num))
+                    {
+                        amount = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
                 roomAmount.Add(amount);
             }
             List<List<string>> roomNumbers = new();
@@ -168,7 +209,7 @@ namespace Project_TestCase2.Menu
             foreach (string type in roomTypes)
             {
                 List<string> roomNumber = new();
-                Console.WriteLine($"Enter room number for rooms under {type} type");
+                Console.WriteLine($"Enter room number for rooms under {type.ToPascalCase()}");
                 for (int i = 1; i <= roomAmount[index]; i++)
                 {
                     roomNumber.Add(Console.ReadLine());
@@ -177,10 +218,34 @@ namespace Project_TestCase2.Menu
                 index++;
             }
             Console.Write("Enter early check-out fees: ");
-            double fees = double.Parse(Console.ReadLine());
+            double fees = -1;
+            while (fees < 0)
+            {
+                if (double.TryParse(Console.ReadLine(), out double num))
+                {
+                    fees = num;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Input!!!");
+                    Console.WriteLine("Try again");
+                }
+            }
             Console.WriteLine("Do you want your hotel to provide room service? (Y/N)");
             bool roomService = false;
-            char choice = char.Parse(Console.ReadLine().ToUpper());
+            char choice = '0';
+            while (choice == '0')
+            {
+                if (char.TryParse(Console.ReadLine().ToUpper(), out char num))
+                {
+                    choice = num;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Input!!!");
+                    Console.WriteLine("Try again");
+                }
+            }
             List<string> roomServices = new();
             List<double> Prices = new();
             if (char.ToUpper(choice) == 'Y')
@@ -195,7 +260,19 @@ namespace Project_TestCase2.Menu
                 foreach (string service in roomServices)
                 {
                     Console.Write($"{service}:  ");
-                    double price = double.Parse(Console.ReadLine());
+                    double price = -1;
+                    while (price < 0)
+                    {
+                        if (double.TryParse(Console.ReadLine(), out double num))
+                        {
+                            price = num;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid Input!!!");
+                            Console.WriteLine("Try again");
+                        }
+                    }
                     Prices.Add(price);
                 }
                 roomService = true;
@@ -225,6 +302,7 @@ namespace Project_TestCase2.Menu
 
         private void ViewHotelDetails()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             List<Hotel> hotel = _hotelRepository.GetList(Admin.LoggedInAdminId);
             if (hotel.Count == 0)
             {
@@ -236,7 +314,19 @@ namespace Project_TestCase2.Menu
             if (hotel.Count > 1)
             {
                 Console.WriteLine("Enter the which hotel to view details (i.e enter 1,2,3,...)");
-                choice = int.Parse(Console.ReadLine());
+                choice = -1;
+                while (choice < 0)
+                {
+                    if (int.TryParse(Console.ReadLine(), out int num))
+                    {
+                        choice = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
                 if (choice > hotel.Count)
                 {
                     Console.WriteLine("Hotel does not exists");
@@ -250,7 +340,7 @@ namespace Project_TestCase2.Menu
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"\t{hotel[choice].Name}");
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine($"ROOM TYPES     AMOUNT OF ROOM      PRICES OF ROOMS");
+            Console.WriteLine("ROOM TYPES".PadRight(10) + "AMOUNT OF ROOM".PadRight(30) + "PRICES OF ROOMS");
             Console.ForegroundColor = ConsoleColor.Gray;
             for (int i = 0; i < roomTypes.Count; i++)
             {
@@ -272,6 +362,7 @@ namespace Project_TestCase2.Menu
 
         private void UpdateHotelDetails()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             List<Hotel> hotels = _hotelRepository.GetList(Admin.LoggedInAdminId);
             if (hotels.Count == 0)
             {
@@ -287,25 +378,36 @@ namespace Project_TestCase2.Menu
                 Console.WriteLine("3. Room Service");
                 Console.WriteLine("4. Change Early Check Out fees");
                 Console.WriteLine("0. Exit");
-                int choice = int.Parse(Console.ReadLine());
+                int choice = 5;
+                if (int.TryParse(Console.ReadLine(), out int num))
+                {
+                    choice = num;
+                }
+                Console.ForegroundColor = ConsoleColor.Green;
                 switch (choice)
                 {
                     case 1:
+                        Console.WriteLine("\t======UPDATING HOTEL NAME======");
                         UpdateHotelName();
                         break;
                     case 2:
+                        Console.WriteLine("\t======UPDATING ROOM TYPES======");
                         UpdateRoomTypes();
                         break;
                     case 3:
+                        Console.WriteLine("\t======UPDATING ROOM SERVICES======");
                         UpdateRoomService();
                         break;
                     case 4:
+                        Console.WriteLine("\t======CHANGING CHECK-OUT FEES======");
                         ChangeCheckOutFees();
                         break;
                     case 0:
+                        Console.ForegroundColor = ConsoleColor.Gray;
                         isContinue = false;
                         break;
                     default:
+                        Console.ForegroundColor = ConsoleColor.Gray;
                         Console.WriteLine("Invalid Input!!!");
                         break;
                 }
@@ -314,12 +416,25 @@ namespace Project_TestCase2.Menu
 
         private void UpdateHotelName()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             List<Hotel> hotel = _hotelRepository.GetList(Admin.LoggedInAdminId);
             int choice = 1;
             if (hotel.Count > 1)
             {
                 Console.WriteLine("Enter the which hotel to change name (i.e enter 1,2,3,...)");
-                choice = int.Parse(Console.ReadLine());
+                choice = -1;
+                while (choice < 0)
+                {
+                    if (int.TryParse(Console.ReadLine(), out int num))
+                    {
+                        choice = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
                 if (choice > hotel.Count)
                 {
                     Console.WriteLine("Hotel does not exists");
@@ -346,6 +461,7 @@ namespace Project_TestCase2.Menu
 
         private void UpdateRoomTypes()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             bool isContinue = true;
             while (isContinue)
             {
@@ -355,36 +471,50 @@ namespace Project_TestCase2.Menu
                 Console.WriteLine("4. Change amount of rooms available in Room Type");
                 Console.WriteLine("5. Add Room");
                 Console.WriteLine("6. Remove Room");
+                Console.WriteLine("7. Change Room Number");
                 Console.WriteLine("0. Exit");
-                int choice = 7;
+                int choice = 8;
                 if (int.TryParse(Console.ReadLine(), out int num))
                 {
                     choice = num;
                 }
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
                 switch (choice)
                 {
                     case 1:
+                        Console.WriteLine("\t======ADDING ROOM TYPE======");
                         AddRoomType();
                         break;
                     case 2:
+                        Console.WriteLine("\t======REMOVING ROOM TYPE======");
                         RemoveRoomType();
                         break;
                     case 3:
+                        Console.WriteLine("\t======CHANGING PRICE OF ROOM TYPE======");
                         ChangePriceOfRoomType();
                         break;
                     case 4:
+                        Console.WriteLine("\t======CHANGING AMOUNT OF ROOM TYPE======");
                         ChangeAmount();
                         break;
                     case 5:
+                        Console.WriteLine("\t======ADDING ROOM======");
                         AddRoom();
                         break;
                     case 6:
+                        Console.WriteLine("\t======REMOVING ROOM======");
                         RemoveRoom();
                         break;
+                    case 7:
+                        Console.WriteLine("\t======CHANGING ROOM NUMBER======");
+                        ChangeRoomNumber();
+                        break;
                     case 0:
+                        Console.ForegroundColor = ConsoleColor.Gray;
                         isContinue = false;
                         break;
                     default:
+                        Console.ForegroundColor = ConsoleColor.Gray;
                         Console.WriteLine("Invalid Input!!!");
                         break;
                 }
@@ -393,12 +523,25 @@ namespace Project_TestCase2.Menu
 
         private void AddRoomType()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             List<Hotel> hotel = _hotelRepository.GetList(Admin.LoggedInAdminId);
             int choice = 1;
             if (hotel.Count > 1)
             {
                 Console.WriteLine("Enter the which hotel to add room type (i.e enter 1,2,3,...)");
-                choice = int.Parse(Console.ReadLine());
+                choice = -1;
+                while (choice < 0)
+                {
+                    if (int.TryParse(Console.ReadLine(), out int num))
+                    {
+                        choice = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
                 if (choice > hotel.Count)
                 {
                     Console.WriteLine("Hotel does not exists");
@@ -418,9 +561,33 @@ namespace Project_TestCase2.Menu
                 return;
             }
             Console.Write("Enter price of room type: ");
-            double price = double.Parse(Console.ReadLine());
+            double price = -1;
+            while (price < 0)
+            {
+                if (double.TryParse(Console.ReadLine(), out double num))
+                {
+                    price = num;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Input!!!");
+                    Console.WriteLine("Try again");
+                }
+            }
             Console.Write("Enter amount of room type: ");
-            int amount = int.Parse(Console.ReadLine());
+            int amount = -1;
+            while (amount < 0)
+            {
+                if (int.TryParse(Console.ReadLine(), out int num))
+                {
+                    amount = num;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Input!!!");
+                    Console.WriteLine("Try again");
+                }
+            }
             RoomType type = new(hotel[choice].Id, roomType, amount, price);
             Console.WriteLine($"Enter room numbers of rooms under type {roomType}");
             for (int i = 1; i <= amount; i++)
@@ -435,13 +602,26 @@ namespace Project_TestCase2.Menu
 
         private void RemoveRoomType()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             onStart.CheckRoomTypeStatus();
             List<Hotel> hotel = _hotelRepository.GetList(Admin.LoggedInAdminId);
             int choice = 1;
             if (hotel.Count > 1)
             {
                 Console.WriteLine("Enter the which hotel to remove room type (i.e enter 1,2,3,...)");
-                choice = int.Parse(Console.ReadLine());
+                choice = -1;
+                while (choice < 0)
+                {
+                    if (int.TryParse(Console.ReadLine(), out int num))
+                    {
+                        choice = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
                 if (choice > hotel.Count)
                 {
                     Console.WriteLine("Hotel does not exists");
@@ -480,12 +660,25 @@ namespace Project_TestCase2.Menu
 
         private void ChangePriceOfRoomType()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             List<Hotel> hotel = _hotelRepository.GetList(Admin.LoggedInAdminId);
             int choice = 1;
             if (hotel.Count > 1)
             {
                 Console.WriteLine("Enter the which hotel to update room prices (i.e enter 1,2,3,...)");
-                choice = int.Parse(Console.ReadLine());
+                choice = -1;
+                while (choice < 0)
+                {
+                    if (int.TryParse(Console.ReadLine(), out int num))
+                    {
+                        choice = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
                 if (choice > hotel.Count)
                 {
                     Console.WriteLine("Hotel does not exists");
@@ -499,7 +692,19 @@ namespace Project_TestCase2.Menu
             if (_roomTypeManager.IsExist(roomType, hotel[choice].Id))
             {
                 Console.Write("Enter new price: ");
-                double price = double.Parse(Console.ReadLine());
+                double price = -1;
+                while (price < 0)
+                {
+                    if (double.TryParse(Console.ReadLine(), out double num))
+                    {
+                        price = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
                 _roomTypeRepository.Get(hotel[choice].Id, roomType).Price = price;
                 Console.WriteLine($"Price of {roomType} room type has been successfully changed to N{price:n}");
                 Read();
@@ -515,12 +720,25 @@ namespace Project_TestCase2.Menu
 
         private void ChangeAmount()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             List<Hotel> hotel = _hotelRepository.GetList(Admin.LoggedInAdminId);
             int choice = 1;
             if (hotel.Count > 1)
             {
                 Console.WriteLine("Enter the which hotel to update room amount (i.e enter 1,2,3,...)");
-                choice = int.Parse(Console.ReadLine());
+                choice = -1;
+                while (choice < 0)
+                {
+                    if (int.TryParse(Console.ReadLine(), out int num))
+                    {
+                        choice = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
                 if (choice > hotel.Count)
                 {
                     Console.WriteLine("Hotel does not exists");
@@ -535,7 +753,19 @@ namespace Project_TestCase2.Menu
             {
                 RoomType type = _roomTypeRepository.Get(hotel[choice].Id, roomType);
                 Console.Write("Enter new amount: ");
-                int amount = int.Parse(Console.ReadLine());
+                int amount = -1;
+                while (amount < 0)
+                {
+                    if (int.TryParse(Console.ReadLine(), out int num))
+                    {
+                        amount = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
                 if (amount > type.Amount)
                 {
                     Console.WriteLine("Enter room numbers of newly added rooms: ");
@@ -578,12 +808,25 @@ namespace Project_TestCase2.Menu
 
         private void AddRoom()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             List<Hotel> hotel = _hotelRepository.GetList(Admin.LoggedInAdminId);
             int choice = 1;
             if (hotel.Count > 1)
             {
                 Console.WriteLine("Enter the which hotel to remove room type (i.e enter 1,2,3,...)");
-                choice = int.Parse(Console.ReadLine());
+                choice = -1;
+                while (choice < 0)
+                {
+                    if (int.TryParse(Console.ReadLine(), out int num))
+                    {
+                        choice = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
                 if (choice > hotel.Count)
                 {
                     Console.WriteLine("Hotel does not exists");
@@ -612,12 +855,25 @@ namespace Project_TestCase2.Menu
 
         private void RemoveRoom()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             List<Hotel> hotel = _hotelRepository.GetList(Admin.LoggedInAdminId);
             int choice = 1;
             if (hotel.Count > 1)
             {
                 Console.WriteLine("Enter the which hotel to remove room type (i.e enter 1,2,3,...)");
-                choice = int.Parse(Console.ReadLine());
+                choice = -1;
+                while (choice < 0)
+                {
+                    if (int.TryParse(Console.ReadLine(), out int num))
+                    {
+                        choice = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
                 if (choice > hotel.Count)
                 {
                     Console.WriteLine("Hotel does not exists");
@@ -664,8 +920,71 @@ namespace Project_TestCase2.Menu
             }
         }
 
+        private void ChangeRoomNumber()
+        {
+            Console.ForegroundColor = ConsoleColor.Gray;
+            List<Hotel> hotel = _hotelRepository.GetList(Admin.LoggedInAdminId);
+            int choice = 1;
+            if (hotel.Count > 1)
+            {
+                Console.WriteLine("Enter the which hotel to remove room type (i.e enter 1,2,3,...)");
+                choice = -1;
+                while (choice < 0)
+                {
+                    if (int.TryParse(Console.ReadLine(), out int num))
+                    {
+                        choice = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
+                if (choice > hotel.Count)
+                {
+                    Console.WriteLine("Hotel does not exists");
+                    Read();
+                    return;
+                }
+            }
+            choice--;
+            Console.Write("Under which room type is room number to be changed: ");
+            string roomType = Console.ReadLine();
+            if (_roomTypeManager.IsExist(roomType, hotel[choice].Id))
+            {
+                RoomType type = _roomTypeRepository.Get(hotel[choice].Id, roomType);
+                Console.Write("Enter room number of room to be changed: ");
+                string num = Console.ReadLine();
+                if (_roomManager.IsExist(num, type.Id))
+                {
+                    Console.Write("Enter new room number: ");
+                    string newnum = Console.ReadLine();
+                    if (!_roomManager.IsExist(newnum, type.Id))
+                    {
+                        _roomRepository.GetByRoomNumber(num, type.Id).Number = newnum;
+                        Console.WriteLine($"You have successfully changed room's room number to {newnum}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"A room with {newnum} room number already exists within the same type!!!");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"Room with room number {num} does not exist!!!");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Room type {roomType} does not exist!!!");
+            }
+            Read();
+        }
+
         private void UpdateRoomService()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             bool isContinue = true;
             while (isContinue)
             {
@@ -678,21 +997,27 @@ namespace Project_TestCase2.Menu
                 {
                     choice = num;
                 }
+                Console.ForegroundColor = ConsoleColor.Red;
                 switch (choice)
                 {
                     case 1:
+                        Console.WriteLine("\t======ADDING ROOM SERVICE======");
                         AddRoomService();
                         break;
                     case 2:
+                        Console.WriteLine("\t======REMOVING ROOM SERVICE======");
                         RemoveRoomService();
                         break;
                     case 3:
+                        Console.WriteLine("\t======CHANGING PRICE OF ROOM SERVICE======");
                         ChangePriceOfRoomService();
                         break;
                     case 0:
+                        Console.ForegroundColor = ConsoleColor.Gray;
                         isContinue = false;
                         break;
                     default:
+                        Console.ForegroundColor = ConsoleColor.Gray;
                         Console.WriteLine("Invalid Input!!!");
                         break;
                 }
@@ -701,12 +1026,25 @@ namespace Project_TestCase2.Menu
 
         private void AddRoomService()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             List<Hotel> hotel = _hotelRepository.GetList(Admin.LoggedInAdminId);
             int choice = 1;
             if (hotel.Count > 1)
             {
                 Console.WriteLine("Enter the which hotel to view details (i.e enter 1,2,3,...)");
-                choice = int.Parse(Console.ReadLine());
+                choice = -1;
+                while (choice < 0)
+                {
+                    if (int.TryParse(Console.ReadLine(), out int num))
+                    {
+                        choice = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
                 if (choice > hotel.Count)
                 {
                     Console.WriteLine("Hotel does not exists");
@@ -719,7 +1057,19 @@ namespace Project_TestCase2.Menu
             if (!hotel[choice].RoomService)
             {
                 Console.WriteLine("Are you sure you want your hotel to be providing room service (Y/N)");
-                input = char.Parse(Console.ReadLine().ToUpper());
+                input = '0';
+                while (input == '0')
+                {
+                    if (char.TryParse(Console.ReadLine().ToUpper(), out char num))
+                    {
+                        input = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
             }
             if (input == 'Y')
             {
@@ -741,7 +1091,19 @@ namespace Project_TestCase2.Menu
                 foreach (string service in roomServices)
                 {
                     Console.Write($"{service}:  ");
-                    double price = double.Parse(Console.ReadLine());
+                    double price = -1;
+                    while (price < 0)
+                    {
+                        if (double.TryParse(Console.ReadLine(), out double num))
+                        {
+                            price = num;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid Input!!!");
+                            Console.WriteLine("Try again");
+                        }
+                    }
                     _roomServiceRepository.Add(new RoomService(hotel[choice].Id, service, price));
                 }
                 hotel[choice].RoomService = true;
@@ -758,13 +1120,26 @@ namespace Project_TestCase2.Menu
 
         private void RemoveRoomService()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             onStart.CheckHotelStatus();
             List<Hotel> hotel = _hotelRepository.GetList(Admin.LoggedInAdminId);
             int choice = 1;
             if (hotel.Count > 1)
             {
                 Console.WriteLine("Enter the which hotel to view details (i.e enter 1,2,3,...)");
-                choice = int.Parse(Console.ReadLine());
+                choice = -1;
+                while (choice < 0)
+                {
+                    if (int.TryParse(Console.ReadLine(), out int num))
+                    {
+                        choice = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
                 if (choice > hotel.Count)
                 {
                     Console.WriteLine("Hotel does not exists");
@@ -806,12 +1181,25 @@ namespace Project_TestCase2.Menu
 
         private void ChangePriceOfRoomService()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             List<Hotel> hotel = _hotelRepository.GetList(Admin.LoggedInAdminId);
             int choice = 1;
             if (hotel.Count > 1)
             {
                 Console.WriteLine("Enter the which hotel to view details (i.e enter 1,2,3,...)");
-                choice = int.Parse(Console.ReadLine());
+                choice = -1;
+                while (choice < 0)
+                {
+                    if (int.TryParse(Console.ReadLine(), out int num))
+                    {
+                        choice = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
                 if (choice > hotel.Count)
                 {
                     Console.WriteLine("Hotel does not exists");
@@ -834,7 +1222,19 @@ namespace Project_TestCase2.Menu
                 if (_roomServiceManager.IsExist(name, hotel[choice].Id))
                 {
                     Console.Write("Enter new price of room service: ");
-                    double price = double.Parse(Console.ReadLine());
+                    double price = -1;
+                    while (price < 0)
+                    {
+                        if (double.TryParse(Console.ReadLine(), out double num))
+                        {
+                            price = num;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid Input!!!");
+                            Console.WriteLine("Try again");
+                        }
+                    }
                     _roomServiceRepository.GetByName(name, hotel[choice].Id).Price = price;
                     Console.WriteLine($"{name} price has been successfully changed to N{price:n}");
                     Read();
@@ -849,12 +1249,25 @@ namespace Project_TestCase2.Menu
 
         private void ChangeCheckOutFees()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             List<Hotel> hotel = _hotelRepository.GetList(Admin.LoggedInAdminId);
             int choice = 1;
             if (hotel.Count > 1)
             {
                 Console.WriteLine("Enter the which hotel to remove room type (i.e enter 1,2,3,...)");
-                choice = int.Parse(Console.ReadLine());
+                choice = -1;
+                while (choice < 0)
+                {
+                    if (int.TryParse(Console.ReadLine(), out int num))
+                    {
+                        choice = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
                 if (choice > hotel.Count)
                 {
                     Console.WriteLine("Hotel does not exists");
@@ -864,17 +1277,42 @@ namespace Project_TestCase2.Menu
             }
             choice--;
             Console.Write("Enter new Check out fees: ");
-            hotel[choice].EarlyCheckOutFee = double.Parse(Console.ReadLine());
+            hotel[choice].EarlyCheckOutFee = -1;
+            while (hotel[choice].EarlyCheckOutFee < 0)
+            {
+                if (double.TryParse(Console.ReadLine(), out double num))
+                {
+                    hotel[choice].EarlyCheckOutFee = num;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Input!!!");
+                    Console.WriteLine("Try again");
+                }
+            }
             Console.WriteLine($"Successfully changed check out fees to N{hotel[choice].EarlyCheckOutFee:n}");
             Read();
         }
 
         private void RemoveHotel()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             onStart.CheckHotelStatus();
             Console.WriteLine("All details about hotel will be removed including room types, room services, etc");
             Console.WriteLine("Are you sure you want to remove hotel (Y/N)");
-            char choice = char.Parse(Console.ReadLine().ToUpper());
+            char choice = '0';
+            while (choice == '0')
+            {
+                if (char.TryParse(Console.ReadLine().ToUpper(), out char num))
+                {
+                    choice = num;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Input!!!");
+                    Console.WriteLine("Try again");
+                }
+            }
             if (choice != 'Y')
             {
                 return;
@@ -930,10 +1368,23 @@ namespace Project_TestCase2.Menu
 
         private void DeleteAccount()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             onStart.CheckHotelStatus();
             Console.WriteLine("All details about user will be removed if user deletes account");
             Console.WriteLine("Do you want to continue with this operation (Y/N)");
-            char choice = char.Parse(Console.ReadLine().ToUpper());
+            char choice = '0';
+            while (choice < 0)
+            {
+                if (char.TryParse(Console.ReadLine().ToUpper(), out char num))
+                {
+                    choice = num;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Input!!!");
+                    Console.WriteLine("Try again");
+                }
+            }
             if (choice == 'Y')
             {
                 Admin admin = _adminRepository.GetById(Admin.LoggedInAdminId);

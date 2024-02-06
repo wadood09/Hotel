@@ -23,6 +23,7 @@ namespace Project_TestCase2.Menu
         OnStart onStart = new();
         public void MainMenu()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             bool isContinue = true;
             while (isContinue)
             {
@@ -35,18 +36,23 @@ namespace Project_TestCase2.Menu
                 {
                     choice = num;
                 }
+                Console.ForegroundColor = ConsoleColor.Red;
                 switch (choice)
                 {
                     case 1:
+                        Console.WriteLine("\t======REGISTRATION======");
                         Register();
                         break;
                     case 2:
+                        Console.WriteLine("\t======LOGIN======");
                         Login();
                         break;
                     case 0:
+                        Console.ForegroundColor = ConsoleColor.Gray;
                         isContinue = false;
                         break;
                     default:
+                        Console.ForegroundColor = ConsoleColor.Gray;
                         Console.WriteLine("Invalid Input!!!");
                         break;
                 }
@@ -55,6 +61,7 @@ namespace Project_TestCase2.Menu
 
         private void Register()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.Write("Enter your first name: ");
             string firstName = Console.ReadLine();
 
@@ -74,6 +81,7 @@ namespace Project_TestCase2.Menu
 
         private void Login()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.Write("Enter your email: ");
             string email = Console.ReadLine();
             Console.Write("Enter your password: ");
@@ -124,42 +132,54 @@ namespace Project_TestCase2.Menu
                 {
                     choice = num;
                 }
+                Console.ForegroundColor = ConsoleColor.Blue;
                 switch (choice)
                 {
                     case 1:
+                        Console.WriteLine("\t======VIEWING AVAILABLE HOTELS======");
                         ViewAvailableHotels();
                         break;
                     case 2:
+                        Console.WriteLine("\t======BOOKING ROOM======");
                         BookARoom();
                         break;
                     case 3:
+                        Console.WriteLine("\t======INCREASING STAY PERIOD======");
                         IncreaseStayPeriod();
                         break;
                     case 4:
+                        Console.WriteLine("\t======CHANGING CHECK-IN TIME======");
                         ChangeCheckInTime();
                         break;
                     case 5:
                         RoomService();
                         break;
                     case 6:
+                        Console.WriteLine("\t======VIEWING ROOM DETAILS======");
                         ViewRoomDetails();
                         break;
                     case 7:
+                        Console.WriteLine("\t======VIEWING BILLS======");
                         ViewBillings();
                         break;
                     case 8:
+                        Console.WriteLine("\t======RATING HOTEL======");
                         RateHotel();
                         break;
                     case 9:
+                        Console.WriteLine("\t======CHECKING OUT======");
                         CheckOut();
                         break;
                     case 10:
+                        Console.WriteLine("\t======DELETING ACCOUNT======");
                         DeleteAccount();
                         break;
                     case 0:
+                        Console.ForegroundColor = ConsoleColor.Gray;
                         isContinue = false;
                         break;
                     default:
+                        Console.ForegroundColor = ConsoleColor.Gray;
                         Console.WriteLine("Invalid Input!!!");
                         break;
 
@@ -169,6 +189,7 @@ namespace Project_TestCase2.Menu
 
         private void ViewAvailableHotels()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             List<Hotel> hotels = _hotelRepository.GetAll();
             if (hotels.Count == 0)
             {
@@ -187,6 +208,7 @@ namespace Project_TestCase2.Menu
 
         private void BookARoom()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             onStart.CheckRoomTypeStatus();
             List<Hotel> hotels = _hotelRepository.GetAll();
             if (hotels.Count == 0)
@@ -211,18 +233,66 @@ namespace Project_TestCase2.Menu
                     bool roomService = false;
                     string service = "";
                     Console.Write("Do you want to check in immediately (Y/N)");
-                    char choice2 = char.Parse(Console.ReadLine().ToUpper());
+                    char choice2 = '0';
+                    while (choice2 == '0')
+                    {
+                        if (char.TryParse(Console.ReadLine().ToUpper(), out char num))
+                        {
+                            choice2 = num;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid Input!!!");
+                            Console.WriteLine("Try again");
+                        }
+                    }
                     if (choice2 != 'Y')
                     {
                         Console.Write("How days from now do you want to check in: ");
-                        date = int.Parse(Console.ReadLine());
+                        date = -1;
+                        while (date < 0)
+                        {
+                            if (int.TryParse(Console.ReadLine(), out int num))
+                            {
+                                date = num;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid Input!!!");
+                                Console.WriteLine("Try again");
+                            }
+                        }
                     }
                     Console.Write("How many nights are you staying for: ");
-                    int nights = int.Parse(Console.ReadLine());
+                    int nights = -1;
+                    while (nights < 0)
+                    {
+                        if (int.TryParse(Console.ReadLine(), out int num))
+                        {
+                            nights = num;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid Input!!!");
+                            Console.WriteLine("Try again");
+                        }
+                    }
                     if (hotel.RoomService)
                     {
                         Console.WriteLine("Do you want hotel to provide you room service: ");
-                        char choice3 = char.Parse(Console.ReadLine().ToUpper());
+                        char choice3 = '0';
+                        while (choice3 == '0')
+                        {
+                            if (char.TryParse(Console.ReadLine().ToUpper(), out char num))
+                            {
+                                choice3 = num;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid Input!!!");
+                                Console.WriteLine("Try again");
+                            }
+                        }
                         if (choice3 == 'Y')
                         {
                             Console.WriteLine("Choose room service to be provided: ");
@@ -258,6 +328,7 @@ namespace Project_TestCase2.Menu
 
         private void IncreaseStayPeriod()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             int choice = 1;
             List<StayHistory> histories = _historyRepository.Get(Customer.LoggedInCustomerId);
             if (histories.Count == 0)
@@ -270,7 +341,19 @@ namespace Project_TestCase2.Menu
             {
                 Console.WriteLine("Choose which room to increase stay period: ");
                 _historyManager.DisplayRooms(histories);
-                choice = int.Parse(Console.ReadLine());
+                choice = -1;
+                while (choice < 0)
+                {
+                    if (int.TryParse(Console.ReadLine(), out int num))
+                    {
+                        choice = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
                 if (choice > histories.Count)
                 {
                     Console.WriteLine("Room does not exists!!!");
@@ -280,7 +363,19 @@ namespace Project_TestCase2.Menu
             }
             choice--;
             Console.WriteLine("Enter how many days you wish to increase stay period");
-            int days = int.Parse(Console.ReadLine());
+            int days = -1;
+            while (days < 0)
+            {
+                if (int.TryParse(Console.ReadLine(), out int num))
+                {
+                    days = num;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Input!!!");
+                    Console.WriteLine("Try again");
+                }
+            }
             histories[choice].StayPeriod += days;
             histories[choice].CheckOutDate = histories[choice].CheckInDate.AddDays(histories[choice].StayPeriod);
             histories[choice].TotalPriceOfStay = histories[choice].Price * histories[choice].StayPeriod;
@@ -294,6 +389,7 @@ namespace Project_TestCase2.Menu
 
         private void ChangeCheckInTime()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             int choice = 1;
             List<StayHistory> histories = _historyRepository.Get(Customer.LoggedInCustomerId);
             if (histories.Count == 0)
@@ -306,7 +402,19 @@ namespace Project_TestCase2.Menu
             {
                 Console.WriteLine("Choose which room to change check in time: ");
                 _historyManager.DisplayRooms(histories);
-                choice = int.Parse(Console.ReadLine());
+                choice = -1;
+                while (choice < 0)
+                {
+                    if (int.TryParse(Console.ReadLine(), out int num))
+                    {
+                        choice = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
                 if (choice > histories.Count)
                 {
                     Console.WriteLine("Room does not exists!!!");
@@ -324,7 +432,19 @@ namespace Project_TestCase2.Menu
             else
             {
                 Console.Write("How many days from now do you wish to be checked in: ");
-                int days = int.Parse(Console.ReadLine());
+                int days = -1;
+                while (days < 0)
+                {
+                    if (int.TryParse(Console.ReadLine(), out int num))
+                    {
+                        days = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
                 histories[choice].CheckInDate = DateTime.Now.AddDays(days);
                 histories[choice].CheckOutDate = histories[choice].CheckInDate.AddDays(histories[choice].StayPeriod);
                 Console.WriteLine($"Check in date has successfully been changed to {histories[choice].CheckInDate.ToString("dddd, MMMM dd, yyyy")}");
@@ -334,6 +454,7 @@ namespace Project_TestCase2.Menu
 
         private void RoomService()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             bool isContinue = true;
             while (isContinue)
             {
@@ -345,18 +466,23 @@ namespace Project_TestCase2.Menu
                 {
                     choice = num;
                 }
+                Console.ForegroundColor = ConsoleColor.Green;
                 switch (choice)
                 {
                     case 1:
+                        Console.WriteLine("\t======CHANGING ROOM SERVICE STATUS======");
                         OptInOrOutOfRoomService();
                         break;
                     case 2:
+                        Console.WriteLine("\t======CHANGING ROOM SERVICE TYPE======");
                         ChangeRoomServiceType();
                         break;
                     case 0:
+                        Console.ForegroundColor = ConsoleColor.Gray;
                         isContinue = false;
                         break;
                     default:
+                        Console.ForegroundColor = ConsoleColor.Gray;
                         Console.WriteLine("Invalid Input!!!");
                         break;
                 }
@@ -365,6 +491,7 @@ namespace Project_TestCase2.Menu
 
         private void OptInOrOutOfRoomService()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             int choice = 1;
             List<StayHistory> histories = _historyRepository.Get(Customer.LoggedInCustomerId);
             if (histories.Count == 0)
@@ -377,7 +504,19 @@ namespace Project_TestCase2.Menu
             {
                 Console.WriteLine("Choose which room to opt in/out of room service: ");
                 _historyManager.DisplayRooms(histories);
-                choice = int.Parse(Console.ReadLine());
+                choice = -1;
+                while (choice < 0)
+                {
+                    if (int.TryParse(Console.ReadLine(), out int num))
+                    {
+                        choice = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
                 if (choice > histories.Count)
                 {
                     Console.WriteLine("Room does not exists!!!");
@@ -389,7 +528,19 @@ namespace Project_TestCase2.Menu
             if (histories[choice].IsRoomService)
             {
                 Console.WriteLine("Are you  sure you want to opt out of the room service function? (Y/N)");
-                char input = char.Parse(Console.ReadLine().ToUpper());
+                char input = '0';
+                while (input == '0')
+                {
+                    if (char.TryParse(Console.ReadLine().ToUpper(), out char num))
+                    {
+                        input = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
                 if (input == 'Y')
                 {
                     histories[choice].IsRoomService = false;
@@ -400,7 +551,19 @@ namespace Project_TestCase2.Menu
             else
             {
                 Console.WriteLine("Are you  sure you want to opt in to the room service function? (Y/N)");
-                char input = char.Parse(Console.ReadLine().ToUpper());
+                char input = '0';
+                while (input == '0')
+                {
+                    if (char.TryParse(Console.ReadLine().ToUpper(), out char num))
+                    {
+                        input = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
                 if (input == 'Y')
                 {
                     Console.WriteLine("Choose room service to be provided: ");
@@ -428,6 +591,7 @@ namespace Project_TestCase2.Menu
 
         private void ChangeRoomServiceType()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             int choice = 1;
             List<StayHistory> histories = _historyRepository.Get(Customer.LoggedInCustomerId);
             if (histories.Count == 0)
@@ -440,7 +604,19 @@ namespace Project_TestCase2.Menu
             {
                 Console.WriteLine("Choose which room to change room service type: ");
                 _historyManager.DisplayRooms(histories);
-                choice = int.Parse(Console.ReadLine());
+                choice = -1;
+                while (choice < 0)
+                {
+                    if (int.TryParse(Console.ReadLine(), out int num))
+                    {
+                        choice = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
                 if (choice > histories.Count)
                 {
                     Console.WriteLine("Room does not exists!!!");
@@ -479,6 +655,7 @@ namespace Project_TestCase2.Menu
 
         private void ViewRoomDetails()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             int choice = 1;
             List<StayHistory> histories = _historyRepository.Get(Customer.LoggedInCustomerId);
             if (histories.Count == 0)
@@ -491,7 +668,19 @@ namespace Project_TestCase2.Menu
             {
                 Console.WriteLine("Choose which room to check details: ");
                 _historyManager.DisplayRooms(histories);
-                choice = int.Parse(Console.ReadLine());
+                choice = -1;
+                while (choice < 0)
+                {
+                    if (int.TryParse(Console.ReadLine(), out int num))
+                    {
+                        choice = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
                 if (choice > histories.Count)
                 {
                     Console.WriteLine("Room does not exists!!!");
@@ -537,6 +726,7 @@ namespace Project_TestCase2.Menu
 
         private void ViewBillings()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             int choice = 1;
             List<StayHistory> histories = _historyRepository.Get(Customer.LoggedInCustomerId);
             if (histories.Count == 0)
@@ -549,7 +739,19 @@ namespace Project_TestCase2.Menu
             {
                 Console.WriteLine("Choose which room to check billings: ");
                 _historyManager.DisplayRooms(histories);
-                choice = int.Parse(Console.ReadLine());
+                choice = -1;
+                while (choice < 0)
+                {
+                    if (int.TryParse(Console.ReadLine(), out int num))
+                    {
+                        choice = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
                 if (choice > histories.Count)
                 {
                     Console.WriteLine("Room does not exists!!!");
@@ -581,6 +783,7 @@ namespace Project_TestCase2.Menu
 
         private void RateHotel()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             int choice = 1;
             List<StayHistory> histories = _historyRepository.GetHotels(Customer.LoggedInCustomerId);
             if (histories.Count == 0)
@@ -593,7 +796,19 @@ namespace Project_TestCase2.Menu
             {
                 Console.WriteLine("Choose which hotel to be rated: ");
                 _historyManager.DisplayHotels(histories);
-                choice = int.Parse(Console.ReadLine());
+                choice = -1;
+                while (choice < 0)
+                {
+                    if (int.TryParse(Console.ReadLine(), out int num))
+                    {
+                        choice = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
                 if (choice > histories.Count)
                 {
                     Console.WriteLine("Hotel does not exists!!!");
@@ -603,7 +818,19 @@ namespace Project_TestCase2.Menu
             }
             choice--;
             Console.WriteLine("Rate your satisfaction from 1-5");
-            int rating = int.Parse(Console.ReadLine());
+            int rating = -1;
+            while (rating < 0)
+            {
+                if (int.TryParse(Console.ReadLine(), out int num))
+                {
+                    rating = num;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Input!!!");
+                    Console.WriteLine("Try again");
+                }
+            }
             _hotelRepository.GetById(histories[choice].HotelId).Ratings = (_hotelRepository.GetById(histories[choice].HotelId).Ratings + rating) / 2;
             foreach (StayHistory history in _historyRepository.GetAllHotels(Customer.LoggedInCustomerId, histories[choice].HotelId))
             {
@@ -615,9 +842,22 @@ namespace Project_TestCase2.Menu
 
         private void CheckOut()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Early Check out will incur extra fees");
             Console.WriteLine("Are you sure you want to continue with this operation (Y/N)");
-            int choice2 = char.Parse(Console.ReadLine());
+            int choice2 = '0';
+            while (choice2 == '0')
+            {
+                if (char.TryParse(Console.ReadLine().ToUpper(), out char num))
+                {
+                    choice2 = num;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Input!!!");
+                    Console.WriteLine("Try again");
+                }
+            }
             if (choice2 == 'Y')
             {
                 int choice = 1;
@@ -632,7 +872,19 @@ namespace Project_TestCase2.Menu
                 {
                     Console.WriteLine("Choose which room to be checked out of: ");
                     _historyManager.DisplayRooms(histories);
-                    choice = int.Parse(Console.ReadLine());
+                    choice = -1;
+                    while (choice < 0)
+                    {
+                        if (int.TryParse(Console.ReadLine(), out int num))
+                        {
+                            choice = num;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid Input!!!");
+                            Console.WriteLine("Try again");
+                        }
+                    }
                     if (choice > histories.Count)
                     {
                         Console.WriteLine("Room does not exists!!!");
@@ -644,7 +896,19 @@ namespace Project_TestCase2.Menu
                 if (!histories[choice].Rate)
                 {
                     Console.WriteLine("Kindly please rate your satisfaction from 1-5");
-                    int rating = int.Parse(Console.ReadLine());
+                    int rating = -1;
+                    while (rating < 0)
+                    {
+                        if (int.TryParse(Console.ReadLine(), out int num))
+                        {
+                            rating = num;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid Input!!!");
+                            Console.WriteLine("Try again");
+                        }
+                    }
                     _hotelRepository.GetById(histories[choice].HotelId).Ratings = (_hotelRepository.GetById(histories[choice].HotelId).Ratings + rating) / 2;
                     foreach (StayHistory history in _historyRepository.GetAllHotels(Customer.LoggedInCustomerId, histories[choice].HotelId))
                     {
@@ -662,6 +926,7 @@ namespace Project_TestCase2.Menu
 
         private void CheckOut(StayHistory history)
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Check out time has passed!!!");
             Console.WriteLine("Checking Out...");
             Console.WriteLine($"Total fee to be paid is N{history.TotalPriceOfStay:n}");
@@ -673,6 +938,7 @@ namespace Project_TestCase2.Menu
 
         private void DeleteAccount()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("All details about user will be removed if user deletes account");
             Console.WriteLine("Do you want to continue with this operation (Y/N)");
             char choice = char.Parse(Console.ReadLine().ToUpper());

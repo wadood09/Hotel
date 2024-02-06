@@ -84,11 +84,5 @@ static void Reverse(string str)
 DateTime dateTime = DateTime.Now;
 TimeSpan timeSpan = new(36, 0, 0, 0);
 
-List<int> dd = new() { 2, 4, 3, 5, 7, 3 };
-dd.RemoveAt(0);
-foreach (var item in dd)
-{
-    Console.WriteLine(item);
-}
-dd.RemoveAt(0);
-Console.WriteLine(dd.Count);
+char c = '0';
+Console.WriteLine(char.ToUpper(c));

@@ -18,18 +18,23 @@ namespace Project_TestCase2.Menu
                 {
                     choice = num;
                 }
+                Console.ForegroundColor = ConsoleColor.Red;
                 switch (choice)
                 {
                     case 1:
+                        Console.WriteLine("ADMIN");
                         adminMenu.MainMenu();
                         break;
                     case 2:
+                        Console.WriteLine("CUSTOMER");
                         customerMenu.MainMenu();
                         break;
                     case 0:
+                        Console.ForegroundColor = ConsoleColor.Gray;
                         isContinue = false;
                         break;
                     default:
+                        Console.ForegroundColor = ConsoleColor.Gray;
                         Console.WriteLine("Invalid Input!!!");
                         break;
                 }
