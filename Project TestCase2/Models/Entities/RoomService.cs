@@ -14,7 +14,6 @@ namespace Project_TestCase2.Models.Entities
             HotelId = hotelId;
             Name = name;
             Price = price;
-            IsDeleted = false;
         }
     }
 }

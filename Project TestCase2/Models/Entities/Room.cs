@@ -9,8 +9,6 @@ namespace Project_TestCase2.Models.Entities
         public int CustomerId {get; set;}
         public string Number {get; set;}
         public RoomStatus RoomStatus {get; set;}
-        public DateTime CheckedIn {get; set;}
-        public DateTime CheckedOut {get; set;}
 
         public Room(int roomTypeId, string number)
         {

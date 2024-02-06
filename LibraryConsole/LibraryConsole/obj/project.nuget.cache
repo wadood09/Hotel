@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "yyZFRfyn9903m/9HPb3n0F0mO+LEJOxpX4kx5OWRlD8P15MCEEu/h4P5jnu5gl4JBJJsr5ZG76666bVGzzSkBQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\WADOOD\\OneDrive\\Desktop\\LibraryConsole\\LibraryConsole\\LibraryConsole.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\WADOOD\\.nuget\\packages\\microsoft.netcore.app.ref\\5.0.0\\microsoft.netcore.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\WADOOD\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\5.0.0\\microsoft.windowsdesktop.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\WADOOD\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\5.0.0\\microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\WADOOD\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.15\\microsoft.netcore.app.host.win-x64.5.0.15.nupkg.sha512"
+  ],
+  "logs": []
+}

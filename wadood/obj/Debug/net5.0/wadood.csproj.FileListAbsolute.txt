@@ -1,0 +1,16 @@
+C:\Users\DELL\Desktop\wadood\bin\Debug\net5.0\wadood.exe
+C:\Users\DELL\Desktop\wadood\bin\Debug\net5.0\wadood.deps.json
+C:\Users\DELL\Desktop\wadood\bin\Debug\net5.0\wadood.runtimeconfig.json
+C:\Users\DELL\Desktop\wadood\bin\Debug\net5.0\wadood.runtimeconfig.dev.json
+C:\Users\DELL\Desktop\wadood\bin\Debug\net5.0\wadood.dll
+C:\Users\DELL\Desktop\wadood\bin\Debug\net5.0\wadood.pdb
+C:\Users\DELL\Desktop\wadood\obj\Debug\net5.0\wadood.csproj.AssemblyReference.cache
+C:\Users\DELL\Desktop\wadood\obj\Debug\net5.0\wadood.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DELL\Desktop\wadood\obj\Debug\net5.0\wadood.AssemblyInfoInputs.cache
+C:\Users\DELL\Desktop\wadood\obj\Debug\net5.0\wadood.AssemblyInfo.cs
+C:\Users\DELL\Desktop\wadood\obj\Debug\net5.0\wadood.csproj.CoreCompileInputs.cache
+C:\Users\DELL\Desktop\wadood\obj\Debug\net5.0\wadood.dll
+C:\Users\DELL\Desktop\wadood\obj\Debug\net5.0\ref\wadood.dll
+C:\Users\DELL\Desktop\wadood\obj\Debug\net5.0\wadood.pdb
+C:\Users\DELL\Desktop\wadood\obj\Debug\net5.0\wadood.genruntimeconfig.cache
+C:\Users\DELL\Desktop\wadood\obj\Debug\net5.0\refint\wadood.dll

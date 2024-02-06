@@ -1,0 +1,14 @@
+C:\Users\DELL\Desktop\Data Types\obj\Debug\net7.0\Class.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DELL\Desktop\Data Types\obj\Debug\net7.0\Class.AssemblyInfoInputs.cache
+C:\Users\DELL\Desktop\Data Types\obj\Debug\net7.0\Class.AssemblyInfo.cs
+C:\Users\DELL\Desktop\Data Types\obj\Debug\net7.0\Class.csproj.CoreCompileInputs.cache
+C:\Users\DELL\Desktop\Data Types\bin\Debug\net7.0\Class.exe
+C:\Users\DELL\Desktop\Data Types\bin\Debug\net7.0\Class.deps.json
+C:\Users\DELL\Desktop\Data Types\bin\Debug\net7.0\Class.runtimeconfig.json
+C:\Users\DELL\Desktop\Data Types\bin\Debug\net7.0\Class.dll
+C:\Users\DELL\Desktop\Data Types\bin\Debug\net7.0\Class.pdb
+C:\Users\DELL\Desktop\Data Types\obj\Debug\net7.0\Class.dll
+C:\Users\DELL\Desktop\Data Types\obj\Debug\net7.0\refint\Class.dll
+C:\Users\DELL\Desktop\Data Types\obj\Debug\net7.0\Class.pdb
+C:\Users\DELL\Desktop\Data Types\obj\Debug\net7.0\Class.genruntimeconfig.cache
+C:\Users\DELL\Desktop\Data Types\obj\Debug\net7.0\ref\Class.dll

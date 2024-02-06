@@ -1,0 +1,16 @@
+C:\Users\DELL\Desktop\text\bin\Debug\net5.0\text.exe
+C:\Users\DELL\Desktop\text\bin\Debug\net5.0\text.deps.json
+C:\Users\DELL\Desktop\text\bin\Debug\net5.0\text.runtimeconfig.json
+C:\Users\DELL\Desktop\text\bin\Debug\net5.0\text.runtimeconfig.dev.json
+C:\Users\DELL\Desktop\text\bin\Debug\net5.0\text.dll
+C:\Users\DELL\Desktop\text\bin\Debug\net5.0\text.pdb
+C:\Users\DELL\Desktop\text\obj\Debug\net5.0\text.csproj.AssemblyReference.cache
+C:\Users\DELL\Desktop\text\obj\Debug\net5.0\text.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DELL\Desktop\text\obj\Debug\net5.0\text.AssemblyInfoInputs.cache
+C:\Users\DELL\Desktop\text\obj\Debug\net5.0\text.AssemblyInfo.cs
+C:\Users\DELL\Desktop\text\obj\Debug\net5.0\text.csproj.CoreCompileInputs.cache
+C:\Users\DELL\Desktop\text\obj\Debug\net5.0\text.dll
+C:\Users\DELL\Desktop\text\obj\Debug\net5.0\ref\text.dll
+C:\Users\DELL\Desktop\text\obj\Debug\net5.0\text.pdb
+C:\Users\DELL\Desktop\text\obj\Debug\net5.0\text.genruntimeconfig.cache
+C:\Users\DELL\Desktop\text\obj\Debug\net5.0\refint\text.dll

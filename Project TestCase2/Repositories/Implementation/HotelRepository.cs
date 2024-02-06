@@ -13,7 +13,7 @@ namespace Project_TestCase2.Repositories.Implementation
 
         public List<Hotel> GetAll()
         {
-            return HotelContext.Hotels;//.Sort(b => b.Ratings);
+            return HotelContext.Hotels.OrderBy(b => b.Ratings).ToList();
         }
 
         public Hotel GetById(int id)

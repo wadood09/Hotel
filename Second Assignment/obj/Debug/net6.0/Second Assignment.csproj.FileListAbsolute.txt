@@ -1,0 +1,15 @@
+C:\Users\WADOOD\OneDrive\Desktop\Second Assignment\bin\Debug\net6.0\Second Assignment.exe
+C:\Users\WADOOD\OneDrive\Desktop\Second Assignment\bin\Debug\net6.0\Second Assignment.deps.json
+C:\Users\WADOOD\OneDrive\Desktop\Second Assignment\bin\Debug\net6.0\Second Assignment.runtimeconfig.json
+C:\Users\WADOOD\OneDrive\Desktop\Second Assignment\bin\Debug\net6.0\Second Assignment.dll
+C:\Users\WADOOD\OneDrive\Desktop\Second Assignment\bin\Debug\net6.0\Second Assignment.pdb
+C:\Users\WADOOD\OneDrive\Desktop\Second Assignment\obj\Debug\net6.0\Second Assignment.csproj.AssemblyReference.cache
+C:\Users\WADOOD\OneDrive\Desktop\Second Assignment\obj\Debug\net6.0\Second Assignment.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\WADOOD\OneDrive\Desktop\Second Assignment\obj\Debug\net6.0\Second Assignment.AssemblyInfoInputs.cache
+C:\Users\WADOOD\OneDrive\Desktop\Second Assignment\obj\Debug\net6.0\Second Assignment.AssemblyInfo.cs
+C:\Users\WADOOD\OneDrive\Desktop\Second Assignment\obj\Debug\net6.0\Second Assignment.csproj.CoreCompileInputs.cache
+C:\Users\WADOOD\OneDrive\Desktop\Second Assignment\obj\Debug\net6.0\Second Assignment.dll
+C:\Users\WADOOD\OneDrive\Desktop\Second Assignment\obj\Debug\net6.0\refint\Second Assignment.dll
+C:\Users\WADOOD\OneDrive\Desktop\Second Assignment\obj\Debug\net6.0\Second Assignment.pdb
+C:\Users\WADOOD\OneDrive\Desktop\Second Assignment\obj\Debug\net6.0\Second Assignment.genruntimeconfig.cache
+C:\Users\WADOOD\OneDrive\Desktop\Second Assignment\obj\Debug\net6.0\ref\Second Assignment.dll

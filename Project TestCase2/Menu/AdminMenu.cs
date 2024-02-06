@@ -19,6 +19,7 @@ namespace Project_TestCase2.Menu
         IRoomManager _roomManager = new RoomManager();
         IRoomServiceManager _roomServiceManager = new RoomServiceManager();
         IRoomTypeManager _roomTypeManager = new RoomTypeManager();
+        OnStart onStart = new();
         public void MainMenu()
         {
             bool isContinue = true;
@@ -28,7 +29,11 @@ namespace Project_TestCase2.Menu
                 Console.WriteLine("1. Register");
                 Console.WriteLine("2. Login");
                 Console.WriteLine("0. Exit");
-                int choice = int.Parse(Console.ReadLine());
+                int choice = 3;
+                if (int.TryParse(Console.ReadLine(), out int num))
+                {
+                    choice = num;
+                }
                 switch (choice)
                 {
                     case 1:
@@ -98,7 +103,11 @@ namespace Project_TestCase2.Menu
                 Console.WriteLine("4. Remove Hotel");
                 Console.WriteLine("5. Delete Account");
                 Console.WriteLine("0. Logout");
-                int choice = int.Parse(Console.ReadLine());
+                int choice = 7;
+                if (int.TryParse(Console.ReadLine(), out int num))
+                {
+                    choice = num;
+                }
                 switch (choice)
                 {
                     case 1:
@@ -155,9 +164,9 @@ namespace Project_TestCase2.Menu
                 roomAmount.Add(amount);
             }
             List<List<string>> roomNumbers = new();
+            int index = 0;
             foreach (string type in roomTypes)
             {
-                int index = 0;
                 List<string> roomNumber = new();
                 Console.WriteLine($"Enter room number for rooms under {type} type");
                 for (int i = 1; i <= roomAmount[index]; i++)
@@ -167,6 +176,8 @@ namespace Project_TestCase2.Menu
                 roomNumbers.Add(roomNumber);
                 index++;
             }
+            Console.Write("Enter early check-out fees: ");
+            double fees = double.Parse(Console.ReadLine());
             Console.WriteLine("Do you want your hotel to provide room service? (Y/N)");
             bool roomService = false;
             char choice = char.Parse(Console.ReadLine().ToUpper());
@@ -189,7 +200,7 @@ namespace Project_TestCase2.Menu
                 }
                 roomService = true;
             }
-            Hotel hotel = new(Admin.LoggedInAdminId, name, roomService);
+            Hotel hotel = new(Admin.LoggedInAdminId, name, roomService, fees);
             _hotelManager.Register(hotel);
             for (int i = 0; i < roomTypes.Count; i++)
             {
@@ -234,7 +245,7 @@ namespace Project_TestCase2.Menu
                 }
             }
             choice--;
-            List<RoomType> roomTypes = _roomTypeRepository.GetAll(hotel[choice].Id);
+            List<RoomType> roomTypes = _roomTypeRepository.GetAllByHotelId(hotel[choice].Id);
             List<RoomService> roomServices = _roomServiceRepository.GetByHotelId(hotel[choice].Id);
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"\t{hotel[choice].Name}");
@@ -243,15 +254,19 @@ namespace Project_TestCase2.Menu
             Console.ForegroundColor = ConsoleColor.Gray;
             for (int i = 0; i < roomTypes.Count; i++)
             {
-                Console.WriteLine($"{roomTypes[i].Name}     {roomTypes[i].Amount}       N{roomTypes[i].Price}:n");
+                Console.WriteLine(roomTypes[i].Name.PadRight(10) + roomTypes[i].Amount.ToString().PadRight(30) + $"N{roomTypes[i].Price}:n");
             }
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"ROOM SERVICES      PRICES");
-            Console.ForegroundColor = ConsoleColor.Gray;
-            foreach (RoomService service in roomServices)
+            if (hotel[choice].RoomService)
             {
-                Console.WriteLine($"{service.Name}      N{service.Price:n}");
+                Console.WriteLine($"ROOM SERVICES      PRICES");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                foreach (RoomService service in roomServices)
+                {
+                    Console.WriteLine(service.Name.PadRight(10) + $"N{service.Price:n}");
+                }
             }
+            Console.ForegroundColor = ConsoleColor.Gray;
             Read();
         }
 
@@ -270,6 +285,7 @@ namespace Project_TestCase2.Menu
                 Console.WriteLine("1. Hotel Name");
                 Console.WriteLine("2. Rooms");
                 Console.WriteLine("3. Room Service");
+                Console.WriteLine("4. Change Early Check Out fees");
                 Console.WriteLine("0. Exit");
                 int choice = int.Parse(Console.ReadLine());
                 switch (choice)
@@ -282,6 +298,9 @@ namespace Project_TestCase2.Menu
                         break;
                     case 3:
                         UpdateRoomService();
+                        break;
+                    case 4:
+                        ChangeCheckOutFees();
                         break;
                     case 0:
                         isContinue = false;
@@ -337,7 +356,11 @@ namespace Project_TestCase2.Menu
                 Console.WriteLine("5. Add Room");
                 Console.WriteLine("6. Remove Room");
                 Console.WriteLine("0. Exit");
-                int choice = int.Parse(Console.ReadLine());
+                int choice = 7;
+                if (int.TryParse(Console.ReadLine(), out int num))
+                {
+                    choice = num;
+                }
                 switch (choice)
                 {
                     case 1:
@@ -412,6 +435,7 @@ namespace Project_TestCase2.Menu
 
         private void RemoveRoomType()
         {
+            onStart.CheckRoomTypeStatus();
             List<Hotel> hotel = _hotelRepository.GetList(Admin.LoggedInAdminId);
             int choice = 1;
             if (hotel.Count > 1)
@@ -621,6 +645,7 @@ namespace Project_TestCase2.Menu
                         else
                         {
                             _roomRepository.Remove(_roomRepository.GetByRoomNumber(num, type.Id));
+                            Console.WriteLine("Room removed successfully!!!");
                             isContinue = false;
                             Read();
                         }
@@ -648,7 +673,11 @@ namespace Project_TestCase2.Menu
                 Console.WriteLine("2. Remove Room Service");
                 Console.WriteLine("3. Change price of existing Room Service");
                 Console.WriteLine("0. Exit");
-                int choice = int.Parse(Console.ReadLine());
+                int choice = 4;
+                if (int.TryParse(Console.ReadLine(), out int num))
+                {
+                    choice = num;
+                }
                 switch (choice)
                 {
                     case 1:
@@ -729,6 +758,7 @@ namespace Project_TestCase2.Menu
 
         private void RemoveRoomService()
         {
+            onStart.CheckHotelStatus();
             List<Hotel> hotel = _hotelRepository.GetList(Admin.LoggedInAdminId);
             int choice = 1;
             if (hotel.Count > 1)
@@ -817,8 +847,31 @@ namespace Project_TestCase2.Menu
             }
         }
 
+        private void ChangeCheckOutFees()
+        {
+            List<Hotel> hotel = _hotelRepository.GetList(Admin.LoggedInAdminId);
+            int choice = 1;
+            if (hotel.Count > 1)
+            {
+                Console.WriteLine("Enter the which hotel to remove room type (i.e enter 1,2,3,...)");
+                choice = int.Parse(Console.ReadLine());
+                if (choice > hotel.Count)
+                {
+                    Console.WriteLine("Hotel does not exists");
+                    Read();
+                    return;
+                }
+            }
+            choice--;
+            Console.Write("Enter new Check out fees: ");
+            hotel[choice].EarlyCheckOutFee = double.Parse(Console.ReadLine());
+            Console.WriteLine($"Successfully changed check out fees to N{hotel[choice].EarlyCheckOutFee:n}");
+            Read();
+        }
+
         private void RemoveHotel()
         {
+            onStart.CheckHotelStatus();
             Console.WriteLine("All details about hotel will be removed including room types, room services, etc");
             Console.WriteLine("Are you sure you want to remove hotel (Y/N)");
             char choice = char.Parse(Console.ReadLine().ToUpper());
@@ -831,7 +884,7 @@ namespace Project_TestCase2.Menu
             Hotel hotel = _hotelRepository.GetByName(name);
             if (hotel is null)
             {
-                Console.WriteLine($"Hotel with name {name} does not exist!!!\nTry again later");
+                Console.WriteLine($"Hotel with name {name.ToPascalCase()} does not exist!!!\nTry again later");
                 Read();
             }
             else
@@ -845,7 +898,7 @@ namespace Project_TestCase2.Menu
                         return;
                     }
                     List<RoomService> services = _roomServiceRepository.GetByHotelId(hotel.Id);
-                    List<RoomType> types = _roomTypeRepository.GetAll(hotel.Id);
+                    List<RoomType> types = _roomTypeRepository.GetAllByHotelId(hotel.Id);
                     List<List<Room>> rooms = new();
                     foreach (RoomType type in types)
                     {
@@ -877,13 +930,14 @@ namespace Project_TestCase2.Menu
 
         private void DeleteAccount()
         {
+            onStart.CheckHotelStatus();
             Console.WriteLine("All details about user will be removed if user deletes account");
             Console.WriteLine("Do you want to continue with this operation (Y/N)");
             char choice = char.Parse(Console.ReadLine().ToUpper());
             if (choice == 'Y')
             {
                 Admin admin = _adminRepository.GetById(Admin.LoggedInAdminId);
-                if(admin is null)
+                if (admin is null)
                 {
                     Console.WriteLine("Account not found!!! \nAccount must be registered in order to delete account");
                     Read();
@@ -902,7 +956,7 @@ namespace Project_TestCase2.Menu
                 foreach (Hotel hotel in hotels)
                 {
                     List<RoomService> services = _roomServiceRepository.GetByHotelId(hotel.Id);
-                    List<RoomType> types = _roomTypeRepository.GetAll(hotel.Id);
+                    List<RoomType> types = _roomTypeRepository.GetAllByHotelId(hotel.Id);
                     List<List<Room>> rooms = new();
                     foreach (RoomType type in types)
                     {

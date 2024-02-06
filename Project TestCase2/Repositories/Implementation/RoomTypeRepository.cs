@@ -23,7 +23,12 @@ namespace Project_TestCase2.Repositories.Implementation
             return null;
         }
 
-        public List<RoomType> GetAll(int hotelId)
+        public List<RoomType> GetAll()
+        {
+            return HotelContext.RoomTypes;
+        }
+
+        public List<RoomType> GetAllByHotelId(int hotelId)
         {
             List<RoomType> roomTypes = new();
             foreach (RoomType roomType in HotelContext.RoomTypes)

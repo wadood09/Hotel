@@ -1,0 +1,15 @@
+C:\Users\WADOOD\Desktop\First Assessment\obj\Debug\net6.0\First Assessment.csproj.AssemblyReference.cache
+C:\Users\WADOOD\Desktop\First Assessment\obj\Debug\net6.0\First Assessment.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\WADOOD\Desktop\First Assessment\obj\Debug\net6.0\First Assessment.AssemblyInfoInputs.cache
+C:\Users\WADOOD\Desktop\First Assessment\obj\Debug\net6.0\First Assessment.AssemblyInfo.cs
+C:\Users\WADOOD\Desktop\First Assessment\obj\Debug\net6.0\First Assessment.csproj.CoreCompileInputs.cache
+C:\Users\WADOOD\Desktop\First Assessment\bin\Debug\net6.0\First Assessment.exe
+C:\Users\WADOOD\Desktop\First Assessment\bin\Debug\net6.0\First Assessment.deps.json
+C:\Users\WADOOD\Desktop\First Assessment\bin\Debug\net6.0\First Assessment.runtimeconfig.json
+C:\Users\WADOOD\Desktop\First Assessment\bin\Debug\net6.0\First Assessment.dll
+C:\Users\WADOOD\Desktop\First Assessment\bin\Debug\net6.0\First Assessment.pdb
+C:\Users\WADOOD\Desktop\First Assessment\obj\Debug\net6.0\First Assessment.dll
+C:\Users\WADOOD\Desktop\First Assessment\obj\Debug\net6.0\refint\First Assessment.dll
+C:\Users\WADOOD\Desktop\First Assessment\obj\Debug\net6.0\First Assessment.pdb
+C:\Users\WADOOD\Desktop\First Assessment\obj\Debug\net6.0\First Assessment.genruntimeconfig.cache
+C:\Users\WADOOD\Desktop\First Assessment\obj\Debug\net6.0\ref\First Assessment.dll

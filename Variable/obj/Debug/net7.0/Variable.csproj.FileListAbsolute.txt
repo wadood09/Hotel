@@ -1,0 +1,14 @@
+C:\Users\DELL\Desktop\Variable\bin\Debug\net7.0\Variable.exe
+C:\Users\DELL\Desktop\Variable\bin\Debug\net7.0\Variable.deps.json
+C:\Users\DELL\Desktop\Variable\bin\Debug\net7.0\Variable.runtimeconfig.json
+C:\Users\DELL\Desktop\Variable\bin\Debug\net7.0\Variable.dll
+C:\Users\DELL\Desktop\Variable\bin\Debug\net7.0\Variable.pdb
+C:\Users\DELL\Desktop\Variable\obj\Debug\net7.0\Variable.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DELL\Desktop\Variable\obj\Debug\net7.0\Variable.AssemblyInfoInputs.cache
+C:\Users\DELL\Desktop\Variable\obj\Debug\net7.0\Variable.AssemblyInfo.cs
+C:\Users\DELL\Desktop\Variable\obj\Debug\net7.0\Variable.csproj.CoreCompileInputs.cache
+C:\Users\DELL\Desktop\Variable\obj\Debug\net7.0\Variable.dll
+C:\Users\DELL\Desktop\Variable\obj\Debug\net7.0\refint\Variable.dll
+C:\Users\DELL\Desktop\Variable\obj\Debug\net7.0\Variable.pdb
+C:\Users\DELL\Desktop\Variable\obj\Debug\net7.0\Variable.genruntimeconfig.cache
+C:\Users\DELL\Desktop\Variable\obj\Debug\net7.0\ref\Variable.dll

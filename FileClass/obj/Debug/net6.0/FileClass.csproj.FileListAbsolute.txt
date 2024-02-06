@@ -1,0 +1,14 @@
+/home/abdulrosheed/Folders/FileClass/bin/Debug/net6.0/FileClass
+/home/abdulrosheed/Folders/FileClass/bin/Debug/net6.0/FileClass.deps.json
+/home/abdulrosheed/Folders/FileClass/bin/Debug/net6.0/FileClass.runtimeconfig.json
+/home/abdulrosheed/Folders/FileClass/bin/Debug/net6.0/FileClass.dll
+/home/abdulrosheed/Folders/FileClass/bin/Debug/net6.0/FileClass.pdb
+/home/abdulrosheed/Folders/FileClass/obj/Debug/net6.0/FileClass.GeneratedMSBuildEditorConfig.editorconfig
+/home/abdulrosheed/Folders/FileClass/obj/Debug/net6.0/FileClass.AssemblyInfoInputs.cache
+/home/abdulrosheed/Folders/FileClass/obj/Debug/net6.0/FileClass.AssemblyInfo.cs
+/home/abdulrosheed/Folders/FileClass/obj/Debug/net6.0/FileClass.csproj.CoreCompileInputs.cache
+/home/abdulrosheed/Folders/FileClass/obj/Debug/net6.0/FileClass.dll
+/home/abdulrosheed/Folders/FileClass/obj/Debug/net6.0/ref/FileClass.dll
+/home/abdulrosheed/Folders/FileClass/obj/Debug/net6.0/FileClass.pdb
+/home/abdulrosheed/Folders/FileClass/obj/Debug/net6.0/FileClass.genruntimeconfig.cache
+/home/abdulrosheed/Folders/FileClass/obj/Debug/net6.0/refint/FileClass.dll

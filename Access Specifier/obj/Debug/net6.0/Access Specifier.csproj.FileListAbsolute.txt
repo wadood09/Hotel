@@ -1,0 +1,15 @@
+C:\Users\WADOOD\OneDrive\Desktop\Access Specifier\bin\Debug\net6.0\Access Specifier.exe
+C:\Users\WADOOD\OneDrive\Desktop\Access Specifier\bin\Debug\net6.0\Access Specifier.deps.json
+C:\Users\WADOOD\OneDrive\Desktop\Access Specifier\bin\Debug\net6.0\Access Specifier.runtimeconfig.json
+C:\Users\WADOOD\OneDrive\Desktop\Access Specifier\bin\Debug\net6.0\Access Specifier.dll
+C:\Users\WADOOD\OneDrive\Desktop\Access Specifier\bin\Debug\net6.0\Access Specifier.pdb
+C:\Users\WADOOD\OneDrive\Desktop\Access Specifier\obj\Debug\net6.0\Access Specifier.csproj.AssemblyReference.cache
+C:\Users\WADOOD\OneDrive\Desktop\Access Specifier\obj\Debug\net6.0\Access Specifier.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\WADOOD\OneDrive\Desktop\Access Specifier\obj\Debug\net6.0\Access Specifier.AssemblyInfoInputs.cache
+C:\Users\WADOOD\OneDrive\Desktop\Access Specifier\obj\Debug\net6.0\Access Specifier.AssemblyInfo.cs
+C:\Users\WADOOD\OneDrive\Desktop\Access Specifier\obj\Debug\net6.0\Access Specifier.csproj.CoreCompileInputs.cache
+C:\Users\WADOOD\OneDrive\Desktop\Access Specifier\obj\Debug\net6.0\Access Specifier.dll
+C:\Users\WADOOD\OneDrive\Desktop\Access Specifier\obj\Debug\net6.0\refint\Access Specifier.dll
+C:\Users\WADOOD\OneDrive\Desktop\Access Specifier\obj\Debug\net6.0\Access Specifier.pdb
+C:\Users\WADOOD\OneDrive\Desktop\Access Specifier\obj\Debug\net6.0\Access Specifier.genruntimeconfig.cache
+C:\Users\WADOOD\OneDrive\Desktop\Access Specifier\obj\Debug\net6.0\ref\Access Specifier.dll

@@ -1,0 +1,30 @@
+C:\Users\DELL\Desktop\anything\bin\Debug\net5.0\anything.exe
+C:\Users\DELL\Desktop\anything\bin\Debug\net5.0\anything.deps.json
+C:\Users\DELL\Desktop\anything\bin\Debug\net5.0\anything.runtimeconfig.json
+C:\Users\DELL\Desktop\anything\bin\Debug\net5.0\anything.runtimeconfig.dev.json
+C:\Users\DELL\Desktop\anything\bin\Debug\net5.0\anything.dll
+C:\Users\DELL\Desktop\anything\bin\Debug\net5.0\anything.pdb
+C:\Users\DELL\Desktop\anything\obj\Debug\net5.0\anything.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DELL\Desktop\anything\obj\Debug\net5.0\anything.AssemblyInfoInputs.cache
+C:\Users\DELL\Desktop\anything\obj\Debug\net5.0\anything.AssemblyInfo.cs
+C:\Users\DELL\Desktop\anything\obj\Debug\net5.0\anything.csproj.CoreCompileInputs.cache
+C:\Users\DELL\Desktop\anything\obj\Debug\net5.0\anything.dll
+C:\Users\DELL\Desktop\anything\obj\Debug\net5.0\refint\anything.dll
+C:\Users\DELL\Desktop\anything\obj\Debug\net5.0\anything.pdb
+C:\Users\DELL\Desktop\anything\obj\Debug\net5.0\anything.genruntimeconfig.cache
+C:\Users\DELL\Desktop\anything\obj\Debug\net5.0\ref\anything.dll
+C:\Users\DELL\Desktop\Quadratic Equation\bin\Debug\net5.0\anything.exe
+C:\Users\DELL\Desktop\Quadratic Equation\bin\Debug\net5.0\anything.deps.json
+C:\Users\DELL\Desktop\Quadratic Equation\bin\Debug\net5.0\anything.runtimeconfig.json
+C:\Users\DELL\Desktop\Quadratic Equation\bin\Debug\net5.0\anything.runtimeconfig.dev.json
+C:\Users\DELL\Desktop\Quadratic Equation\bin\Debug\net5.0\anything.dll
+C:\Users\DELL\Desktop\Quadratic Equation\bin\Debug\net5.0\anything.pdb
+C:\Users\DELL\Desktop\Quadratic Equation\obj\Debug\net5.0\anything.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DELL\Desktop\Quadratic Equation\obj\Debug\net5.0\anything.AssemblyInfoInputs.cache
+C:\Users\DELL\Desktop\Quadratic Equation\obj\Debug\net5.0\anything.AssemblyInfo.cs
+C:\Users\DELL\Desktop\Quadratic Equation\obj\Debug\net5.0\anything.csproj.CoreCompileInputs.cache
+C:\Users\DELL\Desktop\Quadratic Equation\obj\Debug\net5.0\anything.dll
+C:\Users\DELL\Desktop\Quadratic Equation\obj\Debug\net5.0\refint\anything.dll
+C:\Users\DELL\Desktop\Quadratic Equation\obj\Debug\net5.0\anything.pdb
+C:\Users\DELL\Desktop\Quadratic Equation\obj\Debug\net5.0\anything.genruntimeconfig.cache
+C:\Users\DELL\Desktop\Quadratic Equation\obj\Debug\net5.0\ref\anything.dll

@@ -1,2 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using Project_TestCase2.Menu;
+
+Menu menu = new();
+menu.MainMenu();

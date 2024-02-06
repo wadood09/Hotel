@@ -1,0 +1,15 @@
+C:\Users\User\Desktop\LibraryConsole\LibraryConsole\bin\Debug\net5.0\LibraryConsole.exe
+C:\Users\User\Desktop\LibraryConsole\LibraryConsole\bin\Debug\net5.0\LibraryConsole.deps.json
+C:\Users\User\Desktop\LibraryConsole\LibraryConsole\bin\Debug\net5.0\LibraryConsole.runtimeconfig.json
+C:\Users\User\Desktop\LibraryConsole\LibraryConsole\bin\Debug\net5.0\LibraryConsole.runtimeconfig.dev.json
+C:\Users\User\Desktop\LibraryConsole\LibraryConsole\bin\Debug\net5.0\LibraryConsole.dll
+C:\Users\User\Desktop\LibraryConsole\LibraryConsole\bin\Debug\net5.0\LibraryConsole.pdb
+C:\Users\User\Desktop\LibraryConsole\LibraryConsole\obj\Debug\net5.0\LibraryConsole.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Desktop\LibraryConsole\LibraryConsole\obj\Debug\net5.0\LibraryConsole.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\LibraryConsole\LibraryConsole\obj\Debug\net5.0\LibraryConsole.AssemblyInfo.cs
+C:\Users\User\Desktop\LibraryConsole\LibraryConsole\obj\Debug\net5.0\LibraryConsole.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\LibraryConsole\LibraryConsole\obj\Debug\net5.0\LibraryConsole.dll
+C:\Users\User\Desktop\LibraryConsole\LibraryConsole\obj\Debug\net5.0\refint\LibraryConsole.dll
+C:\Users\User\Desktop\LibraryConsole\LibraryConsole\obj\Debug\net5.0\LibraryConsole.pdb
+C:\Users\User\Desktop\LibraryConsole\LibraryConsole\obj\Debug\net5.0\LibraryConsole.genruntimeconfig.cache
+C:\Users\User\Desktop\LibraryConsole\LibraryConsole\obj\Debug\net5.0\ref\LibraryConsole.dll

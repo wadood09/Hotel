@@ -1,0 +1,16 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using BankApp.Models.Entities;
+
+namespace BankApp.Repositories.Interfaces
+{
+    public interface ITransferRepository
+    {
+        void Drop(Transfer transfer);
+        Transfer Get(string refNumber);
+        List<Transfer> GetList(string accountNumber);
+        List<Transfer> GetAll();
+    }
+}

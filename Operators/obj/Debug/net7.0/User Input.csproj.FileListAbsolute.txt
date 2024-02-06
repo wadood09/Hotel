@@ -1,0 +1,28 @@
+C:\Users\DELL\Desktop\User Input\bin\Debug\net7.0\User Input.exe
+C:\Users\DELL\Desktop\User Input\bin\Debug\net7.0\User Input.deps.json
+C:\Users\DELL\Desktop\User Input\bin\Debug\net7.0\User Input.runtimeconfig.json
+C:\Users\DELL\Desktop\User Input\bin\Debug\net7.0\User Input.dll
+C:\Users\DELL\Desktop\User Input\bin\Debug\net7.0\User Input.pdb
+C:\Users\DELL\Desktop\User Input\obj\Debug\net7.0\User Input.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DELL\Desktop\User Input\obj\Debug\net7.0\User Input.AssemblyInfoInputs.cache
+C:\Users\DELL\Desktop\User Input\obj\Debug\net7.0\User Input.AssemblyInfo.cs
+C:\Users\DELL\Desktop\User Input\obj\Debug\net7.0\User Input.csproj.CoreCompileInputs.cache
+C:\Users\DELL\Desktop\User Input\obj\Debug\net7.0\User Input.dll
+C:\Users\DELL\Desktop\User Input\obj\Debug\net7.0\refint\User Input.dll
+C:\Users\DELL\Desktop\User Input\obj\Debug\net7.0\User Input.pdb
+C:\Users\DELL\Desktop\User Input\obj\Debug\net7.0\User Input.genruntimeconfig.cache
+C:\Users\DELL\Desktop\User Input\obj\Debug\net7.0\ref\User Input.dll
+C:\Users\DELL\Desktop\Operators\bin\Debug\net7.0\User Input.exe
+C:\Users\DELL\Desktop\Operators\bin\Debug\net7.0\User Input.deps.json
+C:\Users\DELL\Desktop\Operators\bin\Debug\net7.0\User Input.runtimeconfig.json
+C:\Users\DELL\Desktop\Operators\bin\Debug\net7.0\User Input.dll
+C:\Users\DELL\Desktop\Operators\bin\Debug\net7.0\User Input.pdb
+C:\Users\DELL\Desktop\Operators\obj\Debug\net7.0\User Input.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DELL\Desktop\Operators\obj\Debug\net7.0\User Input.AssemblyInfoInputs.cache
+C:\Users\DELL\Desktop\Operators\obj\Debug\net7.0\User Input.AssemblyInfo.cs
+C:\Users\DELL\Desktop\Operators\obj\Debug\net7.0\User Input.csproj.CoreCompileInputs.cache
+C:\Users\DELL\Desktop\Operators\obj\Debug\net7.0\User Input.dll
+C:\Users\DELL\Desktop\Operators\obj\Debug\net7.0\refint\User Input.dll
+C:\Users\DELL\Desktop\Operators\obj\Debug\net7.0\User Input.pdb
+C:\Users\DELL\Desktop\Operators\obj\Debug\net7.0\User Input.genruntimeconfig.cache
+C:\Users\DELL\Desktop\Operators\obj\Debug\net7.0\ref\User Input.dll

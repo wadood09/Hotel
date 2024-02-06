@@ -1,0 +1,16 @@
+C:\Users\USER\Desktop\Votin App\obj\Debug\net5.0\Votin App.csproj.AssemblyReference.cache
+C:\Users\USER\Desktop\Votin App\obj\Debug\net5.0\Votin App.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\USER\Desktop\Votin App\obj\Debug\net5.0\Votin App.AssemblyInfoInputs.cache
+C:\Users\USER\Desktop\Votin App\obj\Debug\net5.0\Votin App.AssemblyInfo.cs
+C:\Users\USER\Desktop\Votin App\obj\Debug\net5.0\Votin App.csproj.CoreCompileInputs.cache
+C:\Users\USER\Desktop\Votin App\bin\Debug\net5.0\Votin App.exe
+C:\Users\USER\Desktop\Votin App\bin\Debug\net5.0\Votin App.deps.json
+C:\Users\USER\Desktop\Votin App\bin\Debug\net5.0\Votin App.runtimeconfig.json
+C:\Users\USER\Desktop\Votin App\bin\Debug\net5.0\Votin App.runtimeconfig.dev.json
+C:\Users\USER\Desktop\Votin App\bin\Debug\net5.0\Votin App.dll
+C:\Users\USER\Desktop\Votin App\bin\Debug\net5.0\ref\Votin App.dll
+C:\Users\USER\Desktop\Votin App\bin\Debug\net5.0\Votin App.pdb
+C:\Users\USER\Desktop\Votin App\obj\Debug\net5.0\Votin App.dll
+C:\Users\USER\Desktop\Votin App\obj\Debug\net5.0\ref\Votin App.dll
+C:\Users\USER\Desktop\Votin App\obj\Debug\net5.0\Votin App.pdb
+C:\Users\USER\Desktop\Votin App\obj\Debug\net5.0\Votin App.genruntimeconfig.cache

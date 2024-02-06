@@ -17,7 +17,6 @@ namespace Project_TestCase2.Models.Entities
             LastName = lastname;
             Email = email;
             Password = password;
-            IsDeleted = false;
         }
     }
 }

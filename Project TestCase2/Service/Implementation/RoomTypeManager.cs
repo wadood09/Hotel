@@ -11,7 +11,7 @@ namespace Project_TestCase2.Service.Implementation
 
         public void DisplayRoomTypes(int hotelId)
         {
-            foreach (RoomType type in Repository.GetAll(hotelId))
+            foreach (RoomType type in Repository.GetAllByHotelId(hotelId))
             {
                 Console.WriteLine($"{type.Name}     N{type.Price:n}     {type.Status}");
             }

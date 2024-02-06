@@ -1,0 +1,15 @@
+C:\Users\WADOOD\OneDrive\Desktop\Random & Math Classes\bin\Debug\net6.0\Random & Math Classes.exe
+C:\Users\WADOOD\OneDrive\Desktop\Random & Math Classes\bin\Debug\net6.0\Random & Math Classes.deps.json
+C:\Users\WADOOD\OneDrive\Desktop\Random & Math Classes\bin\Debug\net6.0\Random & Math Classes.runtimeconfig.json
+C:\Users\WADOOD\OneDrive\Desktop\Random & Math Classes\bin\Debug\net6.0\Random & Math Classes.dll
+C:\Users\WADOOD\OneDrive\Desktop\Random & Math Classes\bin\Debug\net6.0\Random & Math Classes.pdb
+C:\Users\WADOOD\OneDrive\Desktop\Random & Math Classes\obj\Debug\net6.0\Random & Math Classes.csproj.AssemblyReference.cache
+C:\Users\WADOOD\OneDrive\Desktop\Random & Math Classes\obj\Debug\net6.0\Random & Math Classes.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\WADOOD\OneDrive\Desktop\Random & Math Classes\obj\Debug\net6.0\Random & Math Classes.AssemblyInfoInputs.cache
+C:\Users\WADOOD\OneDrive\Desktop\Random & Math Classes\obj\Debug\net6.0\Random & Math Classes.AssemblyInfo.cs
+C:\Users\WADOOD\OneDrive\Desktop\Random & Math Classes\obj\Debug\net6.0\Random & Math Classes.csproj.CoreCompileInputs.cache
+C:\Users\WADOOD\OneDrive\Desktop\Random & Math Classes\obj\Debug\net6.0\Random & Math Classes.dll
+C:\Users\WADOOD\OneDrive\Desktop\Random & Math Classes\obj\Debug\net6.0\refint\Random & Math Classes.dll
+C:\Users\WADOOD\OneDrive\Desktop\Random & Math Classes\obj\Debug\net6.0\Random & Math Classes.pdb
+C:\Users\WADOOD\OneDrive\Desktop\Random & Math Classes\obj\Debug\net6.0\Random & Math Classes.genruntimeconfig.cache
+C:\Users\WADOOD\OneDrive\Desktop\Random & Math Classes\obj\Debug\net6.0\ref\Random & Math Classes.dll

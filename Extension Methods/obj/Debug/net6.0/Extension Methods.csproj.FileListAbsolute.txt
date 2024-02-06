@@ -1,0 +1,15 @@
+C:\Users\WADOOD\OneDrive\Desktop\Extension Methods\bin\Debug\net6.0\Extension Methods.exe
+C:\Users\WADOOD\OneDrive\Desktop\Extension Methods\bin\Debug\net6.0\Extension Methods.deps.json
+C:\Users\WADOOD\OneDrive\Desktop\Extension Methods\bin\Debug\net6.0\Extension Methods.runtimeconfig.json
+C:\Users\WADOOD\OneDrive\Desktop\Extension Methods\bin\Debug\net6.0\Extension Methods.dll
+C:\Users\WADOOD\OneDrive\Desktop\Extension Methods\bin\Debug\net6.0\Extension Methods.pdb
+C:\Users\WADOOD\OneDrive\Desktop\Extension Methods\obj\Debug\net6.0\Extension Methods.csproj.AssemblyReference.cache
+C:\Users\WADOOD\OneDrive\Desktop\Extension Methods\obj\Debug\net6.0\Extension Methods.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\WADOOD\OneDrive\Desktop\Extension Methods\obj\Debug\net6.0\Extension Methods.AssemblyInfoInputs.cache
+C:\Users\WADOOD\OneDrive\Desktop\Extension Methods\obj\Debug\net6.0\Extension Methods.AssemblyInfo.cs
+C:\Users\WADOOD\OneDrive\Desktop\Extension Methods\obj\Debug\net6.0\Extension Methods.csproj.CoreCompileInputs.cache
+C:\Users\WADOOD\OneDrive\Desktop\Extension Methods\obj\Debug\net6.0\Extension Methods.dll
+C:\Users\WADOOD\OneDrive\Desktop\Extension Methods\obj\Debug\net6.0\refint\Extension Methods.dll
+C:\Users\WADOOD\OneDrive\Desktop\Extension Methods\obj\Debug\net6.0\Extension Methods.pdb
+C:\Users\WADOOD\OneDrive\Desktop\Extension Methods\obj\Debug\net6.0\Extension Methods.genruntimeconfig.cache
+C:\Users\WADOOD\OneDrive\Desktop\Extension Methods\obj\Debug\net6.0\ref\Extension Methods.dll
