@@ -234,7 +234,7 @@ namespace Project_TestCase2.Menu
                     string service = "";
                     Console.Write("Do you want to check in immediately (Y/N)");
                     char choice2 = '0';
-                    while (choice2 == '0')
+                    while (choice2 != 'Y' || choice2 != 'N')
                     {
                         if (char.TryParse(Console.ReadLine().ToUpper(), out char num))
                         {
@@ -281,7 +281,7 @@ namespace Project_TestCase2.Menu
                     {
                         Console.WriteLine("Do you want hotel to provide you room service: ");
                         char choice3 = '0';
-                        while (choice3 == '0')
+                        while (choice3 != 'Y' || choice3 != 'N')
                         {
                             if (char.TryParse(Console.ReadLine().ToUpper(), out char num))
                             {
@@ -529,7 +529,7 @@ namespace Project_TestCase2.Menu
             {
                 Console.WriteLine("Are you  sure you want to opt out of the room service function? (Y/N)");
                 char input = '0';
-                while (input == '0')
+                while (input != 'Y' || input != 'N')
                 {
                     if (char.TryParse(Console.ReadLine().ToUpper(), out char num))
                     {
@@ -552,7 +552,7 @@ namespace Project_TestCase2.Menu
             {
                 Console.WriteLine("Are you  sure you want to opt in to the room service function? (Y/N)");
                 char input = '0';
-                while (input == '0')
+                while (input != 'Y' || input != 'N')
                 {
                     if (char.TryParse(Console.ReadLine().ToUpper(), out char num))
                     {
@@ -846,7 +846,7 @@ namespace Project_TestCase2.Menu
             Console.WriteLine("Early Check out will incur extra fees");
             Console.WriteLine("Are you sure you want to continue with this operation (Y/N)");
             int choice2 = '0';
-            while (choice2 == '0')
+            while (choice2 != 'Y' || choice2 != 'N')
             {
                 if (char.TryParse(Console.ReadLine().ToUpper(), out char num))
                 {
@@ -941,7 +941,19 @@ namespace Project_TestCase2.Menu
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("All details about user will be removed if user deletes account");
             Console.WriteLine("Do you want to continue with this operation (Y/N)");
-            char choice = char.Parse(Console.ReadLine().ToUpper());
+            char choice = '0';
+            while (choice != 'Y' || choice != 'N')
+            {
+                if (char.TryParse(Console.ReadLine(), out char num))
+                {
+                    choice = num;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Input!!!");
+                    Console.WriteLine("Try again");
+                }
+            }
             if (choice == 'Y')
             {
                 Customer customer = _customerRepository.GetById(Customer.LoggedInCustomerId);

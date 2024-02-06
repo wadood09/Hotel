@@ -234,7 +234,7 @@ namespace Project_TestCase2.Menu
             Console.WriteLine("Do you want your hotel to provide room service? (Y/N)");
             bool roomService = false;
             char choice = '0';
-            while (choice == '0')
+            while (choice != 'Y' || choice != 'N')
             {
                 if (char.TryParse(Console.ReadLine().ToUpper(), out char num))
                 {
@@ -1058,7 +1058,7 @@ namespace Project_TestCase2.Menu
             {
                 Console.WriteLine("Are you sure you want your hotel to be providing room service (Y/N)");
                 input = '0';
-                while (input == '0')
+                while (input != 'Y' || input != 'N')
                 {
                     if (char.TryParse(Console.ReadLine().ToUpper(), out char num))
                     {
@@ -1301,7 +1301,7 @@ namespace Project_TestCase2.Menu
             Console.WriteLine("All details about hotel will be removed including room types, room services, etc");
             Console.WriteLine("Are you sure you want to remove hotel (Y/N)");
             char choice = '0';
-            while (choice == '0')
+            while (choice != 'Y' || choice != 'N')
             {
                 if (char.TryParse(Console.ReadLine().ToUpper(), out char num))
                 {
@@ -1373,7 +1373,7 @@ namespace Project_TestCase2.Menu
             Console.WriteLine("All details about user will be removed if user deletes account");
             Console.WriteLine("Do you want to continue with this operation (Y/N)");
             char choice = '0';
-            while (choice < 0)
+            while (choice != 'Y' || choice != 'N')
             {
                 if (char.TryParse(Console.ReadLine().ToUpper(), out char num))
                 {
