@@ -9,9 +9,9 @@ namespace Project_TestCase2.Menu
 {
     public class CustomerMenu
     {
-        bool skip = false;
-        Random random = new();
-        ConsoleColor[] colours = new ConsoleColor[] { ConsoleColor.Black, ConsoleColor.DarkBlue, ConsoleColor.DarkGreen, ConsoleColor.DarkCyan, ConsoleColor.DarkRed, ConsoleColor.DarkMagenta, ConsoleColor.DarkYellow, ConsoleColor.Blue, ConsoleColor.Green, ConsoleColor.Cyan, ConsoleColor.Red, ConsoleColor.Magenta, ConsoleColor.Yellow};
+        private bool skip = false;
+        private Random random = new();
+        private ConsoleColor[] colours = new ConsoleColor[] { ConsoleColor.Black, ConsoleColor.DarkBlue, ConsoleColor.DarkGreen, ConsoleColor.DarkCyan, ConsoleColor.DarkRed, ConsoleColor.DarkMagenta, ConsoleColor.DarkYellow, ConsoleColor.Blue, ConsoleColor.Green, ConsoleColor.Cyan, ConsoleColor.Red, ConsoleColor.Magenta, ConsoleColor.Yellow};
         IHotelManager _hotelManager = new HotelManager();
         IRoomManager _roomManager = new RoomManager();
         IRoomServiceManager _roomServiceManager = new RoomServiceManager();
@@ -148,42 +148,42 @@ namespace Project_TestCase2.Menu
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine("\t======VIEWING AVAILABLE HOTELS======");
+                        Console.WriteLine("\t====== VIEWING AVAILABLE HOTELS ======");
                         ViewAvailableHotels();
                         break;
                     case 2:
-                        Console.WriteLine("\t======BOOKING ROOM======");
+                        Console.WriteLine("\t====== BOOKING ROOM ======");
                         BookARoom();
                         break;
                     case 3:
-                        Console.WriteLine("\t======INCREASING STAY PERIOD======");
+                        Console.WriteLine("\t====== INCREASING STAY PERIOD ======");
                         IncreaseStayPeriod();
                         break;
                     case 4:
-                        Console.WriteLine("\t======CHANGING CHECK-IN TIME======");
+                        Console.WriteLine("\t====== CHANGING CHECK-IN TIME ======");
                         ChangeCheckInTime();
                         break;
                     case 5:
                         RoomService();
                         break;
                     case 6:
-                        Console.WriteLine("\t======VIEWING ROOM DETAILS======");
+                        Console.WriteLine("\t====== VIEWING ROOM DETAILS ======");
                         ViewRoomDetails();
                         break;
                     case 7:
-                        Console.WriteLine("\t======VIEWING BILLS======");
+                        Console.WriteLine("\t====== VIEWING BILLS ======");
                         ViewBillings();
                         break;
                     case 8:
-                        Console.WriteLine("\t======RATING HOTEL======");
+                        Console.WriteLine("\t====== RATING HOTEL ======");
                         RateHotel();
                         break;
                     case 9:
-                        Console.WriteLine("\t======CHECKING OUT======");
+                        Console.WriteLine("\t====== CHECKING OUT ======");
                         CheckOut();
                         break;
                     case 10:
-                        Console.WriteLine("\t======DELETING ACCOUNT======");
+                        Console.WriteLine("\t====== DELETING ACCOUNT ======");
                         DeleteAccount();
                         break;
                     case 0:
@@ -505,11 +505,11 @@ namespace Project_TestCase2.Menu
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine("\t======CHANGING ROOM SERVICE STATUS======");
+                        Console.WriteLine("\t====== CHANGING ROOM SERVICE STATUS ======");
                         OptInOrOutOfRoomService();
                         break;
                     case 2:
-                        Console.WriteLine("\t======CHANGING ROOM SERVICE TYPE======");
+                        Console.WriteLine("\t====== CHANGING ROOM SERVICE TYPE ======");
                         ChangeRoomServiceType();
                         break;
                     case 0:
@@ -667,13 +667,6 @@ namespace Project_TestCase2.Menu
                 }
             }
             choice--;
-            if(!_hotelRepository.GetById(histories[choice].HotelId).RoomService)
-            {
-                Console.WriteLine("Hotel is not providing room service!!!");
-                Console.WriteLine("Cannot opt in to Room Service function!!!");
-                Read();
-                return;
-            }
             if (histories[choice].IsRoomService)
             {
                 Console.WriteLine("Choose room service to be provided: ");
