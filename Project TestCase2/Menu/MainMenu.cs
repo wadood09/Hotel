@@ -12,7 +12,7 @@ namespace Project_TestCase2.Menu
             while (isContinue)
             {
                 Console.ForegroundColor = colours[random.Next(0, colours.Length)];
-                Console.WriteLine("==========WELCOME TO MY HOTEL MANAGEMENT APP==========");
+                Console.WriteLine("========== WELCOME TO MY HOTEL MANAGEMENT APP ==========");
                 Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine("1. ADMIN");
                 Console.WriteLine("2. CUSTOMER");

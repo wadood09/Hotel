@@ -11,19 +11,6 @@ namespace Project_TestCase2.Repositories.Implementation
             HotelContext.Rooms.Add(room);
         }
 
-        public List<Room> GetRooms(int customerId)
-        {
-            List<Room> rooms = new();
-            foreach (Room room in HotelContext.Rooms)
-            {
-                if(room.CustomerId == customerId)
-                {
-                    rooms.Add(room);
-                }
-            }
-            return rooms;
-        }
-
         public List<Room> GetByRoomTypeId(int roomTypeId)
         {
             List<Room> rooms = new();

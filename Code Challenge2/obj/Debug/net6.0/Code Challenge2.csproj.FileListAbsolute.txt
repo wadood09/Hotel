@@ -1,0 +1,15 @@
+C:\Users\WADOOD\OneDrive\Desktop\Code Challenge2\obj\Debug\net6.0\Code Challenge2.csproj.AssemblyReference.cache
+C:\Users\WADOOD\OneDrive\Desktop\Code Challenge2\obj\Debug\net6.0\Code Challenge2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\WADOOD\OneDrive\Desktop\Code Challenge2\obj\Debug\net6.0\Code Challenge2.AssemblyInfoInputs.cache
+C:\Users\WADOOD\OneDrive\Desktop\Code Challenge2\obj\Debug\net6.0\Code Challenge2.AssemblyInfo.cs
+C:\Users\WADOOD\OneDrive\Desktop\Code Challenge2\obj\Debug\net6.0\Code Challenge2.csproj.CoreCompileInputs.cache
+C:\Users\WADOOD\OneDrive\Desktop\Code Challenge2\bin\Debug\net6.0\Code Challenge2.exe
+C:\Users\WADOOD\OneDrive\Desktop\Code Challenge2\bin\Debug\net6.0\Code Challenge2.deps.json
+C:\Users\WADOOD\OneDrive\Desktop\Code Challenge2\bin\Debug\net6.0\Code Challenge2.runtimeconfig.json
+C:\Users\WADOOD\OneDrive\Desktop\Code Challenge2\bin\Debug\net6.0\Code Challenge2.dll
+C:\Users\WADOOD\OneDrive\Desktop\Code Challenge2\bin\Debug\net6.0\Code Challenge2.pdb
+C:\Users\WADOOD\OneDrive\Desktop\Code Challenge2\obj\Debug\net6.0\Code Challenge2.dll
+C:\Users\WADOOD\OneDrive\Desktop\Code Challenge2\obj\Debug\net6.0\refint\Code Challenge2.dll
+C:\Users\WADOOD\OneDrive\Desktop\Code Challenge2\obj\Debug\net6.0\Code Challenge2.pdb
+C:\Users\WADOOD\OneDrive\Desktop\Code Challenge2\obj\Debug\net6.0\Code Challenge2.genruntimeconfig.cache
+C:\Users\WADOOD\OneDrive\Desktop\Code Challenge2\obj\Debug\net6.0\ref\Code Challenge2.dll

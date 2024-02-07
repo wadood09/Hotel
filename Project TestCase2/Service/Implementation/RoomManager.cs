@@ -11,7 +11,7 @@ namespace Project_TestCase2.Service.Implementation
 
         public Room GetRoom(int roomTypeId)
         {
-            foreach (Room room in Repository.GetRooms(roomTypeId))
+            foreach (Room room in Repository.GetByRoomTypeId(roomTypeId))
             {
                 if(room.RoomStatus == Models.Enums.RoomStatus.Vacant)
                 {

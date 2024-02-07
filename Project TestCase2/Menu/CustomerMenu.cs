@@ -336,6 +336,12 @@ namespace Project_TestCase2.Menu
                         }
                     }
                     Room room1 = _roomManager.GetRoom(type.Id);
+                    if(room1 is null)
+                    {
+                        Console.WriteLine($"No available room under {type.Name} room type");
+                        Read();
+                        return;
+                    }
                     Console.WriteLine($"Your room number is {room1.Number}");
                     if (choice2 == 'Y')
                     {
@@ -554,6 +560,13 @@ namespace Project_TestCase2.Menu
                 }
             }
             choice--;
+            if(!_hotelRepository.GetById(histories[choice].HotelId).RoomService)
+            {
+                Console.WriteLine("Hotel is not providing room service!!!");
+                Console.WriteLine("Cannot opt in to Room Service function!!!");
+                Read();
+                return;
+            }
             if (histories[choice].IsRoomService)
             {
                 Console.WriteLine("Are you  sure you want to opt out of the room service function? (Y/N)");
@@ -654,6 +667,13 @@ namespace Project_TestCase2.Menu
                 }
             }
             choice--;
+            if(!_hotelRepository.GetById(histories[choice].HotelId).RoomService)
+            {
+                Console.WriteLine("Hotel is not providing room service!!!");
+                Console.WriteLine("Cannot opt in to Room Service function!!!");
+                Read();
+                return;
+            }
             if (histories[choice].IsRoomService)
             {
                 Console.WriteLine("Choose room service to be provided: ");

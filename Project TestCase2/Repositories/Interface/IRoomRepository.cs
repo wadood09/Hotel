@@ -8,6 +8,5 @@ namespace Project_TestCase2.Repositories.Interface
         void Remove(Room value);
         List<Room> GetByRoomTypeId(int id);
         Room GetByRoomNumber(string roomNumber, int roomTypeId);
-        List<Room> GetRooms(int customerId);
     }
 }

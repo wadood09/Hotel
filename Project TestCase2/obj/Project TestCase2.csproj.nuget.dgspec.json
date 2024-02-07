@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\WADOOD\\OneDrive\\Desktop\\Project TestCase2\\Project TestCase2.csproj": {}
+    "c:\\Users\\WADOOD\\OneDrive\\Desktop\\Project TestCase2\\Project TestCase2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\WADOOD\\OneDrive\\Desktop\\Project TestCase2\\Project TestCase2.csproj": {
+    "c:\\Users\\WADOOD\\OneDrive\\Desktop\\Project TestCase2\\Project TestCase2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\WADOOD\\OneDrive\\Desktop\\Project TestCase2\\Project TestCase2.csproj",
+        "projectUniqueName": "c:\\Users\\WADOOD\\OneDrive\\Desktop\\Project TestCase2\\Project TestCase2.csproj",
         "projectName": "Project TestCase2",
-        "projectPath": "C:\\Users\\WADOOD\\OneDrive\\Desktop\\Project TestCase2\\Project TestCase2.csproj",
+        "projectPath": "c:\\Users\\WADOOD\\OneDrive\\Desktop\\Project TestCase2\\Project TestCase2.csproj",
         "packagesPath": "C:\\Users\\WADOOD\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\WADOOD\\OneDrive\\Desktop\\Project TestCase2\\obj\\",
+        "outputPath": "c:\\Users\\WADOOD\\OneDrive\\Desktop\\Project TestCase2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\WADOOD\\AppData\\Roaming\\NuGet\\NuGet.Config"
