@@ -7,9 +7,11 @@ namespace Project_TestCase2.Menu
         public void MainMenu()
         {
             bool isContinue = true;
-            Console.WriteLine("WELCOME");
+            Console.ForegroundColor = ConsoleColor.Gray;
             while (isContinue)
             {
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.WriteLine("==========WELCOME TO MY HOTEL MANAGEMENT APP==========");
                 Console.WriteLine("1. ADMIN");
                 Console.WriteLine("2. CUSTOMER");
                 Console.WriteLine("0. EXIT");
@@ -18,15 +20,12 @@ namespace Project_TestCase2.Menu
                 {
                     choice = num;
                 }
-                Console.ForegroundColor = ConsoleColor.Red;
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine("ADMIN");
                         adminMenu.MainMenu();
                         break;
                     case 2:
-                        Console.WriteLine("CUSTOMER");
                         customerMenu.MainMenu();
                         break;
                     case 0:

@@ -9,6 +9,9 @@ namespace Project_TestCase2.Menu
 {
     public class CustomerMenu
     {
+        Random random = new();
+        ConsoleColor[] colours = new ConsoleColor[] { ConsoleColor.Black, ConsoleColor.DarkBlue, ConsoleColor.DarkGreen, ConsoleColor.DarkCyan, ConsoleColor.DarkRed, ConsoleColor.DarkMagenta, ConsoleColor.DarkYellow, ConsoleColor.Blue, ConsoleColor.Green, ConsoleColor.Cyan, ConsoleColor.Red, ConsoleColor.Magenta, ConsoleColor.Yellow, ConsoleColor.White };
+        IHotelManager _hotelManager = new HotelManager();
         IRoomManager _roomManager = new RoomManager();
         IRoomServiceManager _roomServiceManager = new RoomServiceManager();
         IRoomTypeManager _roomTypeManager = new RoomTypeManager();
@@ -23,11 +26,12 @@ namespace Project_TestCase2.Menu
         OnStart onStart = new();
         public void MainMenu()
         {
-            Console.ForegroundColor = ConsoleColor.Gray;
             bool isContinue = true;
             while (isContinue)
             {
-
+                Console.ForegroundColor = colours[random.Next(0, colours.Length)];
+                Console.WriteLine("\t====== CUSTOMER MENU ======");
+                Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine("1. Register");
                 Console.WriteLine("2. Login");
                 Console.WriteLine("0. Exit");
@@ -40,11 +44,11 @@ namespace Project_TestCase2.Menu
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine("\t======REGISTRATION======");
+                        Console.WriteLine("\t====== REGISTRATION ======");
                         Register();
                         break;
                     case 2:
-                        Console.WriteLine("\t======LOGIN======");
+                        Console.WriteLine("\t====== LOGIN ======");
                         Login();
                         break;
                     case 0:
@@ -116,6 +120,9 @@ namespace Project_TestCase2.Menu
             bool isContinue = true;
             while (isContinue)
             {
+                Console.ForegroundColor = colours[random.Next(0, colours.Length)];
+                Console.WriteLine("\t====== MENU ======");
+                Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine("1. View Available Hotels");
                 Console.WriteLine("2. Book a Room");
                 Console.WriteLine("3. Increase Stay Period");
@@ -132,7 +139,7 @@ namespace Project_TestCase2.Menu
                 {
                     choice = num;
                 }
-                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.ForegroundColor = colours[random.Next(0, colours.Length)];
                 switch (choice)
                 {
                     case 1:
@@ -194,16 +201,15 @@ namespace Project_TestCase2.Menu
             if (hotels.Count == 0)
             {
                 Console.WriteLine("No Available Hotel at the Moment!!!.\nTry again later");
-                Read();
             }
             else
             {
                 foreach (var hotel in hotels)
                 {
                     Console.WriteLine($"{hotel.Name.ToPascalCase()}    {hotel.Ratings} star ratings");
-                    Read();
                 }
             }
+            Read();
         }
 
         private void BookARoom()
@@ -214,7 +220,6 @@ namespace Project_TestCase2.Menu
             if (hotels.Count == 0)
             {
                 Console.WriteLine("No Available Hotel!!!Try again Later");
-                Read();
             }
             else
             {
@@ -222,10 +227,22 @@ namespace Project_TestCase2.Menu
                 Console.WriteLine("Choose Hotel to book from: ");
                 ViewAvailableHotels();
                 string choice = Console.ReadLine();
+                if(!_hotelManager.IsExist(choice))
+                {
+                    Console.WriteLine($"Hotel {choice.ToPascalCase()} does not exist!!!");
+                    Read();
+                    return;
+                }
                 Hotel hotel = _hotelRepository.GetByName(choice);
                 Console.WriteLine("Choose room type to book from: ");
                 _roomTypeManager.DisplayRoomTypes(hotel.Id);
                 string room = Console.ReadLine();
+                if(!_roomTypeManager.IsExist(room, hotel.Id))
+                {
+                    Console.WriteLine($"Room type {room.ToPascalCase()} does not exist!!!");
+                    Read();
+                    return;
+                }
                 RoomType type = _roomTypeRepository.Get(hotel.Id, room);
                 if (type.Status == Models.Enums.RoomTypeStatus.Available)
                 {
@@ -234,7 +251,7 @@ namespace Project_TestCase2.Menu
                     string service = "";
                     Console.Write("Do you want to check in immediately (Y/N)");
                     char choice2 = '0';
-                    while (choice2 != 'Y' || choice2 != 'N')
+                    while (choice2 == '0')
                     {
                         if (char.TryParse(Console.ReadLine().ToUpper(), out char num))
                         {
@@ -281,7 +298,7 @@ namespace Project_TestCase2.Menu
                     {
                         Console.WriteLine("Do you want hotel to provide you room service: ");
                         char choice3 = '0';
-                        while (choice3 != 'Y' || choice3 != 'N')
+                        while (choice3 == '0')
                         {
                             if (char.TryParse(Console.ReadLine().ToUpper(), out char num))
                             {
@@ -427,7 +444,6 @@ namespace Project_TestCase2.Menu
             {
                 Console.WriteLine("Cannot change check in time!!!");
                 Console.WriteLine("Can only be changed if user hasn't been checked in");
-                Read();
             }
             else
             {
@@ -454,10 +470,12 @@ namespace Project_TestCase2.Menu
 
         private void RoomService()
         {
-            Console.ForegroundColor = ConsoleColor.Gray;
             bool isContinue = true;
             while (isContinue)
             {
+                Console.ForegroundColor = colours[random.Next(0, colours.Length)];
+                Console.WriteLine("\t====== ROOM SERVICE MENU ======");
+                Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine("1. Opt-in/out of Room Service");
                 Console.WriteLine("2. Change type of room service being provided");
                 Console.WriteLine("0. Exit");
@@ -466,7 +484,7 @@ namespace Project_TestCase2.Menu
                 {
                     choice = num;
                 }
-                Console.ForegroundColor = ConsoleColor.Green;
+                Console.ForegroundColor = colours[random.Next(0, colours.Length)];
                 switch (choice)
                 {
                     case 1:
@@ -529,7 +547,7 @@ namespace Project_TestCase2.Menu
             {
                 Console.WriteLine("Are you  sure you want to opt out of the room service function? (Y/N)");
                 char input = '0';
-                while (input != 'Y' || input != 'N')
+                while (input == '0')
                 {
                     if (char.TryParse(Console.ReadLine().ToUpper(), out char num))
                     {
@@ -552,7 +570,7 @@ namespace Project_TestCase2.Menu
             {
                 Console.WriteLine("Are you  sure you want to opt in to the room service function? (Y/N)");
                 char input = '0';
-                while (input != 'Y' || input != 'N')
+                while (input == '0')
                 {
                     if (char.TryParse(Console.ReadLine().ToUpper(), out char num))
                     {
@@ -691,34 +709,34 @@ namespace Project_TestCase2.Menu
             choice--;
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.Write("Hotel Name: ");
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = colours[random.Next(0, colours.Length)];
             Console.WriteLine(histories[choice].Hotel);
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.Write("Room Type: ");
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.ForegroundColor = colours[random.Next(0, colours.Length)];
             Console.WriteLine(histories[choice].RoomType);
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.Write("Room Number: ");
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = colours[random.Next(0, colours.Length)];
             Console.WriteLine(histories[choice].RoomNumber);
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.Write("Has Room Service: ");
-            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.ForegroundColor = colours[random.Next(0, colours.Length)];
             Console.WriteLine(histories[choice].IsRoomService);
             if (histories[choice].IsRoomService)
             {
                 Console.ForegroundColor = ConsoleColor.Gray;
                 Console.Write("Name of Room Service: ");
-                Console.ForegroundColor = ConsoleColor.DarkBlue;
+                Console.ForegroundColor = colours[random.Next(0, colours.Length)];
                 Console.WriteLine(histories[choice].RoomService.Name);
             }
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.Write("Check-in Time: ");
-            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.ForegroundColor = colours[random.Next(0, colours.Length)];
             Console.WriteLine(histories[choice].CheckInDate.ToString("dddd, MMMM dd, yyyy"));
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.Write("Time to be checked-out: ");
-            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.ForegroundColor = colours[random.Next(0, colours.Length)];
             Console.WriteLine(histories[choice].CheckOutDate.ToString("dddd, MMMM dd, yyyy"));
             Console.ForegroundColor = ConsoleColor.Gray;
             Read();
@@ -761,13 +779,13 @@ namespace Project_TestCase2.Menu
             }
             choice--;
             Console.Write("Price of room per night: ");
-            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.ForegroundColor = colours[random.Next(0, colours.Length)];
             Console.WriteLine($"N{histories[choice].Price:n}");
             Console.ForegroundColor = ConsoleColor.Gray;
             if (histories[choice].IsRoomService)
             {
                 Console.Write("Price of room service: ");
-                Console.ForegroundColor = ConsoleColor.Green;
+                Console.ForegroundColor = colours[random.Next(0, colours.Length)];
                 Console.WriteLine($"N{histories[choice].RoomService.Price:n}");
                 Console.ForegroundColor = ConsoleColor.Gray;
                 histories[choice].TotalPriceOfStay = histories[choice].RoomService.Price;
@@ -775,7 +793,7 @@ namespace Project_TestCase2.Menu
             double price = histories[choice].Price * histories[choice].StayPeriod;
             histories[choice].TotalPriceOfStay += price;
             Console.Write("Total price of stay: ");
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = colours[random.Next(0, colours.Length)];
             Console.WriteLine($"N{histories[choice].TotalPriceOfStay:n}");
             Console.ForegroundColor = ConsoleColor.Gray;
             Read();
@@ -846,7 +864,7 @@ namespace Project_TestCase2.Menu
             Console.WriteLine("Early Check out will incur extra fees");
             Console.WriteLine("Are you sure you want to continue with this operation (Y/N)");
             int choice2 = '0';
-            while (choice2 != 'Y' || choice2 != 'N')
+            while (choice2 == '0')
             {
                 if (char.TryParse(Console.ReadLine().ToUpper(), out char num))
                 {
@@ -942,7 +960,7 @@ namespace Project_TestCase2.Menu
             Console.WriteLine("All details about user will be removed if user deletes account");
             Console.WriteLine("Do you want to continue with this operation (Y/N)");
             char choice = '0';
-            while (choice != 'Y' || choice != 'N')
+            while (choice == '0')
             {
                 if (char.TryParse(Console.ReadLine(), out char num))
                 {
@@ -979,6 +997,7 @@ namespace Project_TestCase2.Menu
                 }
                 _customerRepository.Remove(customer);
                 Console.WriteLine("Successfully deleted account!!!");
+                Read();
             }
         }
 
@@ -986,6 +1005,7 @@ namespace Project_TestCase2.Menu
         {
             Console.WriteLine("Press any key to continue");
             Console.ReadKey();
+            Console.WriteLine();
         }
     }
 }
