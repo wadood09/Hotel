@@ -222,7 +222,16 @@ namespace Project_TestCase2.Menu
                 Console.WriteLine($"Enter room number for rooms under {type.ToPascalCase()}");
                 for (int i = 1; i <= roomAmount[index]; i++)
                 {
-                    roomNumber.Add(Console.ReadLine());
+                    string hold = Console.ReadLine();
+                    while (hold == string.Empty)
+                    {
+                        if (hold == string.Empty)
+                        {
+                            Console.WriteLine("Invalid Input!!!\nTry again");
+                            hold = Console.ReadLine();
+                        }
+                    }
+                    roomNumber.Add(hold);
                 }
                 roomNumbers.Add(roomNumber);
                 index++;
@@ -266,26 +275,33 @@ namespace Project_TestCase2.Menu
                 {
                     roomServices.Add(input);
                 }
-                Console.WriteLine("Enter price of room service(s): ");
-                foreach (string service in roomServices)
+                if (roomServices.Count != 0)
                 {
-                    Console.Write($"{service}:  ");
-                    double price = -1;
-                    while (price < 0)
+                    Console.WriteLine("Enter price of room service(s): ");
+                    foreach (string service in roomServices)
                     {
-                        if (double.TryParse(Console.ReadLine(), out double num))
+                        Console.Write($"{service}:  ");
+                        double price = -1;
+                        while (price < 0)
                         {
-                            price = num;
+                            if (double.TryParse(Console.ReadLine(), out double num))
+                            {
+                                price = num;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid Input!!!");
+                                Console.WriteLine("Try again");
+                            }
                         }
-                        else
-                        {
-                            Console.WriteLine("Invalid Input!!!");
-                            Console.WriteLine("Try again");
-                        }
+                        Prices.Add(price);
                     }
-                    Prices.Add(price);
+                    roomService = true;
                 }
-                roomService = true;
+                else
+                {
+                    Console.WriteLine("Your hotel is not providing room service");
+                }
             }
             Hotel hotel = new(Admin.LoggedInAdminId, name, roomService, fees);
             _hotelManager.Register(hotel);
@@ -372,9 +388,6 @@ namespace Project_TestCase2.Menu
 
         private void UpdateHotelDetails()
         {
-            Console.ForegroundColor = colours[random.Next(0, colours.Length)];
-            Console.WriteLine("\t====== UPDATING HOTEL DETAILS ======");
-            Console.ForegroundColor = ConsoleColor.Gray;
             List<Hotel> hotels = _hotelRepository.GetList(Admin.LoggedInAdminId);
             if (hotels.Count == 0)
             {
@@ -385,6 +398,9 @@ namespace Project_TestCase2.Menu
             bool isContinue = true;
             while (isContinue)
             {
+                Console.ForegroundColor = colours[random.Next(0, colours.Length)];
+                Console.WriteLine("\t====== UPDATING HOTEL DETAILS ======");
+                Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine("1. Hotel Name");
                 Console.WriteLine("2. Rooms");
                 Console.WriteLine("3. Room Service");
@@ -470,12 +486,12 @@ namespace Project_TestCase2.Menu
 
         private void UpdateRoomTypes()
         {
-            Console.ForegroundColor = colours[random.Next(0, colours.Length)];
-            Console.WriteLine("\t====== UPDATING ROOM TYPES ======");
-            Console.ForegroundColor = ConsoleColor.Gray;
             bool isContinue = true;
             while (isContinue)
             {
+                Console.ForegroundColor = colours[random.Next(0, colours.Length)];
+                Console.WriteLine("\t====== UPDATING ROOM TYPES ======");
+                Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine("1. Add Room Type");
                 Console.WriteLine("2. Remove Room Type");
                 Console.WriteLine("3. Change price of existing Room Type");
@@ -989,12 +1005,12 @@ namespace Project_TestCase2.Menu
 
         private void UpdateRoomService()
         {
-            Console.ForegroundColor = colours[random.Next(0, colours.Length)];
-            Console.WriteLine("\t====== UPDATING ROOM SERVICES ======");
-            Console.ForegroundColor = ConsoleColor.Gray;
             bool isContinue = true;
             while (isContinue)
             {
+                Console.ForegroundColor = colours[random.Next(0, colours.Length)];
+                Console.WriteLine("\t====== UPDATING ROOM SERVICES ======");
+                Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine("1. Add Room Service");
                 Console.WriteLine("2. Remove Room Service");
                 Console.WriteLine("3. Change price of existing Room Service");

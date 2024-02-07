@@ -53,3 +53,12 @@ static List<int> Question2(int[] nums)
     return alone;
 }
 
+string hold = Console.ReadLine();
+                    while(hold == string.Empty)
+                    {
+                        if(hold == string.Empty)
+                        {
+                            Console.WriteLine("Invalid Input!!!\nTry again");
+                        hold = Console.ReadLine();
+                        }
+                    }

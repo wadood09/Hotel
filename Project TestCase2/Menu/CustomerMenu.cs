@@ -10,6 +10,7 @@ namespace Project_TestCase2.Menu
     public class CustomerMenu
     {
         private bool skip = false;
+        private int views = 0;
         private Random random = new();
         private ConsoleColor[] colours = new ConsoleColor[] { ConsoleColor.Black, ConsoleColor.DarkBlue, ConsoleColor.DarkGreen, ConsoleColor.DarkCyan, ConsoleColor.DarkRed, ConsoleColor.DarkMagenta, ConsoleColor.DarkYellow, ConsoleColor.Blue, ConsoleColor.Green, ConsoleColor.Cyan, ConsoleColor.Red, ConsoleColor.Magenta, ConsoleColor.Yellow};
         IHotelManager _hotelManager = new HotelManager();
@@ -106,6 +107,7 @@ namespace Project_TestCase2.Menu
                 Console.WriteLine("Login Successfull");
                 Read();
                 Menu();
+                views--;
             }
             else
             {
@@ -119,11 +121,11 @@ namespace Project_TestCase2.Menu
             bool isContinue = true;
             while (isContinue)
             {
-                if (!skip)
+                if (views == 0)
                 {
                     Customer customer = _customerRepository.GetById(Customer.LoggedInCustomerId);
                     Console.WriteLine($"Welcome {customer.FirstName.ToPascalCase()} {customer.LastName.ToPascalCase()}");
-                    skip = true;
+                    views++;
                 }
                 Console.ForegroundColor = colours[random.Next(0, colours.Length)];
                 Console.WriteLine("\t====== MENU ======");
@@ -210,10 +212,11 @@ namespace Project_TestCase2.Menu
             }
             else
             {
+                int count = 0;
                 Console.WriteLine("Viewing all hotels: ");
                 foreach (var hotel in hotels)
                 {
-                    Console.WriteLine($"{hotel.Name.ToPascalCase()}    {hotel.Ratings} star ratings");
+                    Console.WriteLine($"{++count}. {hotel.Name.ToPascalCase()}".PadRight(20) + $"{hotel.Ratings} star ratings");
                 }
             }
             if (!skip)
@@ -234,7 +237,9 @@ namespace Project_TestCase2.Menu
             }
             else
             {
+                skip = true;
                 ViewAvailableHotels();
+                skip = false;
                 Console.WriteLine("Choose Hotel to book from: ");
                 string choice = Console.ReadLine();
                 if (!_hotelManager.IsExist(choice))
@@ -355,7 +360,6 @@ namespace Project_TestCase2.Menu
                     Console.WriteLine($"No available rooms in room type {room}!!!");
                     Console.WriteLine($"Try booking a room in available room type or Try again later");
                 }
-                skip = false;
                 Read();
             }
         }
