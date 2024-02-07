@@ -4,14 +4,16 @@ namespace Project_TestCase2.Menu
     {
         AdminMenu adminMenu = new();
         CustomerMenu customerMenu = new();
+        Random random = new();
+        ConsoleColor[] colours = new ConsoleColor[] { ConsoleColor.Black, ConsoleColor.DarkBlue, ConsoleColor.DarkGreen, ConsoleColor.DarkCyan, ConsoleColor.DarkRed, ConsoleColor.DarkMagenta, ConsoleColor.DarkYellow, ConsoleColor.Blue, ConsoleColor.Green, ConsoleColor.Cyan, ConsoleColor.Red, ConsoleColor.Magenta, ConsoleColor.Yellow, ConsoleColor.White };
         public void MainMenu()
         {
             bool isContinue = true;
-            Console.ForegroundColor = ConsoleColor.Gray;
             while (isContinue)
             {
-                Console.ForegroundColor = ConsoleColor.Black;
+                Console.ForegroundColor = colours[random.Next(0, colours.Length)];
                 Console.WriteLine("==========WELCOME TO MY HOTEL MANAGEMENT APP==========");
+                Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine("1. ADMIN");
                 Console.WriteLine("2. CUSTOMER");
                 Console.WriteLine("0. EXIT");

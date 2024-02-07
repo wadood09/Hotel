@@ -1,4 +1,5 @@
 using Project_TestCase2.Models.Entities;
+using Project_TestCase2.Models.Extensions;
 using Project_TestCase2.Repositories.Implementation;
 using Project_TestCase2.Repositories.Interface;
 using Project_TestCase2.Service.Interface;
@@ -11,9 +12,10 @@ namespace Project_TestCase2.Service.Implementation
 
         public void DisplayRoomTypes(int hotelId)
         {
+            Console.WriteLine("Viewing all room types: ");
             foreach (RoomType type in Repository.GetAllByHotelId(hotelId))
             {
-                Console.WriteLine($"{type.Name}     N{type.Price:n}     {type.Status}");
+                Console.WriteLine($"{type.Name.ToPascalCase()}     N{type.Price:n}     {type.Status}");
             }
         }
 

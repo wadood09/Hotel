@@ -9,8 +9,9 @@ namespace Project_TestCase2.Menu
 {
     public class AdminMenu
     {
+        bool skip = false;
         Random random = new();
-        ConsoleColor[] colours = new ConsoleColor[] { ConsoleColor.Black, ConsoleColor.DarkBlue, ConsoleColor.DarkGreen, ConsoleColor.DarkCyan, ConsoleColor.DarkRed, ConsoleColor.DarkMagenta, ConsoleColor.DarkYellow, ConsoleColor.Blue, ConsoleColor.Green, ConsoleColor.Cyan, ConsoleColor.Red, ConsoleColor.Magenta, ConsoleColor.Yellow, ConsoleColor.White };
+        ConsoleColor[] colours = new ConsoleColor[] { ConsoleColor.Black, ConsoleColor.DarkBlue, ConsoleColor.DarkGreen, ConsoleColor.DarkCyan, ConsoleColor.DarkRed, ConsoleColor.DarkMagenta, ConsoleColor.DarkYellow, ConsoleColor.Blue, ConsoleColor.Green, ConsoleColor.Cyan, ConsoleColor.Red, ConsoleColor.Magenta, ConsoleColor.Yellow };
         IRepository<Admin> _adminRepository = new AdminRepository();
         IRepository<Hotel> _hotelRepository = new HotelRepository();
         IRoomRepository _roomRepository = new RoomRepository();
@@ -102,11 +103,15 @@ namespace Project_TestCase2.Menu
 
         private void Menu()
         {
-            Admin admin = _adminRepository.GetById(Admin.LoggedInAdminId);
-            Console.WriteLine($"Welcome {admin.FirstName.ToPascalCase()} {admin.LastName.ToPascalCase()}");
             bool isContinue = true;
             while (isContinue)
             {
+                if (!skip)
+                {
+                    Admin admin = _adminRepository.GetById(Admin.LoggedInAdminId);
+                    Console.WriteLine($"Welcome {admin.FirstName.ToPascalCase()} {admin.LastName.ToPascalCase()}");
+                    skip = true;
+                }
                 Console.ForegroundColor = colours[random.Next(0, colours.Length)];
                 Console.WriteLine("\t====== MENU ======");
                 Console.ForegroundColor = ConsoleColor.Gray;
@@ -144,6 +149,7 @@ namespace Project_TestCase2.Menu
                         DeleteAccount();
                         break;
                     case 0:
+                        skip = false;
                         Console.ForegroundColor = ConsoleColor.Gray;
                         isContinue = false;
                         break;
@@ -341,23 +347,24 @@ namespace Project_TestCase2.Menu
             choice--;
             List<RoomType> roomTypes = _roomTypeRepository.GetAllByHotelId(hotel[choice].Id);
             List<RoomService> roomServices = _roomServiceRepository.GetByHotelId(hotel[choice].Id);
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"\t{hotel[choice].Name}");
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("ROOM TYPES".PadRight(10) + "AMOUNT OF ROOM".PadRight(30) + "PRICES OF ROOMS");
+            Console.Write("Hotel Name: ");
+            Console.ForegroundColor = colours[random.Next(0, colours.Length)];
+            Console.WriteLine($"{hotel[choice].Name}");
+            Console.ForegroundColor = colours[random.Next(0, colours.Length)];
+            Console.WriteLine("ROOM TYPES".PadRight(20) + "AMOUNT OF ROOM".PadRight(30) + "PRICES OF ROOMS");
             Console.ForegroundColor = ConsoleColor.Gray;
             for (int i = 0; i < roomTypes.Count; i++)
             {
-                Console.WriteLine(roomTypes[i].Name.PadRight(10) + roomTypes[i].Amount.ToString().PadRight(30) + $"N{roomTypes[i].Price:n}");
+                Console.WriteLine(roomTypes[i].Name.ToPascalCase().PadRight(20) + roomTypes[i].Amount.ToString().PadRight(30) + $"N{roomTypes[i].Price:n}");
             }
             if (hotel[choice].RoomService)
             {
-                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.ForegroundColor = colours[random.Next(0, colours.Length)];
                 Console.WriteLine($"ROOM SERVICES      PRICES");
                 Console.ForegroundColor = ConsoleColor.Gray;
                 foreach (RoomService service in roomServices)
                 {
-                    Console.WriteLine(service.Name.PadRight(10) + $"N{service.Price:n}");
+                    Console.WriteLine(service.Name.ToPascalCase().PadRight(20) + $"N{service.Price:n}");
                 }
             }
             Read();
