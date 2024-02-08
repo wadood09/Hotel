@@ -9,6 +9,14 @@ namespace Project_TestCase2.Service.Implementation
     {
         IRoomRepository Repository = new RoomRepository();
 
+        public void DisplayRoomNumbers(int roomTypeId)
+        {
+            foreach (Room room in Repository.GetByRoomTypeId(roomTypeId))
+            {
+                Console.WriteLine(room.Number);
+            }
+        }
+
         public Room GetRoom(int roomTypeId)
         {
             foreach (Room room in Repository.GetByRoomTypeId(roomTypeId))

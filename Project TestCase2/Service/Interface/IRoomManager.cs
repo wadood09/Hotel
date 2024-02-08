@@ -6,5 +6,6 @@ namespace Project_TestCase2.Service.Interface
     {
         bool IsExist(string roomNumber, int roomTypeId);
         Room GetRoom(int roomTypeId);
+        void DisplayRoomNumbers(int roomTypeId);
     }
 }

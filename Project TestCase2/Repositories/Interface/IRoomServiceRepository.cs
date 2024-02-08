@@ -7,7 +7,8 @@ namespace Project_TestCase2.Repositories.Interface
         void Add(RoomService roomService);
         void Remove(RoomService roomService);
         List<RoomService> GetByHotelId(int hotelId);
-        RoomService GetByName(string name, int hotelId);
+        RoomService Get(string name, int hotelId);
+        RoomService Get(int num, int hotelId);
         List<RoomService> GetByCustomerId(int customerId);
     }
 }

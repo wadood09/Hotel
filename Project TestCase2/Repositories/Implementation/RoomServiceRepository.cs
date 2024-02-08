@@ -16,7 +16,7 @@ namespace Project_TestCase2.Repositories.Implementation
             List<RoomService> roomServices = new();
             foreach (RoomService roomService in HotelContext.RoomServices)
             {
-                if(roomService.CustomerId == customerId)
+                if (roomService.CustomerId == customerId)
                 {
                     roomServices.Add(roomService);
                 }
@@ -29,7 +29,7 @@ namespace Project_TestCase2.Repositories.Implementation
             List<RoomService> roomServices = new();
             foreach (RoomService roomService in HotelContext.RoomServices)
             {
-                if(roomService.HotelId == hotelId)
+                if (roomService.HotelId == hotelId)
                 {
                     roomServices.Add(roomService);
                 }
@@ -37,11 +37,11 @@ namespace Project_TestCase2.Repositories.Implementation
             return roomServices;
         }
 
-        public RoomService GetByName(string name, int hotelId)
+        public RoomService Get(string name, int hotelId)
         {
             foreach (RoomService roomService in HotelContext.RoomServices)
             {
-                if(roomService.Name.ToLower() == name.ToLower() && roomService.HotelId == hotelId)
+                if (roomService.Name.ToLower() == name.ToLower() && roomService.HotelId == hotelId)
                 {
                     return roomService;
                 }
@@ -52,6 +52,11 @@ namespace Project_TestCase2.Repositories.Implementation
         public void Remove(RoomService roomService)
         {
             HotelContext.RoomServices.Remove(roomService);
+        }
+
+        public RoomService Get(int num, int hotelId)
+        {
+            return GetByHotelId(hotelId)[--num];
         }
     }
 }

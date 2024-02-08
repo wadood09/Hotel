@@ -352,7 +352,7 @@ namespace Project_TestCase2.Menu
                     {
                         room1.RoomStatus = Models.Enums.RoomStatus.Occupied;
                     }
-                    StayHistory history = new(hotel.Name, hotel.Id, type.Name, type.Id, type.Price, roomService, _roomServiceRepository.GetByName(service, hotel.Id), room1.Number, Customer.LoggedInCustomerId, nights, date);
+                    StayHistory history = new(hotel.Name, hotel.Id, type.Name, type.Id, type.Price, roomService, _roomServiceRepository.Get(service, hotel.Id), room1.Number, Customer.LoggedInCustomerId, nights, date);
                     _historyRepository.Add(history);
                 }
                 else
@@ -618,7 +618,7 @@ namespace Project_TestCase2.Menu
                     if (_roomServiceManager.IsExist(service, histories[choice].HotelId))
                     {
                         histories[choice].IsRoomService = true;
-                        histories[choice].RoomService = _roomServiceRepository.GetByName(service, histories[choice].HotelId);
+                        histories[choice].RoomService = _roomServiceRepository.Get(service, histories[choice].HotelId);
                         Console.WriteLine("You have opted in to the room service function!!!");
                     }
                     else
@@ -679,7 +679,7 @@ namespace Project_TestCase2.Menu
                 if (_roomServiceManager.IsExist(service, histories[choice].HotelId))
                 {
                     histories[choice].IsRoomService = true;
-                    histories[choice].RoomService = _roomServiceRepository.GetByName(service, histories[choice].HotelId);
+                    histories[choice].RoomService = _roomServiceRepository.Get(service, histories[choice].HotelId);
                     Console.WriteLine($"You have successfully changed room service type to {service}!!!");
                 }
                 else

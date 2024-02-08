@@ -9,6 +9,17 @@ namespace Project_TestCase2.Service.Implementation
     public class HotelManager : IHotelManager
     {
         IRepository<Hotel> Repository = new HotelRepository();
+
+        public void DisplayHotels(int adminId)
+        {
+            int count = 0;
+            Console.WriteLine("Viewing all hotels: ");
+            foreach (Hotel hotel in Repository.GetList(adminId))
+            {
+                Console.WriteLine($"{++count}. {hotel.Name}");
+            }
+        }
+
         public bool IsExist(string name)
         {
             foreach (Hotel hotel in HotelContext.Hotels)

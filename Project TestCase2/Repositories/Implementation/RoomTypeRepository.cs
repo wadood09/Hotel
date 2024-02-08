@@ -22,6 +22,11 @@ namespace Project_TestCase2.Repositories.Implementation
             }
             return null;
         }
+        
+        public RoomType Get(int hotelId, int num)
+        {
+            return GetAllByHotelId(hotelId)[--num];
+        }
 
         public List<RoomType> GetAll()
         {
