@@ -7,7 +7,7 @@ namespace Struct___Enums
 {
     public static class Extension
     {
-        static State State(this MonthsOfTheYear months)
+        public static State State(this MonthsOfTheYear months)
         {
             switch ((int)months)
             {
