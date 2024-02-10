@@ -13,19 +13,15 @@ namespace Project_TestCase2.Repositories.Implementation
 
         public RoomType Get(int hotelId, string name)
         {
-            foreach (RoomType roomType in HotelContext.RoomTypes)
-            {
-                if(roomType.HotelId == hotelId && roomType.Name.ToLower() == name.ToLower())
-                {
-                    return roomType;
-                }
-            }
-            return null;
+            return HotelContext.RoomTypes.FirstOrDefault(roomType => roomType.HotelId == hotelId && roomType.Name.ToLower() == name.ToLower());
         }
-        
+
         public RoomType Get(int hotelId, int num)
         {
-            return GetAllByHotelId(hotelId)[--num];
+            if (num > GetAllByHotelId(hotelId).Count)
+                return null;
+            else
+                return GetAllByHotelId(hotelId)[--num];
         }
 
         public List<RoomType> GetAll()
@@ -35,27 +31,12 @@ namespace Project_TestCase2.Repositories.Implementation
 
         public List<RoomType> GetAllByHotelId(int hotelId)
         {
-            List<RoomType> roomTypes = new();
-            foreach (RoomType roomType in HotelContext.RoomTypes)
-            {
-                if(roomType.HotelId == hotelId)
-                {
-                    roomTypes.Add(roomType);
-                }
-            }
-            return roomTypes;
+            return HotelContext.RoomTypes.Where(type => type.HotelId == hotelId).ToList();
         }
 
         public RoomType GetById(int id)
         {
-            foreach (RoomType roomType in HotelContext.RoomTypes)
-            {
-                if(roomType.Id == id)
-                {
-                    return roomType;
-                }
-            }
-            return null;
+            return HotelContext.RoomTypes.FirstOrDefault(type => type.Id == id);
         }
 
         public void Remove(RoomType roomType)

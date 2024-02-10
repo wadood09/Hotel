@@ -18,26 +18,12 @@ namespace Project_TestCase2.Repositories.Implementation
 
         public Admin GetById(int id)
         {
-            foreach (Admin admin in HotelContext.Admins)
-            {
-                if(admin.Id == id)
-                {
-                    return admin;
-                }
-            }
-            return null;
+            return HotelContext.Admins.FirstOrDefault(admin => admin.Id == id);
         }
 
         public Admin GetByName(string email)
         {
-            foreach (Admin admin in HotelContext.Admins)
-            {
-                if(admin.Email == email)
-                {
-                    return admin;
-                }
-            }
-            return null;
+            throw new NotImplementedException();
         }
 
         public List<Admin> GetList(int id)

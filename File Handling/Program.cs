@@ -88,9 +88,21 @@ Console.WriteLine("Hello, World!");
 
 // string filePath = "Folder\\Greetings.txt";
 // File.Create(filePath);
-string newFolder = "Folder\\New Folder\\ Folder.txt";
+// string newFolder = "Folder\\New Folder\\ Folder.txt";
 // File.Create(newFolder);
-StreamWriter writer = new StreamWriter(newFolder);
-writer.WriteLine("I am a boy");
-writer.Flush();
-writer.Close();
+// StreamWriter writer = new StreamWriter(newFolder);
+// writer.WriteLine("I am a boy");
+// writer.Flush();
+// writer.Close();
+// string folder = "C:\\Users\\WADOOD\\OneDrive\\Desktop\\Newfolder\\Newfile.txt";
+// using (var writer = new StreamWriter(folder))
+// {
+//     writer.WriteLine("Hello World");
+// }
+
+string newFolder = @"C:\Users\WADOOD\OneDrive\Desktop\NewFolder2\newFile.txt";
+using(var Reader = new StreamReader(newFolder))
+{
+    string holdStuff = Reader.ReadLine();
+    Console.Write(holdStuff);
+}

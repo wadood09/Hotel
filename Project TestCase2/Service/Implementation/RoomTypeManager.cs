@@ -33,25 +33,17 @@ namespace Project_TestCase2.Service.Implementation
         public bool IsExist(string name, int hotelId)
         {
             if(Repository.Get(hotelId, name) != null)
-            {
                 return true;
-            }
             else
-            {
                 return false;
-            }
         }
 
          public bool IsExist(int num, int hotelId)
         {
-            if(Repository.Get(hotelId, Repository.GetAllByHotelId(hotelId)[--num].Name) != null)
-            {
+            if(Repository.Get(hotelId, num) != null)
                 return true;
-            }
             else
-            {
                 return false;
-            }
         }
     }
 }

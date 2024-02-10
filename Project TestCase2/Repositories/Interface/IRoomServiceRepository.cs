@@ -9,6 +9,5 @@ namespace Project_TestCase2.Repositories.Interface
         List<RoomService> GetByHotelId(int hotelId);
         RoomService Get(string name, int hotelId);
         RoomService Get(int num, int hotelId);
-        List<RoomService> GetByCustomerId(int customerId);
     }
 }

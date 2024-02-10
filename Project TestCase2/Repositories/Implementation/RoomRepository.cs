@@ -13,27 +13,12 @@ namespace Project_TestCase2.Repositories.Implementation
 
         public List<Room> GetByRoomTypeId(int roomTypeId)
         {
-            List<Room> rooms = new();
-            foreach (Room room in HotelContext.Rooms)
-            {
-                if(room.RoomTypeId == roomTypeId)
-                {
-                    rooms.Add(room);
-                }
-            }
-            return rooms;
+            return HotelContext.Rooms.Where(room => room.RoomTypeId == roomTypeId).ToList();
         }
 
         public Room GetByRoomNumber(string roomNumber, int roomTypeId)
         {
-            foreach (Room room in HotelContext.Rooms)
-            {
-                if(room.Number == roomNumber && room.RoomTypeId == roomTypeId)
-                {
-                    return room;
-                }
-            }
-            return null;
+            return HotelContext.Rooms.FirstOrDefault(room => room.Number == roomNumber && room.RoomTypeId == roomTypeId);
         }
 
         public void Remove(Room room)

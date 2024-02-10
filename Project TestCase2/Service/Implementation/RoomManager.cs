@@ -11,6 +11,7 @@ namespace Project_TestCase2.Service.Implementation
 
         public void DisplayRoomNumbers(int roomTypeId)
         {
+            Console.WriteLine("Viewing Room number(s): ");
             foreach (Room room in Repository.GetByRoomTypeId(roomTypeId))
             {
                 Console.WriteLine(room.Number);

@@ -7,6 +7,7 @@ namespace Project_TestCase2.Menu
     public class OnStart
     {
         IRoomRepository _roomRepository = new RoomRepository();
+        IRoomServiceRepository _roomServiceRepository = new RoomServiceRepository();
         IRoomTypeRepository _roomTypeRepository = new RoomTypeRepository();
         IStayRepository _historyRepository = new StayRepository();
         IRepository<Hotel> _hotelRepository = new HotelRepository();
@@ -40,6 +41,14 @@ namespace Project_TestCase2.Menu
                     }
                     type.Status = Models.Enums.RoomTypeStatus.Unavailable;
                 }
+            }
+        }
+
+        public void CheckRoomServiceStatus(ref Hotel hotel)
+        {
+            if(_roomServiceRepository.GetByHotelId(hotel.Id).Count == 0)
+            {
+                hotel.RoomService = false;
             }
         }
 

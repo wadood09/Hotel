@@ -18,39 +18,17 @@ namespace Project_TestCase2.Repositories.Implementation
 
         public Hotel GetById(int id)
         {
-            foreach (Hotel hotel in HotelContext.Hotels)
-            {
-                if(hotel.Id == id)
-                {
-                    return hotel;
-                }
-            }
-            return null;
+            return HotelContext.Hotels.FirstOrDefault(hotel => hotel.Id == id);
         }
 
         public Hotel GetByName(string name)
         {
-            foreach (Hotel hotel in HotelContext.Hotels)
-            {
-                if(hotel.Name.ToLower() == name.ToLower())
-                {
-                    return hotel;
-                }
-            }
-            return null;
+            return HotelContext.Hotels.FirstOrDefault(hotel => hotel.Name.ToLower() == name.ToLower());
         }
 
-        public List<Hotel> GetList(int id)
+        public List<Hotel> GetList(int adminId)
         {
-            List<Hotel> hotels = new();
-            foreach (Hotel hotel in HotelContext.Hotels)
-            {
-                if(hotel.AdminId == id)
-                {
-                    hotels.Add(hotel);
-                }
-            }
-            return hotels;
+            return HotelContext.Hotels.Where(hotel => hotel.AdminId == adminId).ToList();
         }
 
         public void Remove(Hotel hotel)

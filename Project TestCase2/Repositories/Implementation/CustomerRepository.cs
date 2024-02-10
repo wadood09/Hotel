@@ -18,39 +18,17 @@ namespace Project_TestCase2.Repositories.Implementation
 
         public Customer GetById(int id)
         {
-            foreach (Customer customer in HotelContext.Customers)
-            {
-                if(customer.Id == id)
-                {
-                    return customer;
-                }
-            }
-            return null;
+            return HotelContext.Customers.FirstOrDefault(customer => customer.Id == id);
         }
 
         public Customer GetByName(string email)
         {
-            foreach (Customer customer in HotelContext.Customers)
-            {
-                if(customer.Email == email)
-                {
-                    return customer;
-                }
-            }
-            return null;
+            throw new NotImplementedException();
         }
 
         public List<Customer> GetList(int id)
         {
-            List<Customer> customers = new();
-            foreach (Customer customer in HotelContext.Customers)
-            {
-                if(customer.Id == id)
-                {
-                    customers.Add(customer);
-                }
-            }
-            return customers;
+            throw new NotImplementedException();
         }
 
         public void Remove(Customer customer)

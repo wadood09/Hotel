@@ -11,42 +11,14 @@ namespace Project_TestCase2.Repositories.Implementation
             HotelContext.RoomServices.Add(roomService);
         }
 
-        public List<RoomService> GetByCustomerId(int customerId)
-        {
-            List<RoomService> roomServices = new();
-            foreach (RoomService roomService in HotelContext.RoomServices)
-            {
-                if (roomService.CustomerId == customerId)
-                {
-                    roomServices.Add(roomService);
-                }
-            }
-            return roomServices;
-        }
-
         public List<RoomService> GetByHotelId(int hotelId)
         {
-            List<RoomService> roomServices = new();
-            foreach (RoomService roomService in HotelContext.RoomServices)
-            {
-                if (roomService.HotelId == hotelId)
-                {
-                    roomServices.Add(roomService);
-                }
-            }
-            return roomServices;
+            return HotelContext.RoomServices.Where(service => service.HotelId == hotelId).ToList();
         }
 
         public RoomService Get(string name, int hotelId)
         {
-            foreach (RoomService roomService in HotelContext.RoomServices)
-            {
-                if (roomService.Name.ToLower() == name.ToLower() && roomService.HotelId == hotelId)
-                {
-                    return roomService;
-                }
-            }
-            return null;
+            return HotelContext.RoomServices.FirstOrDefault(service => service.Name.ToLower() == name.ToLower() && service.HotelId == hotelId);
         }
 
         public void Remove(RoomService roomService)
@@ -56,7 +28,10 @@ namespace Project_TestCase2.Repositories.Implementation
 
         public RoomService Get(int num, int hotelId)
         {
-            return GetByHotelId(hotelId)[--num];
+            if (num > GetByHotelId(hotelId).Count)
+                return null;
+            else
+                return GetByHotelId(hotelId)[--num];
         }
     }
 }

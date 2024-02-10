@@ -28,26 +28,18 @@ namespace Project_TestCase2.Service.Implementation
 
         public bool IsExist(string name, int hotelId)
         {
-            if(Repository.Get(name, hotelId) != null)
-            {
+            if (Repository.Get(name, hotelId) != null)
                 return true;
-            }
             else
-            {
                 return false;
-            }
         }
 
         public bool IsExist(int num, int hotelId)
         {
-            if(Repository.Get(name, hotelId) != null)
-            {
+            if (Repository.Get(num, hotelId) != null)
                 return true;
-            }
             else
-            {
                 return false;
-            }
         }
     }
 }

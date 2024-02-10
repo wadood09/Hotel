@@ -11,57 +11,29 @@ namespace Project_TestCase2.Repositories.Implementation
             HotelContext.StayHistories.Add(history);
         }
 
-        public List<StayHistory> Get(int id)
+        public List<StayHistory> Get(int customerId)
         {
-            List<StayHistory> histories = new();
-            foreach (StayHistory history in HotelContext.StayHistories)
-            {
-                if (history.CustomerID == id)
-                {
-                    histories.Add(history);
-                }
-            }
-            return histories;
+            return HotelContext.StayHistories.Where(history => history.CustomerID == customerId).ToList();
         }
 
         public List<StayHistory> GetHotels(int customerId)
         {
             List<StayHistory> histories = new();
-            List<StayHistory> store = Get(customerId).OrderBy(b => b.HotelId).ToList();
-            if (store.Count == 0)
+            var store = Get(customerId).OrderBy(b => b.HotelId);
+            if (!store.Any())
             {
                 return histories;
             }
-            HashSet<int> hotelIds = new();
-            foreach (StayHistory history in store)
-            {
-                hotelIds.Add(history.HotelId);
-            }
-            List<int> hold = hotelIds.ToList();
+            List<int> hotelIds = store.Select(history => history.HotelId).Distinct().ToList();
             for (int i = 0; i < hotelIds.Count; i++)
             {
-                foreach (StayHistory history in store)
-                {
-                    if (hold[i] == history.HotelId)
-                    {
-                        histories.Add(history);
-                        break;
-                    }
-                }
+                histories.Add(store.First(history => history.HotelId == hotelIds[i]));
             }
             return histories;
         }
         public List<StayHistory> GetAllHotels(int customerId, int hotelId)
         {
-            List<StayHistory> histories = new();
-            foreach (StayHistory history in HotelContext.StayHistories)
-            {
-                if(history.CustomerID == customerId && history.HotelId == hotelId)
-                {
-                    histories.Add(history);
-                }
-            }
-            return histories;
+            return HotelContext.StayHistories.Where(history => history.CustomerID == customerId && history.HotelId == hotelId).ToList();
         }
 
         public void Remove(StayHistory history)
