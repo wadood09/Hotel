@@ -8,7 +8,7 @@ namespace Project_TestCase2.Service.Implementation
 {
     public class HotelManager : IHotelManager
     {
-        IRepository<Hotel> Repository = new HotelRepository();
+        IHotelRepository Repository = new HotelRepository();
 
         public void DisplayHotels(int adminId)
         {
@@ -22,7 +22,7 @@ namespace Project_TestCase2.Service.Implementation
 
         public bool IsExist(string name)
         {
-            foreach (Hotel hotel in HotelContext.Hotels)
+            foreach (Hotel hotel in Repository.GetAll())
             {
                 if (hotel.Name.ToLower() == name.ToLower())
                 {
@@ -31,10 +31,17 @@ namespace Project_TestCase2.Service.Implementation
             }
             return false;
         }
+        public bool IsExist(int choice)
+        {
+            if (choice > Repository.GetAll().Count)
+                return false;
+            else
+                return true;
+        }
 
         public bool IsOwner(Hotel hotel, int adminId)
         {
-            if(hotel.AdminId == adminId)
+            if (hotel.AdminId == adminId)
             {
                 return true;
             }

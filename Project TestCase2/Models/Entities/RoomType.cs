@@ -17,7 +17,7 @@ namespace Project_TestCase2.Models.Entities
             Name = name;
             Amount = amount;
             Price = price;
-            Status = RoomTypeStatus.Available;
+            Status = RoomTypeStatus.Inactive;
         }
     }
 }

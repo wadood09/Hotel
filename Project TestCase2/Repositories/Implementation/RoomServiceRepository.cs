@@ -28,7 +28,7 @@ namespace Project_TestCase2.Repositories.Implementation
 
         public RoomService Get(int num, int hotelId)
         {
-            if (num > GetByHotelId(hotelId).Count)
+            if (num > GetByHotelId(hotelId).Count || num < 1)
                 return null;
             else
                 return GetByHotelId(hotelId)[--num];

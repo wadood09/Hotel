@@ -4,7 +4,7 @@ using Project_TestCase2.Repositories.Interface;
 
 namespace Project_TestCase2.Repositories.Implementation
 {
-    public class HotelRepository : IRepository<Hotel>
+    public class HotelRepository : IHotelRepository
     {
         public void Add(Hotel hotel)
         {
@@ -24,6 +24,10 @@ namespace Project_TestCase2.Repositories.Implementation
         public Hotel GetByName(string name)
         {
             return HotelContext.Hotels.FirstOrDefault(hotel => hotel.Name.ToLower() == name.ToLower());
+        }
+        public Hotel GetByPos(int choice)
+        {
+            return GetAll()[--choice];
         }
 
         public List<Hotel> GetList(int adminId)

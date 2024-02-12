@@ -10,5 +10,6 @@ namespace Project_TestCase2.Context
         public static List<Room> Rooms = new();
         public static List<RoomService> RoomServices = new();
         public static List<RoomType> RoomTypes = new();
-        public static List<StayHistory> StayHistories = new();    }
+        public static List<StayHistory> StayHistories = new();
+    }
 }

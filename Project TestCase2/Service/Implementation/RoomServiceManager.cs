@@ -20,9 +20,10 @@ namespace Project_TestCase2.Service.Implementation
 
         public void DisplayRoomServices(int hotelId)
         {
+            int count = 0;
             foreach (RoomService service in Repository.GetByHotelId(hotelId))
             {
-                Console.WriteLine(service.Name.PadRight(20) + $"N{service.Price:n}");
+                Console.WriteLine(++count + ". " + service.Name.PadRight(20) + $"N{service.Price:n}");
             }
         }
 

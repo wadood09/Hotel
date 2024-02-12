@@ -5,8 +5,6 @@ namespace Project_TestCase2.Repositories.Interface
         void Add(T value);
         void Remove(T value);
         T GetById(int id);
-        T GetByName(string name);
-        List<T> GetList(int id);
         List<T> GetAll();
 
     }

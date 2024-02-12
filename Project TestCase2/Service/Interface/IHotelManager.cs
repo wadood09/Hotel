@@ -7,6 +7,7 @@ namespace Project_TestCase2.Service.Interface
         void Register(Hotel hotel);
         void DisplayHotels(int adminId);
         bool IsExist(string name);
+        bool IsExist(int choice);
         bool IsOwner(Hotel hotel, int adminId);
     }
 }

@@ -12,14 +12,14 @@ namespace Project_TestCase2.Menu
         private bool skip = false;
         private int views = 0;
         private Random random = new();
-        private ConsoleColor[] colours = new ConsoleColor[] { ConsoleColor.Black, ConsoleColor.DarkBlue, ConsoleColor.DarkGreen, ConsoleColor.DarkCyan, ConsoleColor.DarkRed, ConsoleColor.DarkMagenta, ConsoleColor.DarkYellow, ConsoleColor.Blue, ConsoleColor.Green, ConsoleColor.Cyan, ConsoleColor.Red, ConsoleColor.Magenta, ConsoleColor.Yellow};
+        private ConsoleColor[] colours = new ConsoleColor[] { ConsoleColor.Black, ConsoleColor.DarkBlue, ConsoleColor.DarkGreen, ConsoleColor.DarkCyan, ConsoleColor.DarkRed, ConsoleColor.DarkMagenta, ConsoleColor.DarkYellow, ConsoleColor.Blue, ConsoleColor.Green, ConsoleColor.Cyan, ConsoleColor.Red, ConsoleColor.Magenta, ConsoleColor.Yellow };
         IHotelManager _hotelManager = new HotelManager();
         IRoomManager _roomManager = new RoomManager();
         IRoomServiceManager _roomServiceManager = new RoomServiceManager();
         IRoomTypeManager _roomTypeManager = new RoomTypeManager();
         IManager<Customer> _customerManager = new CustomerManager();
         IStayManager _historyManager = new StayManager();
-        IRepository<Hotel> _hotelRepository = new HotelRepository();
+        IHotelRepository _hotelRepository = new HotelRepository();
         IRepository<Customer> _customerRepository = new CustomerRepository();
         IRoomTypeRepository _roomTypeRepository = new RoomTypeRepository();
         IRoomServiceRepository _roomServiceRepository = new RoomServiceRepository();
@@ -103,7 +103,6 @@ namespace Project_TestCase2.Menu
                         CheckOut(history);
                     }
                 }
-                onStart.RoomStatus();
                 Console.WriteLine("Login Successfull");
                 Read();
                 Menu();
@@ -227,7 +226,7 @@ namespace Project_TestCase2.Menu
 
         private void BookARoom()
         {
-            skip = true;
+            onStart.RoomStatus();
             Console.ForegroundColor = ConsoleColor.Gray;
             onStart.CheckRoomTypeStatus();
             List<Hotel> hotels = _hotelRepository.GetAll();
@@ -240,68 +239,75 @@ namespace Project_TestCase2.Menu
                 skip = true;
                 ViewAvailableHotels();
                 skip = false;
-                Console.WriteLine("Choose Hotel to book from: ");
-                string choice = Console.ReadLine();
+                Console.WriteLine("Choose Hotel to book from (i.e enter 1,2,3,...)");
+                int choice = -1;
+                while (choice < 0)
+                {
+                    if (int.TryParse(Console.ReadLine(), out int num))
+                    {
+                        choice = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
                 if (!_hotelManager.IsExist(choice))
                 {
-                    Console.WriteLine($"Hotel {choice.ToPascalCase()} does not exist!!!");
+                    Console.WriteLine($"Hotel chosen does not exist!!!");
                     Read();
                     return;
                 }
-                Hotel hotel = _hotelRepository.GetByName(choice);
+                Hotel hotel = _hotelRepository.GetByPos(choice);
                 _roomTypeManager.DisplayRoomTypes(hotel.Id);
-                Console.WriteLine("Choose room type to book from: ");
-                string room = Console.ReadLine();
+                Console.WriteLine("Choose room type to book from (i.e enter 1,2,3,...)");
+                int room = -1;
+                while (room < 0)
+                {
+                    if (int.TryParse(Console.ReadLine(), out int num))
+                    {
+                        room = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
                 if (!_roomTypeManager.IsExist(room, hotel.Id))
                 {
-                    Console.WriteLine($"Room type {room.ToPascalCase()} does not exist!!!");
+                    Console.WriteLine($"Room type chosen does not exist!!!");
                     Read();
                     return;
                 }
                 RoomType type = _roomTypeRepository.Get(hotel.Id, room);
-                if (type.Status == Models.Enums.RoomTypeStatus.Available)
+                int date = 0;
+                bool roomService = false;
+                int service = -1;
+                Console.Write("Do you want to check in immediately (Y/N): ");
+                char choice2 = '0';
+                while (choice2 == '0')
                 {
-                    int date = 0;
-                    bool roomService = false;
-                    string service = "";
-                    Console.Write("Do you want to check in immediately (Y/N): ");
-                    char choice2 = '0';
-                    while (choice2 == '0')
+                    if (char.TryParse(Console.ReadLine().ToUpper(), out char num))
                     {
-                        if (char.TryParse(Console.ReadLine().ToUpper(), out char num))
-                        {
-                            choice2 = num;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid Input!!!");
-                            Console.WriteLine("Try again");
-                        }
+                        choice2 = num;
                     }
-                    if (choice2 != 'Y')
+                    else
                     {
-                        Console.Write("How days from now do you want to check in: ");
-                        date = -1;
-                        while (date < 0)
-                        {
-                            if (int.TryParse(Console.ReadLine(), out int num))
-                            {
-                                date = num;
-                            }
-                            else
-                            {
-                                Console.WriteLine("Invalid Input!!!");
-                                Console.WriteLine("Try again");
-                            }
-                        }
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
                     }
-                    Console.Write("How many nights are you staying for: ");
-                    int nights = -1;
-                    while (nights < 0)
+                }
+                if (choice2 != 'Y')
+                {
+                    Console.Write("How days from now do you want to check in: ");
+                    date = -1;
+                    while (date < 0)
                     {
                         if (int.TryParse(Console.ReadLine(), out int num))
                         {
-                            nights = num;
+                            date = num;
                         }
                         else
                         {
@@ -309,15 +315,53 @@ namespace Project_TestCase2.Menu
                             Console.WriteLine("Try again");
                         }
                     }
-                    if (hotel.RoomService)
+                }
+                Console.Write("How many nights are you staying for: ");
+                int nights = -1;
+                while (nights < 0)
+                {
+                    if (int.TryParse(Console.ReadLine(), out int num))
                     {
-                        Console.WriteLine("Do you want hotel to provide you room service: ");
-                        char choice3 = '0';
-                        while (choice3 == '0')
+                        nights = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
+                if (!onStart.IsAvailable(type.Id, date, nights))
+                {
+                    Console.WriteLine($"There are no available rooms {date} days from now in the chosen room type!!!");
+                    Console.WriteLine($"Try Checking in immediately or book from another type");
+                    Read();
+                    return;
+                }
+                if (hotel.RoomService)
+                {
+                    Console.WriteLine("Do you want hotel to provide you room service: ");
+                    char choice3 = '0';
+                    while (choice3 == '0')
+                    {
+                        if (char.TryParse(Console.ReadLine().ToUpper(), out char num))
                         {
-                            if (char.TryParse(Console.ReadLine().ToUpper(), out char num))
+                            choice3 = num;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid Input!!!");
+                            Console.WriteLine("Try again");
+                        }
+                    }
+                    if (choice3 == 'Y')
+                    {
+                        Console.WriteLine("Choose room service to be provided: ");
+                        _roomServiceManager.DisplayRoomServices(hotel.Id);
+                        while (service < 0)
+                        {
+                            if (int.TryParse(Console.ReadLine(), out int num))
                             {
-                                choice3 = num;
+                                service = num;
                             }
                             else
                             {
@@ -325,41 +369,30 @@ namespace Project_TestCase2.Menu
                                 Console.WriteLine("Try again");
                             }
                         }
-                        if (choice3 == 'Y')
+                        if (_roomServiceManager.IsExist(service, hotel.Id))
                         {
-                            Console.WriteLine("Choose room service to be provided: ");
-                            _roomServiceManager.DisplayRoomServices(hotel.Id);
-                            service = Console.ReadLine();
-                            if (_roomServiceManager.IsExist(service, hotel.Id))
-                            {
-                                roomService = true;
-                            }
-                            else
-                            {
-                                Console.WriteLine($"{service} room service does not exist!!!\n The hotel is not providing you room service");
-                            }
+                            roomService = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Room service chosen does not exist!!!\n The hotel is not providing you room service");
                         }
                     }
-                    Room room1 = _roomManager.GetRoom(type.Id);
-                    if(room1 is null)
-                    {
-                        Console.WriteLine($"No available room under {type.Name} room type");
-                        Read();
-                        return;
-                    }
-                    Console.WriteLine($"Your room number is {room1.Number}");
-                    if (choice2 == 'Y')
-                    {
-                        room1.RoomStatus = Models.Enums.RoomStatus.Occupied;
-                    }
-                    StayHistory history = new(hotel.Name, hotel.Id, type.Name, type.Id, type.Price, roomService, _roomServiceRepository.Get(service, hotel.Id), room1.Number, Customer.LoggedInCustomerId, nights, date);
-                    _historyRepository.Add(history);
                 }
-                else
+                Room room1 = _roomManager.GetRoom(type.Id);
+                if (room1 is null)
                 {
-                    Console.WriteLine($"No available rooms in room type {room}!!!");
-                    Console.WriteLine($"Try booking a room in available room type or Try again later");
+                    Console.WriteLine($"No available room under {type.Name} room type");
+                    Read();
+                    return;
                 }
+                Console.WriteLine($"Your room number is {room1.Number}");
+                if (choice2 == 'Y')
+                {
+                    room1.RoomStatus = Models.Enums.RoomStatus.Occupied;
+                }
+                StayHistory history = new(hotel.Name, hotel.Id, type.Name, type.Id, type.Price, roomService, _roomServiceRepository.Get(service, hotel.Id), room1.Number, Customer.LoggedInCustomerId, nights, date);
+                _historyRepository.Add(history);
                 Read();
             }
         }
@@ -484,7 +517,7 @@ namespace Project_TestCase2.Menu
                 }
                 histories[choice].CheckInDate = DateTime.Now.AddDays(days);
                 histories[choice].CheckOutDate = histories[choice].CheckInDate.AddDays(histories[choice].StayPeriod);
-                Console.WriteLine($"Check in date has successfully been changed to {histories[choice].CheckInDate.ToString("dddd, MMMM dd, yyyy")}");
+                Console.WriteLine($"Check in date has successfully been changed to {histories[choice].CheckInDate:dddd, MMMM dd, yyyy}");
                 Read();
             }
         }
@@ -564,7 +597,7 @@ namespace Project_TestCase2.Menu
                 }
             }
             choice--;
-            if(!_hotelRepository.GetById(histories[choice].HotelId).RoomService)
+            if (!_hotelRepository.GetById(histories[choice].HotelId).RoomService)
             {
                 Console.WriteLine("Hotel is not providing room service!!!");
                 Console.WriteLine("Cannot opt in to Room Service function!!!");
@@ -614,7 +647,19 @@ namespace Project_TestCase2.Menu
                 {
                     Console.WriteLine("Choose room service to be provided: ");
                     _roomServiceManager.DisplayRoomServices(histories[choice].HotelId);
-                    string service = Console.ReadLine();
+                    int service = -1;
+                    while (service < 0)
+                    {
+                        if (int.TryParse(Console.ReadLine(), out int num))
+                        {
+                            service = num;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid Input!!!");
+                            Console.WriteLine("Try again");
+                        }
+                    }
                     if (_roomServiceManager.IsExist(service, histories[choice].HotelId))
                     {
                         histories[choice].IsRoomService = true;
@@ -623,7 +668,7 @@ namespace Project_TestCase2.Menu
                     }
                     else
                     {
-                        Console.WriteLine($"{service} room service does not exist!!!\n The hotel is not providing you room service");
+                        Console.WriteLine($"Room service chosen does not exist!!!\n The hotel is not providing you room service");
                     }
                 }
                 histories[choice].TotalPriceOfStay = histories[choice].Price * histories[choice].StayPeriod;
@@ -675,16 +720,28 @@ namespace Project_TestCase2.Menu
             {
                 Console.WriteLine("Choose room service to be provided: ");
                 _roomServiceManager.DisplayRoomServices(histories[choice].HotelId);
-                string service = Console.ReadLine();
+                int service = -1;
+                while (service < 0)
+                {
+                    if (int.TryParse(Console.ReadLine(), out int num))
+                    {
+                        service = num;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!!!");
+                        Console.WriteLine("Try again");
+                    }
+                }
                 if (_roomServiceManager.IsExist(service, histories[choice].HotelId))
                 {
                     histories[choice].IsRoomService = true;
                     histories[choice].RoomService = _roomServiceRepository.Get(service, histories[choice].HotelId);
-                    Console.WriteLine($"You have successfully changed room service type to {service}!!!");
+                    Console.WriteLine($"You have successfully changed room service type!!!");
                 }
                 else
                 {
-                    Console.WriteLine($"{service} room service does not exist!!!\nRoom service type remains unchanged");
+                    Console.WriteLine($"Room service chosen does not exist!!!\nRoom service type remains unchanged");
                 }
             }
             else
@@ -865,7 +922,7 @@ namespace Project_TestCase2.Menu
             choice--;
             Console.WriteLine("Rate your satisfaction from 1-5");
             int rating = -1;
-            while (rating < 0)
+            while (rating < 1 || rating > 5)
             {
                 if (int.TryParse(Console.ReadLine(), out int num))
                 {
@@ -876,6 +933,10 @@ namespace Project_TestCase2.Menu
                     Console.WriteLine("Invalid Input!!!");
                     Console.WriteLine("Try again");
                 }
+            }
+            if (_hotelRepository.GetById(histories[choice].HotelId).Ratings == 0)
+            {
+                _hotelRepository.GetById(histories[choice].HotelId).Ratings = rating;
             }
             _hotelRepository.GetById(histories[choice].HotelId).Ratings = (_hotelRepository.GetById(histories[choice].HotelId).Ratings + rating) / 2;
             foreach (StayHistory history in _historyRepository.GetAllHotels(Customer.LoggedInCustomerId, histories[choice].HotelId))

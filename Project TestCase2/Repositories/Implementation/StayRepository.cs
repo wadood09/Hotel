@@ -16,6 +16,11 @@ namespace Project_TestCase2.Repositories.Implementation
             return HotelContext.StayHistories.Where(history => history.CustomerID == customerId).ToList();
         }
 
+        public List<StayHistory> GetAll()
+        {
+            return HotelContext.StayHistories;
+        }
+
         public List<StayHistory> GetHotels(int customerId)
         {
             List<StayHistory> histories = new();
@@ -39,6 +44,11 @@ namespace Project_TestCase2.Repositories.Implementation
         public void Remove(StayHistory history)
         {
             HotelContext.StayHistories.Remove(history);
+        }
+
+        public List<StayHistory> GetByRoomTypeId(int roomTypeId)
+        {
+            return HotelContext.StayHistories.Where(history => history.RoomTypeId == roomTypeId).ToList();
         }
     }
 }

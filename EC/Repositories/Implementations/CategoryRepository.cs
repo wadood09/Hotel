@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using EC.Context;
 using EC.Models.Entities;
@@ -22,7 +23,8 @@ namespace EC.Repositories.Implementations
 
             using(var str = new StreamWriter(context.CategoryFile, true))
             {
-                str.WriteLine(category.ToString());
+                var b = JsonSerializer.Serialize(category);
+                str.WriteLine(b);
             }
         }
 

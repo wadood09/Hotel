@@ -18,7 +18,7 @@ namespace Project_TestCase2.Repositories.Implementation
 
         public RoomType Get(int hotelId, int num)
         {
-            if (num > GetAllByHotelId(hotelId).Count)
+            if (num > GetAllByHotelId(hotelId).Count || num < 1)
                 return null;
             else
                 return GetAllByHotelId(hotelId)[--num];

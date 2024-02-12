@@ -13,7 +13,7 @@ namespace Project_TestCase2.Menu
         private Random random = new();
         private ConsoleColor[] colours = new ConsoleColor[] { ConsoleColor.Black, ConsoleColor.DarkBlue, ConsoleColor.DarkGreen, ConsoleColor.DarkCyan, ConsoleColor.DarkRed, ConsoleColor.DarkMagenta, ConsoleColor.DarkYellow, ConsoleColor.Blue, ConsoleColor.Green, ConsoleColor.Cyan, ConsoleColor.Red, ConsoleColor.Magenta, ConsoleColor.Yellow };
         IRepository<Admin> _adminRepository = new AdminRepository();
-        IRepository<Hotel> _hotelRepository = new HotelRepository();
+        IHotelRepository _hotelRepository = new HotelRepository();
         IRoomRepository _roomRepository = new RoomRepository();
         IRoomServiceRepository _roomServiceRepository = new RoomServiceRepository();
         IRoomTypeRepository _roomTypeRepository = new RoomTypeRepository();
@@ -199,7 +199,7 @@ namespace Project_TestCase2.Menu
                 _roomTypeRepository.Add(roomType);
                 for (int j = 0; j < roomAmount[i]; j++)
                 {
-                    Room room = new(roomType.Id, roomNumbers[i][j]);
+                    Room room = new(roomType.Id, roomNumbers[i][j], hotel.Id);
                     _roomRepository.Add(room);
                 }
             }
@@ -384,6 +384,11 @@ namespace Project_TestCase2.Menu
             string input;
             while ((input = Console.ReadLine()) != "")
             {
+                if(input == string.Empty)
+                {
+                    Console.WriteLine("Invalid Input!!!");
+                    continue;
+                }
                 if (roomServices.Contains(input))
                 {
                     Console.WriteLine("Cannot have room services of same name in a hotel");
@@ -691,7 +696,7 @@ namespace Project_TestCase2.Menu
                     i--;
                     continue;
                 }
-                _roomRepository.Add(new Room(type.Id, num));
+                _roomRepository.Add(new Room(type.Id, num, hotel[choice].Id));
             }
             _roomTypeRepository.Add(type);
             Console.WriteLine($"Room type '{roomType.ToPascalCase()}' added successfully");
@@ -728,7 +733,7 @@ namespace Project_TestCase2.Menu
             }
             if (_roomTypeManager.IsExist(number, hotel[choice].Id))
             {
-                if (_roomTypeRepository.Get(hotel[choice].Id, number).Status == Models.Enums.RoomTypeStatus.Available)
+                if (_roomTypeRepository.Get(hotel[choice].Id, number).Status == Models.Enums.RoomTypeStatus.Active)
                 {
                     Console.WriteLine($"Cannot remove room type because it is being occupied!!!\nTry again later");
                     return;
@@ -867,7 +872,7 @@ namespace Project_TestCase2.Menu
                             i--;
                             continue;
                         }
-                        _roomRepository.Add(new Room(type.Id, num));
+                        _roomRepository.Add(new Room(type.Id, num, hotel[choice].Id));
                     }
                 }
                 else
@@ -952,7 +957,7 @@ namespace Project_TestCase2.Menu
                         isExist = false;
                     }
                 }
-                _roomRepository.Add(new Room(type.Id, num));
+                _roomRepository.Add(new Room(type.Id, num, hotel[choice].Id));
                 Console.WriteLine("Room added successfully!!!");
             }
             else

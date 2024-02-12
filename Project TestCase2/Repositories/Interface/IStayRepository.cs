@@ -10,6 +10,8 @@ namespace Project_TestCase2.Repositories.Interface
     {
         void Add(StayHistory history);
         List<StayHistory> Get(int id);
+        List<StayHistory> GetAll();
+        List<StayHistory> GetByRoomTypeId(int roomTypeId);
         List<StayHistory> GetHotels(int customerId);
         void Remove(StayHistory history);
         List<StayHistory> GetAllHotels(int customerId, int hotelId);

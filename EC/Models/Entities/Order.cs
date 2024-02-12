@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EC.Models.Enums;
 
 namespace EC.Models.Entities
 {
@@ -11,6 +12,7 @@ namespace EC.Models.Entities
         public string RefNumber{get; set;}
         public string CustomerTagNumber{get; set;}
         public double TotalPrice{get; set;}
+        public OrderStatus Status{get; set;}
         public Dictionary<string, int> Products{get; set;}
 
         // public override string ToString()

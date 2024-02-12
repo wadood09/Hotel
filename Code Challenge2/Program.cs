@@ -3,22 +3,21 @@
 static void Question1()
 {
     Console.WriteLine("Enter arriveAlice: ");
-    DateOnly arriveAlice = DateOnly.Parse(Console.ReadLine());
+    DateTime arriveAlice = DateTime.Now;
     Console.WriteLine("Enter leaveAlice: ");
-    DateOnly leaveAlice = DateOnly.Parse(Console.ReadLine());
+    DateTime leaveAlice = arriveAlice.AddDays(3);
     Console.WriteLine("Enter arriveBob: ");
-    DateOnly arriveBob = DateOnly.Parse(Console.ReadLine());
+    DateTime arriveBob = DateTime.Now.AddDays(2);
     Console.WriteLine("Enter leaveBob: ");
-    DateOnly leaveBob = DateOnly.Parse(Console.ReadLine());
+    DateTime leaveBob = arriveBob.AddDays(4);
     int alice = 0;
     while (arriveAlice < leaveAlice || arriveBob < leaveBob)
     {
         if (arriveAlice == arriveBob)
         {
-            alice++;
-            arriveBob = arriveBob.AddDays(1);
+           return;
         }
-        arriveAlice = arriveAlice.AddDays(1);
+        arriveAlice = arriveAlice.AddMilliseconds(36000*24);
     }
     Console.WriteLine($"Total number of days alice and bob are in Rome together: {alice}");
 }
@@ -42,9 +41,9 @@ static List<int> Question2(int[] nums)
     List<int> alone = new();
     for (int i = 0; i < nums.Length; i++)
     {
-        if(appearance[i] == 1)
+        if (appearance[i] == 1)
         {
-            if(!nums.Contains(numbers[i]-1) && !nums.Contains(numbers[i] + 1))
+            if (!nums.Contains(numbers[i] - 1) && !nums.Contains(numbers[i] + 1))
             {
                 alone.Add(nums[i]);
             }
@@ -53,12 +52,13 @@ static List<int> Question2(int[] nums)
     return alone;
 }
 
-string hold = Console.ReadLine();
-                    while(hold == string.Empty)
-                    {
-                        if(hold == string.Empty)
-                        {
-                            Console.WriteLine("Invalid Input!!!\nTry again");
-                        hold = Console.ReadLine();
-                        }
-                    }
+// string hold = Console.ReadLine();
+// while (hold == string.Empty)
+// {
+//     if (hold == string.Empty)
+//     {
+//         Console.WriteLine("Invalid Input!!!\nTry again");
+//         hold = Console.ReadLine();
+//     }
+// }
+Question1();

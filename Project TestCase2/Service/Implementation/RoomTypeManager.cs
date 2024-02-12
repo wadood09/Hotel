@@ -26,7 +26,7 @@ namespace Project_TestCase2.Service.Implementation
             Console.WriteLine("Viewing all room types: ");
             foreach (RoomType type in Repository.GetAllByHotelId(hotelId))
             {
-                Console.WriteLine(++count + ". " + type.Name.ToPascalCase().PadRight(20) + $"N{type.Price:n}".PadRight(30) + type.Status);
+                Console.WriteLine(++count + ". " + type.Name.ToPascalCase().PadRight(20) + $"N{type.Price:n}");
             }
         }
 

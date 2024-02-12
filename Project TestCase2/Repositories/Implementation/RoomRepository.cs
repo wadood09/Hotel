@@ -16,6 +16,11 @@ namespace Project_TestCase2.Repositories.Implementation
             return HotelContext.Rooms.Where(room => room.RoomTypeId == roomTypeId).ToList();
         }
 
+        public List<Room> GetByHotelId(int hotelId)
+        {
+            return HotelContext.Rooms.Where(room => room.HotelId == hotelId).ToList();
+        }
+
         public Room GetByRoomNumber(string roomNumber, int roomTypeId)
         {
             return HotelContext.Rooms.FirstOrDefault(room => room.Number == roomNumber && room.RoomTypeId == roomTypeId);
