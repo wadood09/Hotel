@@ -1,0 +1,15 @@
+C:\Users\USER-PC\Console GradeBook\bin\Debug\net7.0\Console GradeBook.exe
+C:\Users\USER-PC\Console GradeBook\bin\Debug\net7.0\Console GradeBook.deps.json
+C:\Users\USER-PC\Console GradeBook\bin\Debug\net7.0\Console GradeBook.runtimeconfig.json
+C:\Users\USER-PC\Console GradeBook\bin\Debug\net7.0\Console GradeBook.dll
+C:\Users\USER-PC\Console GradeBook\bin\Debug\net7.0\Console GradeBook.pdb
+C:\Users\USER-PC\Console GradeBook\obj\Debug\net7.0\Console GradeBook.csproj.AssemblyReference.cache
+C:\Users\USER-PC\Console GradeBook\obj\Debug\net7.0\Console GradeBook.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\USER-PC\Console GradeBook\obj\Debug\net7.0\Console GradeBook.AssemblyInfoInputs.cache
+C:\Users\USER-PC\Console GradeBook\obj\Debug\net7.0\Console GradeBook.AssemblyInfo.cs
+C:\Users\USER-PC\Console GradeBook\obj\Debug\net7.0\Console GradeBook.csproj.CoreCompileInputs.cache
+C:\Users\USER-PC\Console GradeBook\obj\Debug\net7.0\Console GradeBook.dll
+C:\Users\USER-PC\Console GradeBook\obj\Debug\net7.0\refint\Console GradeBook.dll
+C:\Users\USER-PC\Console GradeBook\obj\Debug\net7.0\Console GradeBook.pdb
+C:\Users\USER-PC\Console GradeBook\obj\Debug\net7.0\Console GradeBook.genruntimeconfig.cache
+C:\Users\USER-PC\Console GradeBook\obj\Debug\net7.0\ref\Console GradeBook.dll

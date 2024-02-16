@@ -21,16 +21,6 @@ namespace Project_TestCase2.Repositories.Implementation
             return HotelContext.Customers.FirstOrDefault(customer => customer.Id == id);
         }
 
-        public Customer GetByName(string email)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Customer> GetList(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Remove(Customer customer)
         {
             HotelContext.Customers.Remove(customer);

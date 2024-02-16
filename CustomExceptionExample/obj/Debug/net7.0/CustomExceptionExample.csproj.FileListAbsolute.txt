@@ -1,0 +1,15 @@
+C:\Users\DADA\Desktop\CustomExceptionExample\bin\Debug\net7.0\CustomExceptionExample.exe
+C:\Users\DADA\Desktop\CustomExceptionExample\bin\Debug\net7.0\CustomExceptionExample.deps.json
+C:\Users\DADA\Desktop\CustomExceptionExample\bin\Debug\net7.0\CustomExceptionExample.runtimeconfig.json
+C:\Users\DADA\Desktop\CustomExceptionExample\bin\Debug\net7.0\CustomExceptionExample.dll
+C:\Users\DADA\Desktop\CustomExceptionExample\bin\Debug\net7.0\CustomExceptionExample.pdb
+C:\Users\DADA\Desktop\CustomExceptionExample\obj\Debug\net7.0\CustomExceptionExample.csproj.AssemblyReference.cache
+C:\Users\DADA\Desktop\CustomExceptionExample\obj\Debug\net7.0\CustomExceptionExample.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DADA\Desktop\CustomExceptionExample\obj\Debug\net7.0\CustomExceptionExample.AssemblyInfoInputs.cache
+C:\Users\DADA\Desktop\CustomExceptionExample\obj\Debug\net7.0\CustomExceptionExample.AssemblyInfo.cs
+C:\Users\DADA\Desktop\CustomExceptionExample\obj\Debug\net7.0\CustomExceptionExample.csproj.CoreCompileInputs.cache
+C:\Users\DADA\Desktop\CustomExceptionExample\obj\Debug\net7.0\CustomExceptionExample.dll
+C:\Users\DADA\Desktop\CustomExceptionExample\obj\Debug\net7.0\refint\CustomExceptionExample.dll
+C:\Users\DADA\Desktop\CustomExceptionExample\obj\Debug\net7.0\CustomExceptionExample.pdb
+C:\Users\DADA\Desktop\CustomExceptionExample\obj\Debug\net7.0\CustomExceptionExample.genruntimeconfig.cache
+C:\Users\DADA\Desktop\CustomExceptionExample\obj\Debug\net7.0\ref\CustomExceptionExample.dll

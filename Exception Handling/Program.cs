@@ -1,14 +1,4 @@
 ﻿// See https://aka.ms/new-console-template for more information
 Console.WriteLine("Hello, World!");
-try
-{
-    
-}
-catch
-{
-
-}
-finally
-{
-    
-}
+EntryPointNotFoundException e = new();
+StackOverflowException

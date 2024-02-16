@@ -1,0 +1,15 @@
+C:\Users\WADOOD\OneDrive\Desktop\Console GradeBook\bin\Debug\net6.0\Console GradeBook.exe
+C:\Users\WADOOD\OneDrive\Desktop\Console GradeBook\bin\Debug\net6.0\Console GradeBook.deps.json
+C:\Users\WADOOD\OneDrive\Desktop\Console GradeBook\bin\Debug\net6.0\Console GradeBook.runtimeconfig.json
+C:\Users\WADOOD\OneDrive\Desktop\Console GradeBook\bin\Debug\net6.0\Console GradeBook.dll
+C:\Users\WADOOD\OneDrive\Desktop\Console GradeBook\bin\Debug\net6.0\Console GradeBook.pdb
+C:\Users\WADOOD\OneDrive\Desktop\Console GradeBook\obj\Debug\net6.0\Console GradeBook.csproj.AssemblyReference.cache
+C:\Users\WADOOD\OneDrive\Desktop\Console GradeBook\obj\Debug\net6.0\Console GradeBook.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\WADOOD\OneDrive\Desktop\Console GradeBook\obj\Debug\net6.0\Console GradeBook.AssemblyInfoInputs.cache
+C:\Users\WADOOD\OneDrive\Desktop\Console GradeBook\obj\Debug\net6.0\Console GradeBook.AssemblyInfo.cs
+C:\Users\WADOOD\OneDrive\Desktop\Console GradeBook\obj\Debug\net6.0\Console GradeBook.csproj.CoreCompileInputs.cache
+C:\Users\WADOOD\OneDrive\Desktop\Console GradeBook\obj\Debug\net6.0\Console GradeBook.dll
+C:\Users\WADOOD\OneDrive\Desktop\Console GradeBook\obj\Debug\net6.0\refint\Console GradeBook.dll
+C:\Users\WADOOD\OneDrive\Desktop\Console GradeBook\obj\Debug\net6.0\Console GradeBook.pdb
+C:\Users\WADOOD\OneDrive\Desktop\Console GradeBook\obj\Debug\net6.0\Console GradeBook.genruntimeconfig.cache
+C:\Users\WADOOD\OneDrive\Desktop\Console GradeBook\obj\Debug\net6.0\ref\Console GradeBook.dll

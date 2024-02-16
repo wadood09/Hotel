@@ -81,8 +81,10 @@ static void Reverse(string str)
     Console.WriteLine(s);
 }
 // Console.WriteLine(DateTime.Now.ToString("ddd"));
-DateTime dateTime = DateTime.Now;
-TimeSpan timeSpan = new(36, 0, 0, 0);
+// DateTime dateTime = DateTime.Now;
+// TimeSpan timeSpan = new(36, 0, 0, 0);
 
-char c = '0';
-Console.WriteLine(char.ToUpper(c));
+// char c = '0';
+// Console.WriteLine(char.ToUpper(c));
+
+int b = int.Parse(Console.ReadLine());

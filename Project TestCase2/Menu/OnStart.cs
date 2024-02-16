@@ -1,5 +1,6 @@
 using System.Text;
 using Project_TestCase2.Models.Entities;
+using Project_TestCase2.Models.Extensions;
 using Project_TestCase2.Repositories.Implementation;
 using Project_TestCase2.Repositories.Interface;
 
@@ -71,48 +72,26 @@ namespace Project_TestCase2.Menu
             foreach (StayHistory history in histories)
             {
                 if (history.CheckInDate > DateTime.Now)
-                    _roomRepository.GetByRoomNumber(history.RoomNumber, history.RoomTypeId).RoomStatus = Models.Enums.RoomStatus.Occupied;
-                else
                     _roomRepository.GetByRoomNumber(history.RoomNumber, history.RoomTypeId).RoomStatus = Models.Enums.RoomStatus.Vacant;
+                else
+                    _roomRepository.GetByRoomNumber(history.RoomNumber, history.RoomTypeId).RoomStatus = Models.Enums.RoomStatus.Occupied;
             }
         }
         public bool IsAvailable(int id, int days, int night)
         {
             List<Room> rooms = _roomRepository.GetByRoomTypeId(id);
-            // StringBuilder status = new();
-            while (arriveAlice < leaveAlice || arriveBob < leaveBob)
+            int count = 0;
+            DateTime checkIn = DateTime.Now.AddDays(days);
+            DateTime checkOut = checkIn.AddDays(night);
+            foreach (StayHistory history in _historyRepository.GetAll())
             {
-                if (arriveAlice == arriveBob)
+                if (checkIn.WithInRange(history.CheckInDate, history.CheckOutDate) || checkOut.WithInRange(history.CheckInDate, history.CheckOutDate))
                 {
-                    alice++;
-                    arriveBob = arriveBob.AddDays(1);
+                    count++;
                 }
-                arriveAlice = arriveAlice.AddDays(1);
             }
-            var histories = _historyRepository.GetByRoomTypeId(id).Where(history => history.CheckInDate >= DateTime.Now.AddDays(days) && history.CheckOutDate <= DateTime.Now.AddDays(days + night));
-            // if (!histories.Any())
-            //     return true;
-            if (histories.Count() < rooms.Count)
-                return true;
-            else
-                return false;
-            //     List<StayHistory> histories = new();
-            //     foreach (StayHistory history in _historyRepository.GetByRoomTypeId(id))
-            //     {
-            //         if(history.CheckOutDate > DateTime.Now.AddDays(days))
-            //         {
-            //             histories.Add(history);
-            //         }
-            //     }
-            //     if(histories.Count < rooms.Count)
-            //     {
-            //         return true;
-            //     }
-            //     else
-            //     {
-            //         return false;
-            //     }
+            if (count < rooms.Count) return true;
+            else return false;
         }
-
     }
 }
