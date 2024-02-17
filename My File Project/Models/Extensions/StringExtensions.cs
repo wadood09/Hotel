@@ -1,4 +1,4 @@
-namespace Project_TestCase2.Models.Extensions
+namespace My_File_Project.Models.Extensions
 {
     public static class StringExtensions
     {

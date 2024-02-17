@@ -52,5 +52,12 @@ namespace My_File_Project.Repositories.Implementation
                 HotelContext.Rooms.Add(JsonSerializer.Deserialize<Room>(room)!);
             }
         }
+
+        public void Remove(Room room)
+        {
+            HotelContext.Rooms.Remove(room);
+
+            RefreshFile();
+        }
     }
 }

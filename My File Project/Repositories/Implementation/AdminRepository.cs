@@ -52,5 +52,12 @@ namespace My_File_Project.Repositories.Implementation
                 HotelContext.Admins.Add(JsonSerializer.Deserialize<Admin>(admin)!);
             }
         }
+
+        public void Remove(Admin admin)
+        {
+            HotelContext.Admins.Remove(admin);
+
+            RefreshFile();
+        }
     }
 }

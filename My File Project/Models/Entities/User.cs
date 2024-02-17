@@ -14,5 +14,6 @@ namespace My_File_Project.Models.Entities
         public string? Email { get; set; }
         public string? Password { get; set; }
         public string? Role { get; set; }
+        public static string? LoggedInUserId { get; set; }
     }
 }

@@ -30,7 +30,7 @@ namespace My_File_Project.Repositories.Implementation
 
         public List<Hotel> GetSelected(Func<Hotel, bool> pred)
         {
-            return HotelContext.Hotels.Where(pred).ToList();
+            return HotelContext.Hotels.Where(pred).OrderByDescending(hotel => hotel.Ratings).ToList();
         }
 
         public void RefreshFile()
@@ -51,6 +51,13 @@ namespace My_File_Project.Repositories.Implementation
             {
                 HotelContext.Hotels.Add(JsonSerializer.Deserialize<Hotel>(hotel)!);
             }
+        }
+
+        public void Remove(Hotel hotel)
+        {
+            HotelContext.Hotels.Remove(hotel);
+
+            RefreshFile();
         }
     }
 }

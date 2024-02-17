@@ -8,7 +8,10 @@ namespace My_File_Project.Services.Interface
 {
     public interface ICustomerService
     {
-        void CreateCustomer(string userEmail);
+        void CreateCustomer(string userId);
         Customer? Get(Func<Customer, bool> pred);
+        List<Customer> GetSelected(Func<Customer, bool> pred);
+        bool IsDeleted(Customer customer);
+        void UpdateFile();
     }
 }

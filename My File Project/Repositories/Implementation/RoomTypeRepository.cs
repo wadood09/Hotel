@@ -56,5 +56,12 @@ namespace My_File_Project.Repositories.Implementation
                 HotelContext.RoomTypes.Add(JsonSerializer.Deserialize<RoomType>(roomType)!);
             }
         }
+
+        public void Remove(RoomType roomType)
+        {
+            HotelContext.RoomTypes.Remove(roomType);
+
+            RefreshFile();
+        }
     }
 }

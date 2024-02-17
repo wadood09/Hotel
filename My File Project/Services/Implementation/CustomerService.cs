@@ -8,11 +8,11 @@ namespace My_File_Project.Services.Implementation
     public class CustomerService : ICustomerService
     {
         IRepository<Customer> repository = new CustomerRepository();
-        public void CreateCustomer(string userEmail)
+        public void CreateCustomer(string userId)
         {
             Customer customer = new()
             {
-                UserEmail = userEmail
+                UserId = userId
             };
             repository.Add(customer);
         }
@@ -20,6 +20,16 @@ namespace My_File_Project.Services.Implementation
         public Customer? Get(Func<Customer, bool> pred)
         {
             return repository.Get(pred);
+        }
+
+        public List<Customer> GetSelected(Func<Customer, bool> pred)
+        {
+            return repository.GetSelected(pred);
+        }
+
+        public void UpdateFile()
+        {
+            repository.RefreshFile();
         }
     }
 }

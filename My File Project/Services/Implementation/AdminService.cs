@@ -12,11 +12,11 @@ namespace My_File_Project.Services.Implementation
     public class AdminService : IAdminService
     {
         IRepository<Admin> repository = new AdminRepository();
-        public void CreateAdmin(string userEmail)
+        public void CreateAdmin(string userId)
         {
             Admin admin = new()
             {
-                UserEmail = userEmail
+                UserId = userId
             };
             repository.Add(admin);
         }
@@ -24,6 +24,21 @@ namespace My_File_Project.Services.Implementation
         public Admin? Get(Func<Admin, bool> pred)
         {
             return repository.Get(pred);
+        }
+
+        public List<Admin> GetSelected(Func<Admin, bool> pred)
+        {
+            return repository.GetSelected(pred);
+        }
+
+        public bool IsDeleted(Admin admin)
+        {
+            
+        }
+
+        public void UpdateFile()
+        {
+            repository.RefreshFile();
         }
     }
 }

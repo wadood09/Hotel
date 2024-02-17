@@ -8,6 +8,11 @@ namespace My_File_Project.Services.Interface
 {
     public interface IHotelService
     {
-        Hotel? CreateHotel(string name, bool hasRoomService, double checkOutFee, List<string> roomTypes, List<double> roomPrices,List<int> roomAmount, List<List<string>> roomNumbers, List<string> roomService, List<double> servicePrices);
+        Hotel? CreateHotel(string name, bool hasRoomService, double checkOutFee, List<string> roomTypes, List<double> roomPrices, List<int> roomAmount, List<List<string>> roomNumbers, List<string> roomService, List<double> servicePrices);
+        Hotel? Get(Func<Hotel, bool> pred);
+        List<Hotel> GetSelected(Func<Hotel, bool> pred);
+        bool IsDeleted(Hotel hotel);
+        bool IsExist(string name);
+        void UpdateFile();
     }
 }

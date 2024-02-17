@@ -7,7 +7,7 @@ namespace My_File_Project.Models.Entities
 {
     public class Customer : Auditables
     {
-        public string? UserEmail { get; set; }
+        public string? UserId { get; set; }
         public static string? LoggedInCustomerId { get; set; }
     }
 }
