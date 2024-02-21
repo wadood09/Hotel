@@ -13,5 +13,6 @@ namespace My_File_Project.Services.Interface
         List<Admin> GetSelected(Func<Admin, bool> pred);
         bool IsDeleted(Admin admin);
         void UpdateFile();
+        void UpdateList();
     }
 }

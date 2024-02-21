@@ -51,5 +51,10 @@ namespace My_File_Project.Services.Implementation
         {
             repository.RefreshFile();
         }
+
+        public void UpdateList()
+        {
+            repository.RefreshList();
+        }
     }
 }

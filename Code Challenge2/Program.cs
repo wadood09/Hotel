@@ -3,13 +3,13 @@
 static void Question1()
 {
     Console.WriteLine("Enter arriveAlice: ");
-    DateTime arriveAlice = DateTime.Now;
+    DateTime arriveAlice = DateTime.Parse("08:12");
     Console.WriteLine("Enter leaveAlice: ");
-    DateTime leaveAlice = arriveAlice.AddDays(3);
+    DateTime leaveAlice = DateTime.Parse("08:17");
     Console.WriteLine("Enter arriveBob: ");
-    DateTime arriveBob = DateTime.Now.AddDays(2);
+    DateTime arriveBob = DateTime.Parse("08:14");
     Console.WriteLine("Enter leaveBob: ");
-    DateTime leaveBob = arriveBob.AddDays(4);
+    DateTime leaveBob = DateTime.Parse("08:20");
     int alice = 0;
     while (arriveAlice < leaveAlice || arriveBob < leaveBob)
     {
@@ -17,7 +17,7 @@ static void Question1()
         {
            return;
         }
-        arriveAlice = arriveAlice.AddMilliseconds(36000*24);
+        arriveAlice = arriveAlice.AddDays(1);
     }
     Console.WriteLine($"Total number of days alice and bob are in Rome together: {alice}");
 }

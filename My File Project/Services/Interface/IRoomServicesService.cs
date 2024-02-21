@@ -15,5 +15,6 @@ namespace My_File_Project.Services.Interface
         bool IsExist(string name, string? hotelId);
         RoomService? IsExist(int num, string hotelId);
         void UpdateFile();
+        void UpdateList();
     }
 }

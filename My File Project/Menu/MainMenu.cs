@@ -13,6 +13,8 @@ namespace My_File_Project.Menu
         IAdminService _adminService = new AdminService();
         ICustomerService _customerService = new CustomerService();
         IUserService _userService = new UserService();
+        IBookingService _bookingService = new BookingService();
+        GeneralMenu generalMenu = new();
         AdminMenu adminMenu = new();
         CustomerMenu customerMenu = new();
         Random random = new();
@@ -42,11 +44,9 @@ namespace My_File_Project.Menu
                         Login();
                         break;
                     case 0:
-                        Console.ForegroundColor = ConsoleColor.Gray;
                         isContinue = false;
                         break;
                     default:
-                        Console.ForegroundColor = ConsoleColor.Gray;
                         Console.WriteLine("Invalid Input!!!");
                         break;
                 }
@@ -55,7 +55,6 @@ namespace My_File_Project.Menu
 
         private void Register()
         {
-            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Register as: ");
             Console.WriteLine("1. Admin");
             Console.WriteLine("2. Customer");
@@ -78,20 +77,45 @@ namespace My_File_Project.Menu
             }
         }
 
+        private void LoginAs()
+        {
+            Console.WriteLine("Login as: ");
+            Console.WriteLine("1. Admin");
+            Console.WriteLine("2. Customer");
+            int choice = 3;
+            if (int.TryParse(Console.ReadLine(), out int num))
+            {
+                choice = num;
+            }
+            switch (choice)
+            {
+                case 1:
+                    LoginAsAdmin();
+                    break;
+                case 2:
+                    LoginAsCustomer();
+                    break;
+                default:
+                    Console.WriteLine("Invalid Input!!!");
+                    break;
+            }
+        }
+
         private void Register(string role)
         {
-            Console.ForegroundColor = ConsoleColor.Gray;
             Console.Write("Enter your first name: ");
-            string firstName = Console.ReadLine()!;
+            string? firstName = null;
+            generalMenu.EnterChoice(ref firstName);
 
             Console.Write("Enter your last name: ");
-            string lastName = Console.ReadLine()!;
+            string? lastName = null;
+            generalMenu.EnterChoice(ref lastName);
 
-            Console.Write("Enter your date of birth (dd/mm/yyyy): ");
+            Console.Write("Enter your date of birth (yyyy/mm/dd): ");
             DateTime dob = DateTime.Parse("01/01/1800");
             while (dob == DateTime.Parse("01/01/1800"))
             {
-                if (DateTime.TryParse($"{Console.ReadLine(): dd/mm/yyyy}", out DateTime choice))
+                if (DateTime.TryParse(Console.ReadLine(), out DateTime choice))
                 {
                     dob = choice;
                 }
@@ -102,12 +126,14 @@ namespace My_File_Project.Menu
             }
 
             Console.Write("Enter your email: ");
-            string email = Console.ReadLine()!;
+            string? email = null;
+            generalMenu.EnterChoice(ref email);
 
             Console.Write("Enter your password: ");
-            string password = Console.ReadLine()!;
+            string? password = null;
+            generalMenu.EnterChoice(ref password);
 
-            User? user = _userService.CreateUser(firstName, lastName, dob, email, password, role);
+            User? user = _userService.CreateUser(firstName!, lastName!, dob, email!, password!, role);
             if (user is null)
             {
                 Console.WriteLine($"Email {email} already exists!!!");
@@ -129,24 +155,25 @@ namespace My_File_Project.Menu
             string password = Console.ReadLine()!;
 
             var login = _userService.Login(email, password);
-            if(login.Item1 == true)
+            if (login.Item1 == true)
             {
-                User.LoggedInUserId = login.Item2!.Id;
+                User.LoggedInUserEmail = login.Item2[0].Email;
                 Console.WriteLine("Login Successfull!!!");
                 Read();
-                if(login.Item2!.Role == "ADMIN")
+                if (login.Item2.Count == 1)
                 {
-                    Admin admin = _adminService.Get(admin => admin.UserId == User.LoggedInUserId)!;
-                    Admin.LoggedInAdminId = admin.Id;
-                }
-                else if(login.Item2.Role == "CUSTOMER")
-                {
-                    Customer customer = _customerService.Get(customer => customer.UserId == User.LoggedInUserId)!;
-                    Customer.LoggedInCustomerId = customer.Id;
+                    if (login.Item2![0].Role == "ADMIN")
+                    {
+                        LoginAsAdmin();
+                    }
+                    else
+                    {
+                        LoginAsCustomer();
+                    }
                 }
                 else
                 {
-
+                    LoginAs();
                 }
             }
             else
@@ -154,6 +181,31 @@ namespace My_File_Project.Menu
                 Console.WriteLine("Invalid login Credential details!!!");
                 Read();
             }
+        }
+
+        private void LoginAsAdmin()
+        {
+            Admin admin = _adminService.Get(admin => admin.UserEmail == User.LoggedInUserEmail)!;
+            Admin.LoggedInAdminId = admin.Id;
+            generalMenu.CheckHotelStatus();
+            adminMenu.MainMenu();
+        }
+
+        private void LoginAsCustomer()
+        {
+            Customer customer = _customerService.Get(customer => customer.UserEmail == User.LoggedInUserEmail)!;
+            Customer.LoggedInCustomerId = customer.Id;
+            generalMenu.CheckHotelStatus();
+            generalMenu.CustomerStatus();
+            List<Booking> bookings = _bookingService.GetSelected(booking => booking.CustomerID == customer.Id);
+            foreach (Booking booking in bookings)
+            {
+                if(booking.CustomerStatus == Models.Enums.Status.Inactive)
+                {
+                    customerMenu.CheckOut(booking);
+                }
+            }
+            customerMenu.MainMenu();
         }
 
         private void Read()

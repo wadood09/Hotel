@@ -14,7 +14,7 @@ namespace My_File_Project.Services.Implementation
     public class BookingService : IBookingService
     {
         IRepository<Booking> repository = new BookingRepository();
-        public void CreateBooking(string hotelName, string hotelId, string roomType, string roomTypeId, double price, bool isRoomService, RoomService roomService, string roomNumber, Status status, int nights, DatePeriod stayPeriod, bool rate)
+        public void CreateBooking(string hotelName, string hotelId, string roomType, string roomTypeId, bool isRoomService, RoomService? roomService, string roomNumber, string roomId, Status status, int nights, DatePeriod stayPeriod, double price, bool paidService)
         {
             Booking booking = new()
             {
@@ -22,15 +22,16 @@ namespace My_File_Project.Services.Implementation
                 HotelId = hotelId,
                 RoomType = roomType,
                 RoomTypeId = roomTypeId,
-                Price = price,
                 IsRoomService = isRoomService,
                 RoomService = roomService,
                 RoomNumber = roomNumber,
+                RoomId = roomId,
                 CustomerID = Customer.LoggedInCustomerId,
                 CustomerStatus = status,
                 Nights = nights,
                 StayPeriod = stayPeriod,
-                Rate = rate
+                TotalPriceOfStay = price,
+                PaidService = paidService
             };
             repository.Add(booking);
         }
@@ -45,14 +46,55 @@ namespace My_File_Project.Services.Implementation
             return repository.GetSelected(pred);
         }
 
-        public bool IsDeleted(Booking booking)
+        public void Delete(Booking booking)
         {
-            throw new NotImplementedException();
+            repository.Remove(booking);
         }
 
         public void UpdateFile()
         {
             repository.RefreshFile();
+        }
+
+        public void UpdateList()
+        {
+            repository.RefreshList();
+        }
+
+        public bool ShouldIncreaseStayPeriod(int days, Booking booking)
+        {
+            DateTime checkOutDate = booking.StayPeriod.End.AddDays(days);
+            List<Booking> bookings = repository.GetSelected(bookin => bookin.RoomId == booking.RoomId);
+            foreach (Booking booking1 in bookings)
+            {
+                if (booking1 == booking) continue;
+                if (booking1.StayPeriod.WithInRange(checkOutDate))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public bool ShouldChangeCheckInTime(int days, Booking booking)
+        {
+            DateTime checkInDate = DateTime.Now.AddDays(days);
+            if (checkInDate >= booking.StayPeriod.End) return false;
+            List<Booking> bookings = repository.GetSelected(bookin => bookin.RoomId == booking.RoomId);
+            foreach (Booking booking1 in bookings)
+            {
+                if (booking1 == booking) continue;
+                if (booking1.StayPeriod.WithInRange(checkInDate))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public List<Booking> GetAll()
+        {
+            return repository.GetAll();
         }
     }
 }

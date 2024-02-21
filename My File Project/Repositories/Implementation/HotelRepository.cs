@@ -25,7 +25,7 @@ namespace My_File_Project.Repositories.Implementation
 
         public List<Hotel> GetAll()
         {
-            return HotelContext.Hotels;
+            return HotelContext.Hotels.OrderByDescending(hotel => hotel.Ratings).ToList();
         }
 
         public List<Hotel> GetSelected(Func<Hotel, bool> pred)

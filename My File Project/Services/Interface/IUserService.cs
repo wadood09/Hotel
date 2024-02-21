@@ -11,8 +11,9 @@ namespace My_File_Project.Services.Interface
         User? CreateUser(string firstName, string lastName, DateTime dob, string email, string password, string role);
         User? Get(Func<User, bool> pred);
         List<User> GetSelected(Func<User, bool> pred);
-        bool IsDeleted(User user);
-        (bool, User?) Login(string email, string password);
+        void Delete(User user);
+        (bool, List<User>) Login(string email, string password);
         void UpdateFile();
+        void UpdateList();
     }
 }

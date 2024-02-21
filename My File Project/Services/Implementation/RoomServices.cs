@@ -1,3 +1,4 @@
+using My_File_Project.Entities;
 using My_File_Project.Models.Entities;
 using My_File_Project.Models.Enums;
 using My_File_Project.Repositories.Implementation;
@@ -9,6 +10,25 @@ namespace My_File_Project.Services.Implementation
     public class RoomServices : IRoomService
     {
         IRepository<Room> repository = new RoomRepository();
+        IRepository<Booking> bookingRepo = new BookingRepository();
+
+        public Room? BookRoom(DatePeriod period, string roomTypeId)
+        {
+            List<Room> rooms = repository.GetSelected(room => room.RoomTypeId == roomTypeId);
+            foreach (Room room in rooms)
+            {
+                List<Booking> bookings = bookingRepo.GetSelected(booking => booking.RoomId == room.Id);
+                foreach (Booking booking in bookings)
+                {
+                    if(!booking.StayPeriod.WithInRange(period))
+                    {
+                        return room;
+                    }
+                }
+            }
+            return null;
+        }
+
         public void CreateRoom(string hotelId, string roomTypeId, string number)
         {
             Room room = new()
@@ -32,7 +52,7 @@ namespace My_File_Project.Services.Implementation
 
         public bool IsDeleted(Room room)
         {
-            if(room.RoomStatus == RoomStatus.Occupied) return false;
+            if(room.RoomStatus != RoomStatus.Vacant) return false;
             repository.Remove(room);
             return true;
         }
@@ -46,6 +66,11 @@ namespace My_File_Project.Services.Implementation
         public void UpdateFile()
         {
             repository.RefreshFile();
+        }
+
+        public void UpdateList()
+        {
+            repository.RefreshList();
         }
     }
 }

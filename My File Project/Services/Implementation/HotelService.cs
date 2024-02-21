@@ -1,4 +1,5 @@
 using My_File_Project.Models.Entities;
+using My_File_Project.Models.Enums;
 using My_File_Project.Repositories.Implementation;
 using My_File_Project.Repositories.Interface;
 using My_File_Project.Services.Interface;
@@ -58,6 +59,42 @@ namespace My_File_Project.Services.Implementation
         public void UpdateFile()
         {
             repository.RefreshFile();
+        }
+
+        public void UpdateList()
+        {
+            repository.RefreshList();
+        }
+
+        public bool IsDeleted(Hotel hotel)
+        {
+            if (hotel.HotelStatus == Status.Active) return false;
+            List<RoomType> types = typeService.GetSelected(type => type.HotelId == hotel.Id);
+            foreach (RoomType type in types)
+            {
+                bool isDeleted = typeService.IsDeleted(type);
+                if (!isDeleted) return false;
+            }
+
+            List<RoomService> services = servicesService.GetSelected(service => service.HotelId == hotel.Id);
+            foreach (RoomService service in services)
+            {
+                servicesService.Delete(service);
+            }
+            repository.Remove(hotel);
+            return true;
+        }
+
+        public List<Hotel> GetAll()
+        {
+            return repository.GetAll();
+        }
+
+        public Hotel? IsExist(int pos)
+        {
+            List<Hotel> hotels = repository.GetAll();
+            if (pos > hotels.Count || pos == 0) return null;
+            else return hotels[--pos];
         }
     }
 }

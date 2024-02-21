@@ -13,5 +13,6 @@ namespace My_File_Project.Services.Interface
         List<Customer> GetSelected(Func<Customer, bool> pred);
         bool IsDeleted(Customer customer);
         void UpdateFile();
+        void UpdateList();
     }
 }

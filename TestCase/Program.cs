@@ -80,11 +80,17 @@ static void Reverse(string str)
     string s = str.Reverse().ToString();
     Console.WriteLine(s);
 }
-// Console.WriteLine(DateTime.Now.ToString("ddd"));
-// DateTime dateTime = DateTime.Now;
-// TimeSpan timeSpan = new(36, 0, 0, 0);
+string[] digits = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
 
-// char c = '0';
-// Console.WriteLine(char.ToUpper(c));
+var reversedIDigits = (
+    from digit in digits
+    where digit[1] == 'i'
+    select digit)
+    .Reverse();
 
-int b = int.Parse(Console.ReadLine());
+Console.WriteLine("A backwards list of the digits with a second character of 'i':");
+foreach (var d in reversedIDigits)
+{
+    Console.WriteLine(d);
+}
+

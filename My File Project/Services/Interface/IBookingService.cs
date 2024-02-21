@@ -10,10 +10,14 @@ namespace My_File_Project.Services.Interface
 {
     public interface IBookingService
     {
-        void CreateBooking(string hotelName, string hotelId, string roomType, string roomTypeId, double price, bool isRoomService, RoomService roomService, string roomNumber, Status status, int nights, DatePeriod stayPeriod, bool rate);
+        void CreateBooking(string hotelName, string hotelId, string roomType, string roomTypeId, bool isRoomService, RoomService? roomService, string roomNumber, string roomId, Status status, int nights, DatePeriod stayPeriod, double price, bool paidService);
         Booking? Get(Func<Booking, bool> pred);
         List<Booking> GetSelected(Func<Booking, bool> pred);
-        bool IsDeleted(Booking booking);
+        List<Booking> GetAll();
+        void Delete(Booking booking);
         void UpdateFile();
+        void UpdateList();
+        bool ShouldIncreaseStayPeriod(int days, Booking booking);
+        bool ShouldChangeCheckInTime(int days, Booking booking);
     }
 }

@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using My_File_Project.Models.Entities;
 using My_File_Project.Services.Implementation;
 using My_File_Project.Services.Interface;
@@ -16,12 +12,12 @@ namespace My_File_Project.Menu
         private Random random = new();
         private ConsoleColor[] colours = new ConsoleColor[] { ConsoleColor.Black, ConsoleColor.DarkBlue, ConsoleColor.DarkGreen, ConsoleColor.DarkCyan, ConsoleColor.DarkRed, ConsoleColor.DarkMagenta, ConsoleColor.DarkYellow, ConsoleColor.Blue, ConsoleColor.Green, ConsoleColor.Cyan, ConsoleColor.Red, ConsoleColor.Magenta, ConsoleColor.Yellow };
         IAdminService _adminService = new AdminService();
-        ICustomerService _customerService = new CustomerService();
         IHotelService _hotelService = new HotelService();
         IRoomService _roomService = new RoomServices();
         IRoomServicesService _roomServicesService = new RoomServicesService();
         IRoomTypeService _roomTypeService = new RoomTypeService();
         IUserService _userService = new UserService();
+        GeneralMenu generalMenu = new();
         public void MainMenu()
         {
             bool isContinue = true;
@@ -29,12 +25,12 @@ namespace My_File_Project.Menu
             {
                 if (!skip)
                 {
-                    User user = _userService.Get(user => user.Id == User.LoggedInUserId)!;
+                    User user = _userService.Get(user => user.Email == User.LoggedInUserEmail && user.Role == "ADMIN")!;
                     Console.WriteLine($"Welcome {user.FirstName!.ToPascalCase()} {user.LastName!.ToPascalCase()}");
                     skip = true;
                 }
                 Console.ForegroundColor = colours[random.Next(0, colours.Length)];
-                Console.WriteLine("\t====== ADMIN MENU ======");
+                Console.WriteLine("\t========== ADMIN MENU ==========");
                 Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine("1. Register Hotel");
                 Console.WriteLine("2. View Hotel Details");
@@ -51,22 +47,22 @@ namespace My_File_Project.Menu
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine("\t====== REGISTERING HOTEL ======");
+                        Console.WriteLine("\t========== REGISTERING HOTEL ==========");
                         RegisterHotel();
                         break;
                     case 2:
-                        Console.WriteLine("\t====== VIEWING HOTEL DETAILS ======");
+                        Console.WriteLine("\t========== VIEWING HOTEL DETAILS ==========");
                         ViewHotelDetails();
                         break;
                     case 3:
                         UpdateHotelDetails();
                         break;
                     case 4:
-                        Console.WriteLine("\t====== REMOVING HOTEL ======");
+                        Console.WriteLine("\t========== REMOVING HOTEL ==========");
                         RemoveHotel();
                         break;
                     case 5:
-                        Console.WriteLine("\t====== DELETING ACCOUNT ======");
+                        Console.WriteLine("\t========== DELETING ACCOUNT ==========");
                         DeleteAccount();
                         break;
                     case 0:
@@ -264,7 +260,7 @@ namespace My_File_Project.Menu
         {
             char choice = new();
             Console.WriteLine("Do you want your hotel to provide room service? (Y/N)");
-            EnterChoice(ref choice);
+            generalMenu.EnterChoice(ref choice);
             if (choice == 'N') return;
 
             EnterRoomService(ref roomService, ref roomServices, ref Prices, null);
@@ -296,7 +292,7 @@ namespace My_File_Project.Menu
                 {
                     Console.Write($"{service.ToPascalCase()}:  ");
                     double price = new();
-                    EnterChoice(ref price);
+                    generalMenu.EnterChoice(ref price);
                     Prices.Add(price);
                 }
                 roomService = true;
@@ -358,20 +354,9 @@ namespace My_File_Project.Menu
             if (hotel.Count > 1)
             {
                 DisplayHotels(Admin.LoggedInAdminId!);
-                Console.WriteLine("Choose which hotel to view details (i.e enter 1,2,3,...)");
-                choice = -1;
-                while (choice < 0)
-                {
-                    if (int.TryParse(Console.ReadLine(), out int num))
-                    {
-                        choice = Math.Abs(num);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid Input!!!");
-                        Console.WriteLine("Try again");
-                    }
-                }
+                Console.WriteLine("Choose one of the hotels displayed above (i.e enter 1,2,3,...): ");
+                choice = new();
+                generalMenu.EnterChoice(ref choice);
 
                 if (choice > hotel.Count || choice == 0)
                 {
@@ -477,6 +462,8 @@ namespace My_File_Project.Menu
             {
                 hotel[choice].Name = hotelName;
                 Console.WriteLine($"You have successfully changed your hotel name to '{hotelName}'");
+                Console.WriteLine("Update successfull!!!");
+                _hotelService.UpdateFile();
             }
         }
 
@@ -486,7 +473,7 @@ namespace My_File_Project.Menu
             while (isContinue)
             {
                 Console.ForegroundColor = colours[random.Next(0, colours.Length)];
-                Console.WriteLine("\t====== UPDATING ROOM TYPES ======");
+                Console.WriteLine("\t========== UPDATING ROOM TYPES ==========");
                 Console.ForegroundColor = ConsoleColor.Gray;
 
                 Console.WriteLine("1. Add Room Type");
@@ -508,31 +495,31 @@ namespace My_File_Project.Menu
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine("\t======ADDING ROOM TYPE======");
+                        Console.WriteLine("\t========== ADDING ROOM TYPE ==========");
                         AddRoomType();
                         break;
                     case 2:
-                        Console.WriteLine("\t======REMOVING ROOM TYPE======");
+                        Console.WriteLine("\t========== REMOVING ROOM TYPE ==========");
                         RemoveRoomType();
                         break;
                     case 3:
-                        Console.WriteLine("\t======CHANGING PRICE OF ROOM TYPE======");
+                        Console.WriteLine("\t========== CHANGING PRICE OF ROOM TYPE ==========");
                         ChangePriceOfRoomType();
                         break;
                     case 4:
-                        Console.WriteLine("\t======CHANGING AMOUNT OF ROOM TYPE======");
+                        Console.WriteLine("\t========== CHANGING AMOUNT OF ROOM TYPE ==========");
                         ChangeAmountOfRoomType();
                         break;
                     case 5:
-                        Console.WriteLine("\t======ADDING ROOM======");
+                        Console.WriteLine("\t========== ADDING ROOM ==========");
                         AddRoom();
                         break;
                     case 6:
-                        Console.WriteLine("\t======REMOVING ROOM======");
+                        Console.WriteLine("\t========== REMOVING ROOM ==========");
                         RemoveRoom();
                         break;
                     case 7:
-                        Console.WriteLine("\t======CHANGING ROOM NUMBER======");
+                        Console.WriteLine("\t========== CHANGING ROOM NUMBER ==========");
                         ChangeRoomNumber();
                         break;
                     case 0:
@@ -664,19 +651,22 @@ namespace My_File_Project.Menu
             Console.ForegroundColor = ConsoleColor.Gray;
             List<Hotel> hotel = _hotelService.GetSelected(hotel => hotel.AdminId == Admin.LoggedInAdminId);
             int choice = 1;
+
             ChooseHotel(hotel, ref choice);
             if (choice < 0) return;
+
+            generalMenu.CheckRoomTypeStatus(hotel[choice].Id);
             RemoveRoomType(hotel[choice]);
             Read();
         }
 
         private void RemoveRoomType(Hotel hotel)
         {
-            DisplayRoomTypes(hotel.Id);
+            generalMenu.DisplayRoomTypes(hotel.Id);
             int choice = new();
 
             Console.Write("Choose which room type to remove (i.e enter 1,2,3,...) ");
-            EnterChoice(ref choice);
+            generalMenu.EnterChoice(ref choice);
 
             RoomType? type = _roomTypeService.IsExist(choice, hotel.Id);
             if (type is not null)
@@ -700,57 +690,6 @@ namespace My_File_Project.Menu
             }
         }
 
-        private void EnterChoice(ref int choice)
-        {
-            choice = -1;
-            while (choice < 0)
-            {
-                if (int.TryParse(Console.ReadLine(), out int num))
-                {
-                    choice = Math.Abs(num);
-                }
-                else
-                {
-                    Console.WriteLine("Invalid Input!!!");
-                    Console.WriteLine("Try again");
-                }
-            }
-        }
-
-        private void EnterChoice(ref double choice)
-        {
-            choice = -1;
-            while (choice < 0)
-            {
-                if (double.TryParse(Console.ReadLine(), out double num))
-                {
-                    choice = Math.Abs(num);
-                }
-                else
-                {
-                    Console.WriteLine("Invalid Input!!!");
-                    Console.WriteLine("Try again");
-                }
-            }
-        }
-
-        private void EnterChoice(ref char choice)
-        {
-            choice = '0';
-            while (choice != 'Y' || choice != 'N')
-            {
-                if (char.TryParse(Console.ReadLine()!.ToUpper(), out char num) && "YN".Contains(num))
-                {
-                    choice = num;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid Input!!!");
-                    Console.WriteLine("Try again");
-                }
-            }
-        }
-
         private void ChangePriceOfRoomType()
         {
             Console.ForegroundColor = ConsoleColor.Gray;
@@ -764,20 +703,21 @@ namespace My_File_Project.Menu
 
         private void ChangePriceOfRoomType(Hotel hotel)
         {
-            DisplayRoomTypes(hotel.Id);
+            generalMenu.DisplayRoomTypes(hotel.Id);
             Console.WriteLine("Choose which room type price to be changed (i.e enter 1,2,3,...) ");
             int choice = new();
-            EnterChoice(ref choice);
+            generalMenu.EnterChoice(ref choice);
 
             RoomType? type = _roomTypeService.IsExist(choice, hotel.Id);
             if (type is not null)
             {
                 Console.Write("Enter new price: ");
                 double price = new();
-                EnterChoice(ref price);
+                generalMenu.EnterChoice(ref price);
 
                 type.Price = price;
                 Console.WriteLine($"Price of room type has been successfully changed to N{price:n}");
+                _roomTypeService.UpdateFile();
             }
             else
             {
@@ -792,25 +732,29 @@ namespace My_File_Project.Menu
             Console.ForegroundColor = ConsoleColor.Gray;
             List<Hotel> hotel = _hotelService.GetSelected(hotel => hotel.AdminId == Admin.LoggedInAdminId);
             int choice = 1;
+
             ChooseHotel(hotel, ref choice);
             if (choice < 0) return;
+
             ChangeAmountOfRoomType(hotel[choice]);
             Read();
         }
 
         private void ChangeAmountOfRoomType(Hotel hotel)
         {
-            DisplayRoomTypes(hotel.Id);
+            generalMenu.DisplayRoomTypes(hotel.Id);
             Console.Write("Choose which room type amount to change: ");
             int choice = new();
-            EnterChoice(ref choice);
+            generalMenu.EnterChoice(ref choice);
 
             RoomType? type = _roomTypeService.IsExist(choice, hotel.Id);
             if (type is not null)
             {
+                generalMenu.CheckRoomStatus(type.Id);
                 Console.Write("Enter new amount of rooms: ");
                 int amount = new();
-                EnterChoice(ref amount);
+                generalMenu.EnterChoice(ref amount);
+
                 if (amount > type.AmountOfRooms)
                 {
                     Console.WriteLine($"The new amount of room type {type.Name} is higher than the former amount!!!");
@@ -823,6 +767,7 @@ namespace My_File_Project.Menu
                     Console.WriteLine($"The new amount of room type {type.Name} is lower than the former amount!!!");
                     int times = type.AmountOfRooms - amount;
                     List<Room> rooms = _roomService.GetSelected(room => room.RoomTypeId == type.Id && room.RoomStatus == RoomStatus.Vacant);
+                    // Checking whether rooms to be removed is available
                     if (rooms.Count < times)
                     {
                         Console.WriteLine("The available rooms that can be removed is less than the amount of rooms to be removed!!!");
@@ -830,12 +775,13 @@ namespace My_File_Project.Menu
                         Console.WriteLine("Update Unsuccessfull!!!");
                         return;
                     }
-                    DisplayRoomNumbers(type.Id);
+                    generalMenu.DisplayRoomNumbers(type.Id);
                     Console.WriteLine("Enter room number of rooms to be removed");
                     RemoveRoom(times, type.Id);
                 }
                 type.AmountOfRooms = amount;
                 Console.WriteLine($"Amount of room type has been successfully changed to {amount}");
+                _roomTypeService.UpdateFile();
             }
             else
             {
@@ -904,11 +850,11 @@ namespace My_File_Project.Menu
 
         private void AddRoom(Hotel hotel)
         {
-            DisplayRoomTypes(hotel.Id);
+            generalMenu.DisplayRoomTypes(hotel.Id);
 
             Console.Write("Under which room type is room to be added: ");
             int choice = new();
-            EnterChoice(ref choice);
+            generalMenu.EnterChoice(ref choice);
 
             RoomType? type = _roomTypeService.IsExist(choice, hotel.Id);
             if (type is not null)
@@ -938,14 +884,15 @@ namespace My_File_Project.Menu
 
         private void RemoveRoom(Hotel hotel)
         {
-            DisplayRoomTypes(hotel.Id);
+            generalMenu.DisplayRoomTypes(hotel.Id);
             Console.Write("Under which room type does room to be removed exists: ");
             int choice = new();
-            EnterChoice(ref choice);
+            generalMenu.EnterChoice(ref choice);
 
             RoomType? type = _roomTypeService.IsExist(choice, hotel.Id);
             if (type is not null)
             {
+                generalMenu.CheckRoomStatus(type.Id);
                 List<Room> rooms = _roomService.GetSelected(room => room.RoomTypeId == type.Id && room.RoomStatus == RoomStatus.Vacant);
                 if (!rooms.Any())
                 {
@@ -953,7 +900,7 @@ namespace My_File_Project.Menu
                     return;
                 }
 
-                DisplayRoomNumbers(type.Id);
+                generalMenu.DisplayRoomNumbers(type.Id);
                 Console.Write("Enter room number of room to be removed: ");
                 RemoveRoom(1, type.Id);
             }
@@ -978,15 +925,16 @@ namespace My_File_Project.Menu
 
         private void ChangeRoomNumber(Hotel hotel)
         {
-            DisplayRoomTypes(hotel.Id);
+            generalMenu.DisplayRoomTypes(hotel.Id);
 
             Console.Write("Under which room type is room number to be changed: ");
             int choice = new();
-            EnterChoice(ref choice);
+            generalMenu.EnterChoice(ref choice);
 
             RoomType? type = _roomTypeService.IsExist(choice, hotel.Id);
             if (type is not null)
             {
+                generalMenu.CheckRoomStatus(type.Id);
                 List<Room> rooms = _roomService.GetSelected(room => room.RoomTypeId == type.Id && room.RoomStatus == RoomStatus.Vacant);
                 if (!rooms.Any())
                 {
@@ -994,7 +942,7 @@ namespace My_File_Project.Menu
                     return;
                 }
 
-                DisplayRoomNumbers(type.Id);
+                generalMenu.DisplayRoomNumbers(type.Id);
                 Console.Write("Enter room number of room to be changed: ");
                 ChangeRoomNumber(type.Id);
             }
@@ -1024,6 +972,7 @@ namespace My_File_Project.Menu
                     Room room = _roomService.Get(room => room.RoomTypeId == roomTypeId && room.Number == num)!;
                     room.Number = newNum;
                     Console.WriteLine($"You have successfully changed room's room number to {newNum}");
+                    _roomService.UpdateFile();
                 }
                 else
                 {
@@ -1043,7 +992,7 @@ namespace My_File_Project.Menu
             while (isContinue)
             {
                 Console.ForegroundColor = colours[random.Next(0, colours.Length)];
-                Console.WriteLine("\t====== UPDATING ROOM SERVICES ======");
+                Console.WriteLine("\t========== UPDATING ROOM SERVICES ==========");
                 Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine("1. Add Room Service");
                 Console.WriteLine("2. Remove Room Service");
@@ -1058,15 +1007,15 @@ namespace My_File_Project.Menu
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine("\t======ADDING ROOM SERVICE======");
+                        Console.WriteLine("\t========== ADDING ROOM SERVICE ==========");
                         AddRoomService();
                         break;
                     case 2:
-                        Console.WriteLine("\t======REMOVING ROOM SERVICE======");
+                        Console.WriteLine("\t========== REMOVING ROOM SERVICE ==========");
                         RemoveRoomService();
                         break;
                     case 3:
-                        Console.WriteLine("\t======CHANGING PRICE OF ROOM SERVICE======");
+                        Console.WriteLine("\t========== CHANGING PRICE OF ROOM SERVICE ==========");
                         ChangePriceOfRoomService();
                         break;
                     case 0:
@@ -1100,7 +1049,7 @@ namespace My_File_Project.Menu
             if (!hotel[choice].HasRoomService)
             {
                 Console.WriteLine("Are you sure you want your hotel to be providing room service (Y/N)");
-                EnterChoice(ref input);
+                generalMenu.EnterChoice(ref input);
             }
             if (input == 'Y')
             {
@@ -1121,6 +1070,7 @@ namespace My_File_Project.Menu
                 Console.WriteLine("Your hotel is not providing room service");
                 hotel[choice].HasRoomService = false;
             }
+            _hotelService.UpdateFile();
         }
 
         private void RemoveRoomService()
@@ -1131,6 +1081,8 @@ namespace My_File_Project.Menu
 
             ChooseHotel(hotel, ref choice);
             if (choice < 0) return;
+
+            generalMenu.CheckHotelStatus();
 
             RemoveRoomService(ref hotel, choice);
             Read();
@@ -1152,17 +1104,16 @@ namespace My_File_Project.Menu
             }
             else
             {
-                DisplayRoomServices(hotel[choice].Id);
+                generalMenu.DisplayRoomServices(hotel[choice].Id);
                 Console.WriteLine("Choose which room service to be removed (i.e enter 1,2,3,...)");
 
                 int number = new();
-                EnterChoice(ref number);
+                generalMenu.EnterChoice(ref number);
 
                 RoomService? service = _roomServicesService.IsExist(number, hotel[choice].Id);
                 if (service is not null)
                 {
-                    _
-                    Hotel hotel = hotel[choice];
+                    _roomServicesService.Delete(service);
                     Console.WriteLine($"Room service has been removed successfully!!!");
                 }
                 else
@@ -1175,17 +1126,19 @@ namespace My_File_Project.Menu
         private void ChangePriceOfRoomService()
         {
             Console.ForegroundColor = ConsoleColor.Gray;
-            List<Hotel> hotel = _hotelRepository.GetList(Admin.LoggedInAdminId);
+            List<Hotel> hotel = _hotelService.GetSelected(hotel => hotel.AdminId == Admin.LoggedInAdminId);
             int choice = 1;
+
             ChooseHotel(hotel, ref choice);
             if (choice < 0) return;
-            ChangePriceOfRoomService(hotel, choice);
+
+            ChangePriceOfRoomService(hotel[choice]);
             Read();
         }
 
-        private void ChangePriceOfRoomService(List<Hotel> hotel, int choice)
+        private void ChangePriceOfRoomService(Hotel hotel)
         {
-            if (!hotel[choice].RoomService)
+            if (!hotel.HasRoomService)
             {
                 Console.WriteLine("Cannot change room service price because your hotel isn't providing room service!!!");
                 Console.WriteLine("Kindly add room service in order to change room sevice price.");
@@ -1193,37 +1146,22 @@ namespace My_File_Project.Menu
             }
             else
             {
-                _roomServiceManager.DisplayNames(hotel[choice].Id);
+                generalMenu.DisplayRoomServices(hotel.Id);
+
                 Console.WriteLine("Choose which room service price to be changed (i.e enter 1,2,3,...)");
-                int number = -1;
-                while (number < 0)
-                {
-                    if (int.TryParse(Console.ReadLine(), out int num))
-                        number = num;
-                    else
-                    {
-                        Console.WriteLine("Invalid Input!!!");
-                        Console.WriteLine("Try again");
-                    }
-                }
-                if (_roomServiceManager.IsExist(number, hotel[choice].Id))
+                int choice = new();
+                generalMenu.EnterChoice(ref choice);
+
+                RoomService? service = _roomServicesService.IsExist(choice, hotel.Id);
+                if (service is not null)
                 {
                     Console.Write("Enter new price of room service: ");
-                    double price = -1;
-                    while (price < 0)
-                    {
-                        if (double.TryParse(Console.ReadLine(), out double num))
-                        {
-                            price = num;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid Input!!!");
-                            Console.WriteLine("Try again");
-                        }
-                    }
-                    _roomServiceRepository.Get(number, hotel[choice].Id).Price = price;
+                    double price = new();
+                    generalMenu.EnterChoice(ref price);
+
+                    service.Price = price;
                     Console.WriteLine($"Price of chosen room service has been successfully changed to N{price:n}");
+                    _roomServicesService.UpdateFile();
                 }
                 else
                 {
@@ -1235,28 +1173,89 @@ namespace My_File_Project.Menu
         private void ChangeCheckOutFees()
         {
             Console.ForegroundColor = ConsoleColor.Gray;
-            List<Hotel> hotel = _hotelRepository.GetList(Admin.LoggedInAdminId);
+            List<Hotel> hotel = _hotelService.GetSelected(hotel => hotel.AdminId == Admin.LoggedInAdminId);
             int choice = 1;
+
             ChooseHotel(hotel, ref choice);
             if (choice < 0) return;
+
             Console.Write("Enter new Check out fees: ");
-            hotel[choice].EarlyCheckOutFee = -1;
-            while (hotel[choice].EarlyCheckOutFee < 0)
-            {
-                if (double.TryParse(Console.ReadLine(), out double num))
-                {
-                    hotel[choice].EarlyCheckOutFee = num;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid Input!!!");
-                    Console.WriteLine("Try again");
-                }
-            }
-            Console.WriteLine($"Successfully changed check out fees to N{hotel[choice].EarlyCheckOutFee:n}");
+            double fee = new();
+            generalMenu.EnterChoice(ref fee);
+
+            hotel[choice].EarlyCheckOutFee = fee;
+            Console.WriteLine($"Successfully changed check out fees to N{fee:n}");
+            _hotelService.UpdateFile();
             Read();
         }
 
+        private void RemoveHotel()
+        {
+            Console.ForegroundColor = ConsoleColor.Gray;
+            generalMenu.CheckHotelStatus();
+            Console.WriteLine("All details about hotel will be removed including room types, room services, etc");
+            Console.WriteLine("Are you sure you want to remove hotel (Y/N)");
+
+            char choice = new();
+            generalMenu.EnterChoice(ref choice);
+
+            if (choice != 'Y')
+            {
+                Read();
+                return;
+            }
+
+            List<Hotel> hotel = _hotelService.GetSelected(hotel => hotel.AdminId == Admin.LoggedInAdminId);
+            int choice2 = 1;
+
+            ChooseHotel(hotel, ref choice2);
+            if (choice2 < 0) return;
+
+            else
+            {
+                if (hotel[choice2].HotelStatus == Status.Active)
+                {
+                    Console.WriteLine("Hotel status is active and therefore cannot remove hotel!!!\nTry again later");
+                    Read();
+                    return;
+                }
+
+                bool isDeleted = _hotelService.IsDeleted(hotel[choice2]);
+                if (isDeleted)
+                    Console.WriteLine("Hotel has been removed successfully!!!");
+                else
+                    Console.WriteLine($"Unable to remove Hotel if hotel is active!!!\nHotel Removal Unsuccessfull!!!");
+            }
+            Read();
+        }
+
+        private void DeleteAccount()
+        {
+            Console.ForegroundColor = ConsoleColor.Gray;
+            generalMenu.CheckHotelStatus();
+            Console.WriteLine("All details about user will be removed if user deletes account");
+            Console.WriteLine("Do you want to continue with this operation (Y/N)");
+
+            char choice = new();
+            generalMenu.EnterChoice(ref choice);
+
+            if (choice == 'Y')
+            {
+                Admin? admin = _adminService.Get(admin => admin.Id == Admin.LoggedInAdminId);
+                if (admin is null)
+                {
+                    Console.WriteLine("Account not found!!! \nAccount must be registered in order to delete account");
+                    Read();
+                    return;
+                }
+                bool isDeleted = _adminService.IsDeleted(admin);
+                if (isDeleted)
+                    Console.WriteLine("Account has been deleted successfully!!!");
+                else
+                    Console.WriteLine("Account cannot be deleted because some hotels are active!!!\nTry again later");
+                Read();
+            }
+        }
 
         public void DisplayHotels(string adminId)
         {
@@ -1266,37 +1265,6 @@ namespace My_File_Project.Menu
             foreach (Hotel hotel in hotels)
             {
                 Console.WriteLine($"{++count}. {hotel.Name}");
-            }
-        }
-
-        public void DisplayRoomTypes(string hotelId)
-        {
-            int count = 0;
-            Console.WriteLine("Viewing all room types: ");
-            List<RoomType> types = _roomTypeService.GetSelected(type => type.HotelId == hotelId);
-            foreach (RoomType type in types)
-            {
-                Console.WriteLine($"{++count}. {type.Name!.ToPascalCase()}");
-            }
-        }
-
-        public void DisplayRoomNumbers(string roomTypeId)
-        {
-            Console.WriteLine("Viewing Room number(s): ");
-            List<Room> rooms = _roomService.GetSelected(room => room.RoomTypeId == roomTypeId);
-            foreach (Room room in rooms)
-            {
-                Console.WriteLine(room.Number!.PadRight(10) + $" Status: {room.RoomStatus}");
-            }
-        }
-
-        public void DisplayRoomServices(string hotelId)
-        {
-            int count = 0;
-            var services = _roomServicesService.GetSelected(service => service.HotelId == hotelId).Select(service => service.Name);
-            foreach (var service in services)
-            {
-                Console.WriteLine($"{++count}. {service}");
             }
         }
 

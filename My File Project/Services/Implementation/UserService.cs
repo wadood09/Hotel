@@ -12,8 +12,9 @@ namespace My_File_Project.Services.Implementation
     public class UserService : IUserService
     {
         IRepository<User> repository = new UserRepository();
-        IAdminService adminService = new AdminService();
-        ICustomerService customerService = new CustomerService();
+        IRepository<Admin> adminRepo = new AdminRepository();
+        IRepository<Customer> customerRepo = new CustomerRepository();
+
         public User? CreateUser(string firstName, string lastName, DateTime dob, string email, string password, string role)
         {
             if (IsExist(email, role)) return null;
@@ -29,12 +30,26 @@ namespace My_File_Project.Services.Implementation
             };
 
             if (role == "ADMIN")
-                adminService.CreateAdmin(user.Id);
+            {
+                Admin admin = new()
+                {
+                    UserEmail = user.Email
+                };
+                adminRepo.Add(admin);
+            }
             else
-                customerService.CreateCustomer(user.Id);
+            {
+                Customer customer = new()
+                {
+                    UserEmail = user.Email
+                };
+                customerRepo.Add(customer);
+            }
+            
             repository.Add(user);
             return user;
         }
+
 
         public User? Get(Func<User, bool> pred)
         {
@@ -46,22 +61,31 @@ namespace My_File_Project.Services.Implementation
             return repository.GetSelected(pred);
         }
 
+        public void Delete(User user)
+        {
+            repository.Remove(user);
+        }
+
         public bool IsExist(string email, string role)
         {
             bool isExist = repository.GetAll().SingleOrDefault(user => user.Email == email && user.Role == role) is not null;
             return isExist;
         }
 
-        public (bool, User?) IsLogin(string email, string password)
+        public (bool, List<User>) Login(string email, string password)
         {
-            User? user = repository.GetAll().SingleOrDefault(user => user.Email == email && user.Password == password);
-            if(user is not null) return (true, user);
-            else return(false, null);
+            List<User> user = repository.GetAll().Where(user => user.Email == email && user.Password == password).ToList();
+            return(user.Any(), user);
         }
 
         public void UpdateFile()
         {
             repository.RefreshFile();
+        }
+
+        public void UpdateList()
+        {
+            repository.RefreshList();
         }
     }
 }

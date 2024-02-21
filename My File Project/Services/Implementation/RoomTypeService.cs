@@ -49,7 +49,7 @@ namespace My_File_Project.Services.Implementation
             foreach (Room room in rooms)
             {
                 bool isDeleted = roomService.IsDeleted(room);
-                if(!isDeleted) return false;
+                if (!isDeleted) return false;
             }
             repository.Remove(type);
             return true;
@@ -64,13 +64,18 @@ namespace My_File_Project.Services.Implementation
         public RoomType? IsExist(int number, string hotelId)
         {
             List<RoomType> types = repository.GetSelected(type => type.HotelId == hotelId);
-            if (number > types.Count) return null;
+            if (number > types.Count || number == 0) return null;
             else return types[--number];
         }
 
         public void UpdateFile()
         {
             repository.RefreshFile();
+        }
+
+        public void UpdateList()
+        {
+            repository.RefreshList();
         }
     }
 }
