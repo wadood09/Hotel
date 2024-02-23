@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using My_File_Project.Entities;
 using My_File_Project.Models.Enums;
+using My_File_Project.Models.Extensions;
 
 namespace My_File_Project.Models.Entities
 {
@@ -29,14 +26,14 @@ namespace My_File_Project.Models.Entities
         public override string ToString()
         {
             StringBuilder service = new();
-            service.Append($"HasRoomService: {IsRoomService,-20}");
+            service.Append($"HasRoomService: {IsRoomService,-15}");
             if (IsRoomService)
             {
-                service.Append($" Type: {RoomService!.Name}");
+                service.Append($" Type: {RoomService!.Name!.ToPascalCase()}");
             }
-            return @$"Hotel Name: {Hotel,-20} {service}
-            RoomType: {RoomType,-20}  RoomNumber: {RoomNumber}
-            CheckInTime: {StayPeriod.Start: dddd, dd MMMM,yyyy hh:mm tt}  CheckOutTime: {StayPeriod.End: dddd, dd MMM,yyyy hh:mm tt}";
+            return @$"Hotel Name: {Hotel}
+            {service}
+            RoomType: {RoomType!.ToPascalCase(),-20}  RoomNumber: {RoomNumber}";
         }
     }
 }

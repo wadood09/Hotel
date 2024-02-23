@@ -1,0 +1,2 @@
+{"FirstName":"akin","LastName":"ola","Dob":"2000-04-11T00:00:00","Wallet":1786000,"Email":"ak@g.com","Password":"1234","Role":"ADMIN","Id":"1bfc1"}
+{"FirstName":"ade","LastName":"ola","Dob":"2001-12-05T00:00:00","Wallet":814000,"Email":"ad@g.com","Password":"ade","Role":"CUSTOMER","Id":"c1ee7"}

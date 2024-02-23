@@ -35,7 +35,8 @@ namespace My_File_Project.Entities
 
         public void ChangeStartTime(int days)
         {
-            Start = DateTime.Now.AddDays(days);
+            days = Math.Abs(days);
+            Start = DateTime.Today.AddDays(days);
         }
 
         public TimeSpan GetDifference()

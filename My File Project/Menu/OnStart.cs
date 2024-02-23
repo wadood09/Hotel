@@ -24,29 +24,26 @@ namespace My_File_Project.Menu
             {
                 Directory.CreateDirectory("Files");
             }
-            if (!File.Exists(HotelContext.AdminFile)) File.Create(HotelContext.AdminFile);
-            else _adminService.UpdateList();
+            string[] filePaths = new string[] { HotelContext.AdminFile, HotelContext.BookingFile, HotelContext.CustomerFile, HotelContext.HotelFile, HotelContext.RoomFile, HotelContext.RoomServiceFile, HotelContext.RoomTypeFile, HotelContext.UserFile };
+            foreach (string path in filePaths)
+            {
+                using (StreamWriter writer = new(path, true)) { }
+            }
+            _adminService.UpdateList();
 
-            if (!File.Exists(HotelContext.BookingFile)) File.Create(HotelContext.BookingFile);
-            else _bookingService.UpdateList();
+            _bookingService.UpdateList();
 
-            if (!File.Exists(HotelContext.CustomerFile)) File.Create(HotelContext.CustomerFile);
-            else _customerService.UpdateList();
+            _customerService.UpdateList();
 
-            if (!File.Exists(HotelContext.HotelFile)) File.Create(HotelContext.HotelFile);
-            else _hotelService.UpdateList();
+            _hotelService.UpdateList();
 
-            if (!File.Exists(HotelContext.RoomFile)) File.Create(HotelContext.RoomFile);
-            else _roomService.UpdateList();
+            _roomService.UpdateList();
 
-            if (!File.Exists(HotelContext.RoomTypeFile)) File.Create(HotelContext.RoomTypeFile);
-            else _roomTypeService.UpdateList();
+            _roomTypeService.UpdateList();
 
-            if (!File.Exists(HotelContext.RoomServiceFile)) File.Create(HotelContext.RoomServiceFile);
-            else _roomServicesService.UpdateList();
+            _roomServicesService.UpdateList();
 
-            if (!File.Exists(HotelContext.UserFile)) File.Create(HotelContext.UserFile);
-            else _userService.UpdateList();
+            _userService.UpdateList();
         }
     }
 }

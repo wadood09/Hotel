@@ -1,0 +1,6 @@
+{"HotelId":"7f190","Name":"Luxury","AmountOfRooms":3,"Price":120000,"Status":1,"Id":"8b324"}
+{"HotelId":"7f190","Name":"villa","AmountOfRooms":5,"Price":25000,"Status":2,"Id":"a421b"}
+{"HotelId":"7f190","Name":"mansion","AmountOfRooms":4,"Price":20000,"Status":1,"Id":"09c07"}
+{"HotelId":"7f190","Name":"cottage","AmountOfRooms":3,"Price":15000,"Status":2,"Id":"29a2b"}
+{"HotelId":"15623","Name":"Penthouse","AmountOfRooms":3,"Price":100000,"Status":1,"Id":"77cee"}
+{"HotelId":"15623","Name":"villa","AmountOfRooms":3,"Price":70000,"Status":2,"Id":"0cc2a"}

@@ -18,6 +18,6 @@ namespace My_File_Project.Services.Interface
         void UpdateFile();
         void UpdateList();
         bool ShouldIncreaseStayPeriod(int days, Booking booking);
-        bool ShouldChangeCheckInTime(int days, Booking booking);
+        bool ShouldChangeCheckInTime(int days, Booking booking, out DatePeriod period);
     }
 }

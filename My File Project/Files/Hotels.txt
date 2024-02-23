@@ -1,0 +1,2 @@
+{"Name":"LOVELY INN","HasRoomService":true,"AdminId":"8fbeb","HotelStatus":2,"Ratings":4,"EarlyCheckOutFee":5000,"Id":"7f190"}
+{"Name":"JUJUTSU HIGH","HasRoomService":true,"AdminId":"8fbeb","HotelStatus":2,"Ratings":3,"EarlyCheckOutFee":1000,"Id":"15623"}

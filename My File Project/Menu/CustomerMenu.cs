@@ -13,6 +13,7 @@ namespace My_File_Project.Menu
         private bool view = true;
         private Random random = new();
         private ConsoleColor[] colours = new ConsoleColor[] { ConsoleColor.Black, ConsoleColor.DarkBlue, ConsoleColor.DarkGreen, ConsoleColor.DarkCyan, ConsoleColor.DarkRed, ConsoleColor.DarkMagenta, ConsoleColor.DarkYellow, ConsoleColor.Blue, ConsoleColor.Green, ConsoleColor.Cyan, ConsoleColor.Red, ConsoleColor.Magenta, ConsoleColor.Yellow };
+        IAdminService _adminService = new AdminService();
         IBookingService _bookingService = new BookingService();
         ICustomerService _customerService = new CustomerService();
         IHotelService _hotelService = new HotelService();
@@ -37,18 +38,19 @@ namespace My_File_Project.Menu
                 Console.WriteLine("\t========== MENU ==========");
                 Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine("1. View Available Hotels");
-                Console.WriteLine("2. Deposit Wallet");
-                Console.WriteLine("3. Book a Room");
-                Console.WriteLine("4. Increase Stay Period");
-                Console.WriteLine("5. Change Check-In time");
-                Console.WriteLine("6. Room Service");
-                Console.WriteLine("7. Check Room details");
-                Console.WriteLine("8. Check Billings");
-                Console.WriteLine("9. Rate Your Experience");
-                Console.WriteLine("10. CheckOut");
-                Console.WriteLine("11. Delete Account");
+                Console.WriteLine("2. Fund Wallet");
+                Console.WriteLine("3. Check Wallet Balance");
+                Console.WriteLine("4. Book a Room");
+                Console.WriteLine("5. Increase Stay Period");
+                Console.WriteLine("6. Change Check-In time");
+                Console.WriteLine("7. Room Service");
+                Console.WriteLine("8. Check Room details");
+                Console.WriteLine("9. Check Billings");
+                Console.WriteLine("10. Rate Your Experience");
+                Console.WriteLine("11. CheckOut");
+                Console.WriteLine("12. Delete Account");
                 Console.WriteLine("0. Logout");
-                int choice = 12;
+                int choice = 13;
                 if (int.TryParse(Console.ReadLine(), out int num))
                 {
                     choice = num;
@@ -61,41 +63,46 @@ namespace My_File_Project.Menu
                         ViewAvailableHotels();
                         break;
                     case 2:
-                        Console.WriteLine("\t========== DEPOSITING WALLET ==========");
-                        DepositWallet();
+                        Console.WriteLine("\t========== FUNDING WALLET ==========");
+                        FundWallet();
                         break;
                     case 3:
+                        Console.WriteLine("\t========== CHECKING WALLET BALANCE ==========");
+                        generalMenu.CheckBalance("CUSTOMER");
+                        Read();
+                        break;
+                    case 4:
                         Console.WriteLine("\t========== BOOKING ROOM ==========");
                         BookARoom();
                         break;
-                    case 4:
+                    case 5:
                         Console.WriteLine("\t========== INCREASING STAY PERIOD ==========");
                         IncreaseStayPeriod();
                         break;
-                    case 5:
+                    case 6:
                         Console.WriteLine("\t========== CHANGING CHECK-IN TIME ==========");
                         ChangeCheckInTime();
                         break;
-                    case 6:
+                    case 7:
                         RoomService();
                         break;
-                    case 7:
+                    case 8:
                         Console.WriteLine("\t========== VIEWING ROOM DETAILS ==========");
                         ViewRoomDetails();
                         break;
-                    case 8:
+                    case 9:
                         Console.WriteLine("\t========== VIEWING BILLS ==========");
                         ViewBillings();
                         break;
-                    case 9:
+                    case 10:
                         Console.WriteLine("\t========== RATING HOTEL ==========");
                         RateHotel();
                         break;
-                    case 10:
+                    case 11:
                         Console.WriteLine("\t========== CHECKING OUT ==========");
                         CheckOut();
                         break;
-                    case 11:
+                    case 12:
                         Console.WriteLine("\t========== DELETING ACCOUNT ==========");
                         DeleteAccount();
                         break;
@@ -135,7 +142,7 @@ namespace My_File_Project.Menu
             }
         }
 
-        private void DepositWallet()
+        private void FundWallet()
         {
             Console.ForegroundColor = ConsoleColor.Gray;
             User? user = _userService.Get(user => user.Email == User.LoggedInUserEmail && user.Role == "CUSTOMER");
@@ -149,7 +156,8 @@ namespace My_File_Project.Menu
             double amount = new();
             generalMenu.EnterChoice(ref amount);
             user!.Wallet += (decimal)amount;
-            Console.WriteLine($"Account has been successfully deposited with N{amount:n}");
+            Console.WriteLine($"You have successfully deposited N{amount:n} into your account!!!");
+            _userService.UpdateFile();
             Read();
         }
 
@@ -210,26 +218,19 @@ namespace My_File_Project.Menu
                 CheckWallet(type.Id, nights, roomService, out double price);
                 if (price == 0)
                 {
-                    Console.WriteLine("Consider increasing wallet balance before bookinh a room");
+                    Console.WriteLine("Consider increasing wallet balance before booking a room");
                     Read();
                     return;
                 }
                 else
                 {
-                    user.Wallet -= (decimal)price;
-                    _userService.UpdateFile();
+                    CreditWallet(hotel.Id, price);
                 }
 
                 Console.WriteLine($"Your room number is {room.Number}");
-                Status status = Status.Inactive;
-                bool paid = false;
-                if (hasRoomService) paid = true;
-                room.RoomStatus = RoomStatus.Booked;
-                if (choice == 'Y')
-                {
-                    room.RoomStatus = RoomStatus.Occupied;
-                    status = Status.Active;
-                }
+                Status status = choice == 'Y' ? Status.Active : Status.Inactive;
+                room.RoomStatus = choice == 'Y' ? RoomStatus.Occupied : RoomStatus.Booked;
+                bool paid = hasRoomService;
                 _bookingService.CreateBooking(hotel.Name!, hotel.Id, type.Name!, type.Id, hasRoomService, roomService, room.Number!, room.Id, status, nights, period, price, paid);
                 Read();
             }
@@ -264,8 +265,6 @@ namespace My_File_Project.Menu
                 price = 0;
                 return;
             }
-            user.Wallet -= (decimal)price;
-            _userService.UpdateFile();
         }
 
         private void HotelSection(out Hotel? hotel)
@@ -319,7 +318,7 @@ namespace My_File_Project.Menu
             nights = new();
             generalMenu.EnterChoice(ref nights);
 
-            period = new(DateTime.Now.AddDays(checkInDate), DateTime.Now.AddDays(checkInDate + nights));
+            period = new(DateTime.Today.AddDays(checkInDate), DateTime.Today.AddDays(checkInDate + nights));
             room = _roomService.BookRoom(period, roomTypeId);
             if (room is null)
             {
@@ -342,7 +341,7 @@ namespace My_File_Project.Menu
             {
                 int service = new();
                 generalMenu.DisplayRoomServices(hotelId);
-                Console.WriteLine("Choose room service to be provided: ");
+                Console.WriteLine("Choose room service to be provided (i.e enter 1,2,3,...): ");
                 generalMenu.EnterChoice(ref service);
 
                 roomService = _roomServicesService.IsExist(service, hotelId);
@@ -380,7 +379,7 @@ namespace My_File_Project.Menu
             bool shouldIncrease = _bookingService.ShouldIncreaseStayPeriod(days, bookings[choice]);
             if (shouldIncrease)
             {
-                user.Wallet -= (decimal)price;
+                CreditWallet(bookings[choice].HotelId!, price);
                 bookings[choice].TotalPriceOfStay += price;
                 bookings[choice].StayPeriod.IncreaseEndTime(days);
                 bookings[choice].Nights += days;
@@ -402,7 +401,7 @@ namespace My_File_Project.Menu
             ChooseBooking(out int choice, out List<Booking> bookings);
             if (choice < 0) return;
 
-            if (bookings[choice].StayPeriod.WithInRange(DateTime.Now))
+            if (bookings[choice].StayPeriod.WithInRange(DateTime.Today))
             {
                 Console.WriteLine("Cannot change check in time!!!");
                 Console.WriteLine("Can only be changed if user hasn't been checked in");
@@ -413,17 +412,19 @@ namespace My_File_Project.Menu
                 int days = new();
                 generalMenu.EnterChoice(ref days);
 
-                bool ShouldChange = _bookingService.ShouldChangeCheckInTime(days, bookings[choice]);
+                bool ShouldChange = _bookingService.ShouldChangeCheckInTime(days, bookings[choice], out DatePeriod period);
                 if (ShouldChange)
                 {
-                    bookings[choice].StayPeriod.ChangeStartTime(days);
-                    bookings[choice].Nights = bookings[choice].StayPeriod.GetDifference().Days;
+                    bookings[choice].StayPeriod = period;
                     _bookingService.UpdateFile();
                     Console.WriteLine($"Successfully changed Checkin time!!!");
                 }
                 else
                 {
-                    Console.WriteLine($"New Checkin time has exceeded cCheckout time!!!");
+                    if (DateTime.Today.AddDays(days) > bookings[choice].StayPeriod.End)
+                        Console.WriteLine($"New Checkin time has exceeded Checkout time!!!");
+                    else
+                        Console.WriteLine($"Room booked is not available on {DateTime.Today.AddDays(days): dddd, dd MMMM,yyyy}");
                     Console.WriteLine("Cannot change checkin time!!!");
                     Console.WriteLine("Update unsuccessfull!!");
                 }
@@ -522,7 +523,7 @@ namespace My_File_Project.Menu
                             Read();
                             return;
                         }
-                        else user.Wallet -= (decimal)price;
+                        else CreditWallet(bookings[choice].HotelId!, price);
                     }
 
                     bookings[choice].IsRoomService = isRoomService;
@@ -533,8 +534,6 @@ namespace My_File_Project.Menu
                     }
                 }
                 _bookingService.UpdateFile();
-                _userService.UpdateFile();
-
                 Read();
             }
         }
@@ -549,13 +548,15 @@ namespace My_File_Project.Menu
             {
                 skip = true;
                 bool isRoomService = false;
-                RoomService? service1 = new();
-                RoomServiceSection(ref service1, ref isRoomService, bookings[choice].HotelId!);
+                RoomService? service = new();
+                RoomServiceSection(ref service, ref isRoomService, bookings[choice].HotelId!);
                 skip = false;
 
                 if (isRoomService)
                 {
-                    bookings[choice].RoomService = service1;
+                    double price = bookings[choice].RoomService!.Price - service!.Price;
+                    CreditWallet(bookings[choice].HotelId!, price);
+                    bookings[choice].RoomService = service;
                     Console.WriteLine("You have successfully changed room service being provided!!!");
                 }
                 else
@@ -585,7 +586,7 @@ namespace My_File_Project.Menu
 
             Console.Write("Room Type: ");
             Console.ForegroundColor = colours[random.Next(0, colours.Length)];
-            Console.WriteLine(bookings[choice].RoomType);
+            Console.WriteLine(bookings[choice].RoomType!.ToPascalCase());
             Console.ForegroundColor = ConsoleColor.Gray;
 
             Console.Write("Room Number: ");
@@ -599,20 +600,20 @@ namespace My_File_Project.Menu
             if (bookings[choice].IsRoomService)
             {
                 Console.ForegroundColor = ConsoleColor.Gray;
-                Console.Write("Name of Room Service: ");
+                Console.Write("Type of Room Service: ");
                 Console.ForegroundColor = colours[random.Next(0, colours.Length)];
-                Console.WriteLine(bookings[choice].RoomService!.Name);
+                Console.WriteLine(bookings[choice].RoomService!.Name!.ToPascalCase());
             }
             Console.ForegroundColor = ConsoleColor.Gray;
 
             Console.Write("Check-in Time: ");
             Console.ForegroundColor = colours[random.Next(0, colours.Length)];
-            Console.WriteLine(bookings[choice].StayPeriod.Start.ToString("dddd, MMMM dd, yyyy hh:mm tt"));
+            Console.WriteLine(bookings[choice].StayPeriod.Start.ToString("dddd, MMMM dd, yyyy"));
             Console.ForegroundColor = ConsoleColor.Gray;
 
             Console.Write("Time to be checked-out: ");
             Console.ForegroundColor = colours[random.Next(0, colours.Length)];
-            Console.WriteLine(bookings[choice].StayPeriod.End.ToString("dddd, MMMM dd, yyyy hh:mm tt"));
+            Console.WriteLine(bookings[choice].StayPeriod.End.ToString("dddd, MMMM dd, yyyy"));
             Console.ForegroundColor = ConsoleColor.Gray;
             Read();
         }
@@ -627,8 +628,14 @@ namespace My_File_Project.Menu
             Console.Write("Price of room per night: ");
             Console.ForegroundColor = colours[random.Next(0, colours.Length)];
             Console.WriteLine($"N{type.Price:n}");
-            Console.ForegroundColor = ConsoleColor.Gray;
 
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write("Total price of room: ");
+            Console.ForegroundColor = colours[random.Next(0, colours.Length)];
+            double priceOfRoom = type.Price * bookings[choice].Nights;
+            Console.WriteLine($"N{priceOfRoom:n}");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            
             if (bookings[choice].IsRoomService)
             {
                 Console.Write("Price of room service: ");
@@ -663,6 +670,11 @@ namespace My_File_Project.Menu
                     Console.WriteLine("Invalid Input!!!");
                     Console.WriteLine("Try again");
                 }
+                if (rating < 1 || rating > 5)
+                {
+                    Console.WriteLine("Invalid Input!!!");
+                    Console.WriteLine("Try again");
+                }
             }
 
             Hotel hotel = _hotelService.Get(hotel => hotel.Id == bookings[choice].HotelId)!;
@@ -687,16 +699,17 @@ namespace My_File_Project.Menu
         private void CheckOut()
         {
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine("Early Check out will incur extra fees");
+            ChooseBooking(out int choice, out List<Booking> bookings);
+            if (choice < 0) return;
+
+            Hotel hotel = _hotelService.Get(hotel => hotel.Id == bookings[choice].HotelId)!;
+            Console.WriteLine($"Early Check out will incur N{hotel.EarlyCheckOutFee:n} extra fees");
             Console.WriteLine("Are you sure you want to continue with this operation (Y/N)");
-            int choice2 = new();
+            char choice2 = new();
             generalMenu.EnterChoice(ref choice2);
 
             if (choice2 == 'Y')
             {
-                ChooseBooking(out int choice, out List<Booking> bookings);
-                if (choice < 0) return;
-
                 if (!bookings[choice].Rate)
                 {
                     RateHotel();
@@ -705,15 +718,18 @@ namespace My_File_Project.Menu
                 CheckWallet(bookings[choice].HotelId!, out double price);
                 if (price == 0)
                 {
-                    Console.WriteLine("Consider increasing wallet balance before opting in for room service!!!");
+                    Console.WriteLine("Consider increasing wallet balance before checking out!!!");
                     Read();
                     return;
                 }
 
+                CreditWallet(bookings[choice].HotelId!, price);
                 _bookingService.Delete(bookings[choice]);
+                _userService.UpdateFile();
                 Console.WriteLine("Successfully Checked-Out");
+                Read();
             }
-            Read();
+
         }
 
         public void CheckOut(Booking booking)
@@ -774,7 +790,7 @@ namespace My_File_Project.Menu
             choice = 1;
             if (bookings.Count == 0)
             {
-                Console.WriteLine("Cannot this option unless user has booked a room!!!");
+                Console.WriteLine("Cannot access this function unless user has booked a room!!!");
                 choice = -1;
                 Read();
                 return;
@@ -799,10 +815,22 @@ namespace My_File_Project.Menu
         private void DisplayRooms(List<Booking> bookings)
         {
             int count = 0;
+            Console.WriteLine("Viewing all Bookings: ");
             foreach (Booking booking in bookings)
             {
                 Console.WriteLine(++count + ". " + booking.ToString());
             }
+        }
+
+        private void CreditWallet(string hotelId, double price)
+        {
+            Hotel hotel = _hotelService.Get(hotel => hotel.Id == hotelId)!;
+            User user = _userService.Get(user => user.Email == User.LoggedInUserEmail && user.Role == "CUSTOMER")!;
+            Admin admin = _adminService.Get(admin => admin.Id == hotel.AdminId)!;
+            User userAdmin = _userService.Get(user => user.Email == admin.UserEmail && user.Role == "ADMIN")!;
+            user.Wallet -= (decimal)price;
+            userAdmin.Wallet += (decimal)price;
+            _userService.UpdateFile();
         }
 
         private void Read()

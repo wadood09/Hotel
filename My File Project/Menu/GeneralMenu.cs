@@ -13,6 +13,7 @@ namespace My_File_Project.Menu
         IRoomService _roomService = new RoomServices();
         IRoomServicesService _roomServicesService = new RoomServicesService();
         IRoomTypeService _roomTypeService = new RoomTypeService();
+        IUserService _userService = new UserService();
 
         public void DisplayRoomTypes(string hotelId)
         {
@@ -39,10 +40,10 @@ namespace My_File_Project.Menu
         {
             Console.WriteLine("Displaying Room Service(s): ");
             int count = 0;
-            var services = _roomServicesService.GetSelected(service => service.HotelId == hotelId).Select(service => service.Name);
+            List<RoomService> services = _roomServicesService.GetSelected(service => service.HotelId == hotelId);
             foreach (var service in services)
             {
-                Console.WriteLine($"{++count}. {service}");
+                Console.WriteLine($"{++count}. {service.Name,-20} N{service.Price:n}");
             }
         }
 
@@ -200,6 +201,13 @@ namespace My_File_Project.Menu
                 else
                     room.RoomStatus = Models.Enums.RoomStatus.Vacant;
             }
+        }
+
+        public void CheckBalance(string role)
+        {
+            Console.ForegroundColor = ConsoleColor.Gray;
+            User user = _userService.Get(user => user.Email == User.LoggedInUserEmail && user.Role == role)!;
+            Console.WriteLine($"Your wallet balance is N{user.Wallet:n}");
         }
     }
 }

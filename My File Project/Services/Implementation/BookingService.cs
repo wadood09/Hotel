@@ -76,15 +76,19 @@ namespace My_File_Project.Services.Implementation
             return true;
         }
 
-        public bool ShouldChangeCheckInTime(int days, Booking booking)
+        public bool ShouldChangeCheckInTime(int days, Booking booking, out DatePeriod period)
         {
-            DateTime checkInDate = DateTime.Now.AddDays(days);
+            DateTime checkInDate = DateTime.Today.AddDays(days);
+            DateTime checkOutDate = checkInDate.AddDays(booking.Nights);
+            period = new(checkInDate, checkOutDate);
+
             if (checkInDate >= booking.StayPeriod.End) return false;
+
             List<Booking> bookings = repository.GetSelected(bookin => bookin.RoomId == booking.RoomId);
             foreach (Booking booking1 in bookings)
             {
-                if (booking1 == booking) continue;
-                if (booking1.StayPeriod.WithInRange(checkInDate))
+                if(booking == booking1) continue;
+                if (booking.StayPeriod.WithInRange(period))
                 {
                     return false;
                 }

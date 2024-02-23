@@ -14,16 +14,27 @@ namespace My_File_Project.Services.Implementation
 
         public Room? BookRoom(DatePeriod period, string roomTypeId)
         {
+            List<DatePeriod> periods = new();
             List<Room> rooms = repository.GetSelected(room => room.RoomTypeId == roomTypeId);
             foreach (Room room in rooms)
             {
                 List<Booking> bookings = bookingRepo.GetSelected(booking => booking.RoomId == room.Id);
+                bool isAvailable = true;
                 foreach (Booking booking in bookings)
                 {
-                    if(!booking.StayPeriod.WithInRange(period))
+                    if (booking.StayPeriod.WithInRange(period))
                     {
-                        return room;
+                        periods.Add(booking.StayPeriod);
+                        // checks if the period os stay of customer overlaps with another customer that booked that room
+                        isAvailable = false;
+                        break;
                     }
+                }
+
+                // If the room is available, return it
+                if (isAvailable)
+                {
+                    return room;
                 }
             }
             return null;
@@ -52,7 +63,7 @@ namespace My_File_Project.Services.Implementation
 
         public bool IsDeleted(Room room)
         {
-            if(room.RoomStatus != RoomStatus.Vacant) return false;
+            if (room.RoomStatus != RoomStatus.Vacant) return false;
             repository.Remove(room);
             return true;
         }
