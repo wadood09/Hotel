@@ -1,2 +1,3 @@
 {"FirstName":"akin","LastName":"ola","Dob":"2000-04-11T00:00:00","Wallet":1786000,"Email":"ak@g.com","Password":"1234","Role":"ADMIN","Id":"1bfc1"}
 {"FirstName":"ade","LastName":"ola","Dob":"2001-12-05T00:00:00","Wallet":814000,"Email":"ad@g.com","Password":"ade","Role":"CUSTOMER","Id":"c1ee7"}
+{"FirstName":"Olaniyi","LastName":"Wadood","Dob":"2000-01-01T00:00:00","Wallet":0,"Email":"wad","Password":"wad","Role":"CUSTOMER","Id":"5ae44"}

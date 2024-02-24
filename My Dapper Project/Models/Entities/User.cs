@@ -1,0 +1,14 @@
+namespace My_Dapper_Project.Models.Entities
+{
+    public class User : Auditables
+    {
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public DateTime Dob { get; set; }
+        public decimal Wallet { get; set; }
+        public string? Email { get; set; }
+        public string? Password { get; set; }
+        public string? Role { get; set; }
+        public static string? LoggedInUserEmail { get; set; }
+    }
+}

@@ -1,6 +1,6 @@
 namespace My_File_Project.Entities
 {
-    public struct DatePeriod
+    public struct DatePeriod : IComparable<DatePeriod>
     {
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
@@ -17,7 +17,7 @@ namespace My_File_Project.Entities
             return IsWithinRange;
         }
 
-        public bool WithInRange(DatePeriod period)
+        public bool Intersects(DatePeriod period)
         {
             bool IsWithinRange = (Start <= period.Start) && (period.Start <= End) || (Start <= period.End) && (period.End <= End);
             return IsWithinRange;
@@ -43,6 +43,13 @@ namespace My_File_Project.Entities
         {
             TimeSpan difference = End - Start;
             return difference;
+        }
+
+        public int CompareTo(DatePeriod other)
+        {
+            if(Start > other.Start) return -1;
+            else if(other.Start > Start) return 1;
+            else return 0;
         }
     }
 }

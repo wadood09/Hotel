@@ -112,18 +112,8 @@ namespace My_File_Project.Menu
             generalMenu.EnterChoice(ref lastName);
 
             Console.Write("Enter your date of birth (yyyy/mm/dd): ");
-            DateTime dob = DateTime.Parse("01/01/1800");
-            while (dob == DateTime.Parse("01/01/1800"))
-            {
-                if (DateTime.TryParse(Console.ReadLine(), out DateTime choice))
-                {
-                    dob = choice;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid Format for Date of Birth!!!\nTry again: ");
-                }
-            }
+            DateTime dob = DateTime.Parse("1800/01/01");
+            generalMenu.EnterChoice(ref dob);
 
             Console.Write("Enter your email: ");
             string? email = null;

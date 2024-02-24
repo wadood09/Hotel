@@ -26,10 +26,11 @@ namespace My_File_Project.Menu
             }
         }
 
-        public void DisplayRoomNumbers(string roomTypeId)
+        public void DisplayRooms(string roomTypeId)
         {
-            Console.WriteLine("Displaying Room number(s): ");
+            Console.WriteLine("Displaying Room (s): ");
             List<Room> rooms = _roomService.GetSelected(room => room.RoomTypeId == roomTypeId);
+            Console.WriteLine("ROOM NUMBERs".PadRight(10) + "STATUS");
             foreach (Room room in rooms)
             {
                 Console.WriteLine(room.Number!.PadRight(10) + $" Status: {room.RoomStatus}");
@@ -95,7 +96,7 @@ namespace My_File_Project.Menu
                     Console.WriteLine("Invalid Input!!!");
                     Console.WriteLine("Try again");
                 }
-                if(!"YN".Contains(choice))
+                if (!"YN".Contains(choice))
                 {
                     Console.WriteLine("Invalid Input!!!");
                     Console.WriteLine("Try again");
@@ -115,6 +116,25 @@ namespace My_File_Project.Menu
                     choice = Console.ReadLine();
                 }
 
+            }
+        }
+
+        public void EnterChoice(ref DateTime choice)
+        {
+            while (choice.Year < 1930 || choice.Year > DateTime.Today.Year)
+            {
+                if (DateTime.TryParse(Console.ReadLine(), out DateTime date))
+                {
+                    choice = date;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Format for Date of Birth!!!\nTry again: ");
+                }
+                if (choice.Year < 1930 || choice.Year > DateTime.Today.Year)
+                {
+                    Console.WriteLine("Invalid Date of Birth!!!\nTry Again");
+                }
             }
         }
 

@@ -35,11 +35,12 @@ namespace My_File_Project.Menu
                 Console.WriteLine("1. Register Hotel");
                 Console.WriteLine("2. Check Wallet Balance");
                 Console.WriteLine("3. View Hotel Details");
-                Console.WriteLine("4. Update Hotel Details");
-                Console.WriteLine("5. Remove Hotel");
-                Console.WriteLine("6. Delete Account");
+                Console.WriteLine("4. View Room Details");
+                Console.WriteLine("5. Update Hotel Details");
+                Console.WriteLine("6. Remove Hotel");
+                Console.WriteLine("7. Delete Account");
                 Console.WriteLine("0. Logout");
-                int choice = 7;
+                int choice = 8;
                 if (int.TryParse(Console.ReadLine(), out int num))
                 {
                     choice = num;
@@ -61,13 +62,17 @@ namespace My_File_Project.Menu
                         ViewHotelDetails();
                         break;
                     case 4:
-                        UpdateHotelDetails();
+                        Console.WriteLine("\t========== VIEWING ROOM DETAILS ==========");
+                        ViewRoomDetails();
                         break;
                     case 5:
+                        UpdateHotelDetails();
+                        break;
+                    case 6:
                         Console.WriteLine("\t========== REMOVING HOTEL ==========");
                         RemoveHotel();
                         break;
-                    case 6:
+                    case 7:
                         Console.WriteLine("\t========== DELETING ACCOUNT ==========");
                         DeleteAccount();
                         break;
@@ -312,16 +317,9 @@ namespace My_File_Project.Menu
         private void ViewHotelDetails()
         {
             Console.ForegroundColor = ConsoleColor.Gray;
-            List<Hotel> hotel = _hotelService.GetSelected(hotel => hotel.AdminId == Admin.LoggedInAdminId);
-            if (hotel.Count == 0)
-            {
-                Console.WriteLine("Cannot view hotel details until hotel has been registered by user!!!");
-                Read();
-                return;
-            }
-            int choice = 1;
-            ChooseHotel(hotel, ref choice);
+            ChooseHotel(out List<Hotel> hotel, out int choice);
             if (choice < 0) return;
+
             HotelDetails(hotel[choice]);
             Read();
         }
@@ -355,9 +353,55 @@ namespace My_File_Project.Menu
             }
         }
 
-        private void ChooseHotel(List<Hotel> hotel, ref int choice)
+        private void ViewRoomDetails()
         {
-            if (hotel.Count > 1)
+            Console.ForegroundColor = ConsoleColor.Gray;
+            ChooseHotel(out List<Hotel> hotel, out int choice);
+            if (choice < 0) return;
+
+            RoomDetails(hotel[choice]);
+            Read();
+        }
+
+        private void RoomDetails(Hotel hotel)
+        {
+            generalMenu.DisplayRoomTypes(hotel.Id);
+            Console.WriteLine("Choose which room type to view rooms' details (i.e enter 1,2,3,...): ");
+
+            int choice = new();
+            generalMenu.EnterChoice(ref choice);
+
+            RoomType? type = _roomTypeService.IsExist(choice, hotel.Id);
+            if (type is not null)
+            {
+                generalMenu.DisplayRooms(type.Id);
+            }
+            else
+            {
+                Console.WriteLine($"Room type chosen does not exist!!!");
+            }
+        }
+
+        private void ChooseHotel(out List<Hotel> hotel, out int choice)
+        {
+            hotel = _hotelService.GetSelected(hotel => hotel.AdminId == Admin.LoggedInAdminId);
+            User? user = _userService.Get(user => user.Email == User.LoggedInUserEmail && user.Role == "ADMIN");
+            if (user is null)
+            {
+                Console.WriteLine("User must be registered in order to Increase stay period!!!");
+                choice = -1;
+                Read();
+                return;
+            }
+            choice = 1;
+            if (hotel.Count == 0)
+            {
+                Console.WriteLine("Cannot view hotel details until hotel has been registered by user!!!");
+                choice = -1;
+                Read();
+                return;
+            }
+            else if (hotel.Count > 1)
             {
                 DisplayHotels(Admin.LoggedInAdminId!);
                 Console.WriteLine("Choose one of the hotels displayed above (i.e enter 1,2,3,...): ");
@@ -436,10 +480,7 @@ namespace My_File_Project.Menu
         private void UpdateHotelName()
         {
             Console.ForegroundColor = ConsoleColor.Gray;
-            List<Hotel> hotel = _hotelService.GetSelected(hotel => hotel.AdminId == Admin.LoggedInAdminId);
-            int choice = 1;
-
-            ChooseHotel(hotel, ref choice);
+            ChooseHotel(out List<Hotel> hotel, out int choice);
             if (choice < 0) return;
 
             HotelName(ref hotel, choice);
@@ -543,10 +584,7 @@ namespace My_File_Project.Menu
         private void AddRoomType()
         {
             Console.ForegroundColor = ConsoleColor.Gray;
-            List<Hotel> hotel = _hotelService.GetSelected(hotel => hotel.AdminId == Admin.LoggedInAdminId);
-            int choice = 1;
-
-            ChooseHotel(hotel, ref choice);
+            ChooseHotel(out List<Hotel> hotel, out int choice);
             if (choice < 0) return;
 
             AddRoomType(hotel[choice]);
@@ -655,10 +693,7 @@ namespace My_File_Project.Menu
         private void RemoveRoomType()
         {
             Console.ForegroundColor = ConsoleColor.Gray;
-            List<Hotel> hotel = _hotelService.GetSelected(hotel => hotel.AdminId == Admin.LoggedInAdminId);
-            int choice = 1;
-
-            ChooseHotel(hotel, ref choice);
+            ChooseHotel(out List<Hotel> hotel, out int choice);
             if (choice < 0) return;
 
             generalMenu.CheckRoomTypeStatus(hotel[choice].Id);
@@ -699,10 +734,9 @@ namespace My_File_Project.Menu
         private void ChangePriceOfRoomType()
         {
             Console.ForegroundColor = ConsoleColor.Gray;
-            List<Hotel> hotel = _hotelService.GetSelected(hotel => hotel.AdminId == Admin.LoggedInAdminId);
-            int choice = 1;
-            ChooseHotel(hotel, ref choice);
+            ChooseHotel(out List<Hotel> hotel, out int choice);
             if (choice < 0) return;
+
             ChangePriceOfRoomType(hotel[choice]);
             Read();
         }
@@ -736,10 +770,7 @@ namespace My_File_Project.Menu
         private void ChangeAmountOfRoomType()
         {
             Console.ForegroundColor = ConsoleColor.Gray;
-            List<Hotel> hotel = _hotelService.GetSelected(hotel => hotel.AdminId == Admin.LoggedInAdminId);
-            int choice = 1;
-
-            ChooseHotel(hotel, ref choice);
+            ChooseHotel(out List<Hotel> hotel, out int choice);
             if (choice < 0) return;
 
             ChangeAmountOfRoomType(hotel[choice]);
@@ -783,7 +814,7 @@ namespace My_File_Project.Menu
                         return;
                     }
                     Console.WriteLine($"Rooms to be removed: {times}");
-                    generalMenu.DisplayRoomNumbers(type.Id);
+                    generalMenu.DisplayRooms(type.Id);
                     Console.WriteLine("Enter room number of rooms to be removed");
                     RemoveRoom(times, type.Id);
                 }
@@ -855,10 +886,7 @@ namespace My_File_Project.Menu
         private void AddRoom()
         {
             Console.ForegroundColor = ConsoleColor.Gray;
-            List<Hotel> hotel = _hotelService.GetSelected(hotel => hotel.AdminId == Admin.LoggedInAdminId);
-            int choice = 1;
-
-            ChooseHotel(hotel, ref choice);
+            ChooseHotel(out List<Hotel> hotel, out int choice);
             if (choice < 0) return;
 
             AddRoom(hotel[choice]);
@@ -889,10 +917,7 @@ namespace My_File_Project.Menu
         private void RemoveRoom()
         {
             Console.ForegroundColor = ConsoleColor.Gray;
-            List<Hotel> hotel = _hotelService.GetSelected(hotel => hotel.AdminId == Admin.LoggedInAdminId);
-            int choice = 1;
-
-            ChooseHotel(hotel, ref choice);
+            ChooseHotel(out List<Hotel> hotel, out int choice);
             if (choice < 0) return;
 
             RemoveRoom(hotel[choice]);
@@ -917,7 +942,7 @@ namespace My_File_Project.Menu
                     return;
                 }
 
-                generalMenu.DisplayRoomNumbers(type.Id);
+                generalMenu.DisplayRooms(type.Id);
                 Console.Write("Enter room number of room to be removed: ");
                 RemoveRoom(1, type.Id);
             }
@@ -930,10 +955,7 @@ namespace My_File_Project.Menu
         private void ChangeRoomNumber()
         {
             Console.ForegroundColor = ConsoleColor.Gray;
-            List<Hotel> hotel = _hotelService.GetSelected(hotel => hotel.AdminId == Admin.LoggedInAdminId);
-            int choice = 1;
-
-            ChooseHotel(hotel, ref choice);
+            ChooseHotel(out List<Hotel> hotel, out int choice);
             if (choice < 0) return;
 
             ChangeRoomNumber(hotel[choice]);
@@ -959,7 +981,7 @@ namespace My_File_Project.Menu
                     return;
                 }
 
-                generalMenu.DisplayRoomNumbers(type.Id);
+                generalMenu.DisplayRooms(type.Id);
                 Console.Write("Enter room number of room to be changed: ");
                 ChangeRoomNumber(type.Id);
             }
@@ -1050,10 +1072,7 @@ namespace My_File_Project.Menu
         private void AddRoomService()
         {
             Console.ForegroundColor = ConsoleColor.Gray;
-            List<Hotel> hotel = _hotelService.GetSelected(hotel => hotel.AdminId == Admin.LoggedInAdminId);
-            int choice = 1;
-
-            ChooseHotel(hotel, ref choice);
+            ChooseHotel(out List<Hotel> hotel, out int choice);
             if (choice < 0) return;
 
             AddRoomService(ref hotel, choice);
@@ -1093,10 +1112,7 @@ namespace My_File_Project.Menu
         private void RemoveRoomService()
         {
             Console.ForegroundColor = ConsoleColor.Gray;
-            List<Hotel> hotel = _hotelService.GetSelected(hotel => hotel.AdminId == Admin.LoggedInAdminId);
-            int choice = 1;
-
-            ChooseHotel(hotel, ref choice);
+            ChooseHotel(out List<Hotel> hotel, out int choice);
             if (choice < 0) return;
 
             generalMenu.CheckHotelStatus();
@@ -1143,10 +1159,7 @@ namespace My_File_Project.Menu
         private void ChangePriceOfRoomService()
         {
             Console.ForegroundColor = ConsoleColor.Gray;
-            List<Hotel> hotel = _hotelService.GetSelected(hotel => hotel.AdminId == Admin.LoggedInAdminId);
-            int choice = 1;
-
-            ChooseHotel(hotel, ref choice);
+            ChooseHotel(out List<Hotel> hotel, out int choice);
             if (choice < 0) return;
 
             ChangePriceOfRoomService(hotel[choice]);
@@ -1190,10 +1203,7 @@ namespace My_File_Project.Menu
         private void ChangeCheckOutFees()
         {
             Console.ForegroundColor = ConsoleColor.Gray;
-            List<Hotel> hotel = _hotelService.GetSelected(hotel => hotel.AdminId == Admin.LoggedInAdminId);
-            int choice = 1;
-
-            ChooseHotel(hotel, ref choice);
+            ChooseHotel(out List<Hotel> hotel, out int choice);
             if (choice < 0) return;
 
             Console.Write("Enter new Check out fees: ");
@@ -1222,10 +1232,7 @@ namespace My_File_Project.Menu
                 return;
             }
 
-            List<Hotel> hotel = _hotelService.GetSelected(hotel => hotel.AdminId == Admin.LoggedInAdminId);
-            int choice2 = 1;
-
-            ChooseHotel(hotel, ref choice2);
+            ChooseHotel(out List<Hotel> hotel, out int choice2);
             if (choice2 < 0) return;
 
             else

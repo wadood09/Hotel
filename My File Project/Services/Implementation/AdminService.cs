@@ -37,8 +37,9 @@ namespace My_File_Project.Services.Implementation
         public bool IsDeleted(Admin admin)
         {
             List<Hotel> hotels = hotelService.GetSelected(hotel => hotel.AdminId == admin.Id);
-            bool isActive = hotels.Where(hotel => hotel.HotelStatus == Status.Active).Any();
+            bool isActive = hotels.Any(hotel => hotel.HotelStatus == Status.Active);
             if(isActive) return false;
+            
             foreach (Hotel hotel in hotels)
             {
                 bool isDeleted = hotelService.IsDeleted(hotel);
