@@ -7,8 +7,8 @@ namespace My_Dapper_Project.Models.Entities
 {
     public class RoomService : Auditables
     {
-        public string? HotelId {get; set;}
-        public string? Name {get; set;}
+        public string HotelId {get; set;} = default!;
+        public string Name {get; set;} = default!;
         public double Price {get; set;}
     }
 }

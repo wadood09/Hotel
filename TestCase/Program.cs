@@ -80,17 +80,19 @@ static void Reverse(string str)
     string s = str.Reverse().ToString();
     Console.WriteLine(s);
 }
-string[] digits = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
+// string[] digits = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
 
-var reversedIDigits = (
-    from digit in digits
-    where digit[1] == 'i'
-    select digit)
-    .Reverse();
+// var reversedIDigits = (
+//     from digit in digits
+//     where digit[1] == 'i'
+//     select digit)
+//     .Reverse();
 
-Console.WriteLine("A backwards list of the digits with a second character of 'i':");
-foreach (var d in reversedIDigits)
-{
-    Console.WriteLine(d);
-}
+// Console.WriteLine("A backwards list of the digits with a second character of 'i':");
+// foreach (var d in reversedIDigits)
+// {
+//     Console.WriteLine(d);
+// }
 
+ UnauthorizedAccessException exception = new();
+Console.WriteLine(exception.Message);

@@ -148,13 +148,14 @@ namespace My_File_Project.Menu
             User? user = _userService.Get(user => user.Email == User.LoggedInUserEmail && user.Role == "CUSTOMER");
             if (user is null)
             {
-                Console.WriteLine("User must be registered in order to deposit wallet!!!");
+                Console.WriteLine("User must be registered in order to fund wallet!!!");
                 Read();
                 return;
             }
             Console.Write("Enter amount to be deposited: ");
             double amount = new();
             generalMenu.EnterChoice(ref amount);
+            
             user!.Wallet += (decimal)amount;
             Console.WriteLine($"You have successfully deposited N{amount:n} into your account!!!");
             _userService.UpdateFile();

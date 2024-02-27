@@ -27,7 +27,7 @@ namespace My_File_Project.Models.Entities
         {
             StringBuilder service = new();
             service.Append($"HasRoomService: {IsRoomService,-15}");
-            if (IsRoomService)
+            if (IsRoomService)  
             {
                 service.Append($" Type: {RoomService!.Name!.ToPascalCase()}");
             }

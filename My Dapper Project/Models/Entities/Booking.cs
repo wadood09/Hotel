@@ -12,13 +12,12 @@ namespace My_Dapper_Project.Models.Entities
         public string RoomType { get; set; } = default!;
         public int RoomTypeId { get; set; }
         public bool IsRoomService { get; set; }
-        public int RoomServiceId { get; set; }
+        public RoomService? RoomService { get; set; }
         public string RoomNumber { get; set; } = default!;
         public string RoomId { get; set; } = default!;
         public string CustomerID { get; set; } = default!;
         public Status CustomerStatus { get; set; }
         public int Nights { get; set; }
-        public DatePeriod StayPeriod { get; set; }
         public DateOnly CheckInDate { get; set; }
         public DateOnly CheckOutDate { get; set; }
         public double TotalPriceOfStay { get; set; }

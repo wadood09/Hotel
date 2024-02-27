@@ -334,7 +334,7 @@ namespace My_File_Project.Menu
             Console.WriteLine($"\t{hotel.Name}");
 
             Console.ForegroundColor = colours[random.Next(0, colours.Length)];
-            Console.WriteLine("ROOM TYPES".PadRight(20) + "AMOUNT OF ROOM".PadRight(30) + "PRICES OF ROOMS");
+            Console.WriteLine("ROOM TYPES".PadRight(20) + "AMOUNT OF ROOM".PadRight(20) + "PRICES OF ROOMS");
             Console.ForegroundColor = ConsoleColor.Gray;
             for (int i = 0; i < roomTypes.Count; i++)
             {
@@ -388,7 +388,7 @@ namespace My_File_Project.Menu
             User? user = _userService.Get(user => user.Email == User.LoggedInUserEmail && user.Role == "ADMIN");
             if (user is null)
             {
-                Console.WriteLine("User must be registered in order to Increase stay period!!!");
+                Console.WriteLine("User must be registered in order to access this function!!!");
                 choice = -1;
                 Read();
                 return;

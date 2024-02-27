@@ -4,7 +4,7 @@ using Microsoft.Data.SqlClient;
 using My_Dapper_Project.Models.Entities;
 using My_Dapper_Project.Repositories.Interface;
 
-namespace My_File_Project.Repositories.Implementation
+namespace My_Dapper_Project.Repositories.Implementation
 {
     public class CustomerRepository : IRepository<Customer>
     {
@@ -45,7 +45,7 @@ namespace My_File_Project.Repositories.Implementation
         {
             using (IDbConnection dbConnection = new SqlConnection(_connectionString))
             {
-                string query = "Update Customers set UserEmail = @UserEmail";
+                string query = "Update Customers set UserEmail = @UserEmail where Id = @Id";
                 dbConnection.Execute(query, customer);
             }
         }

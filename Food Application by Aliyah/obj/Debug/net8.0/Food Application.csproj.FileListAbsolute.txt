@@ -1,0 +1,29 @@
+C:\Users\AIRIS TECHNOVATION\Desktop\Food Application\bin\Debug\net8.0\Food Application.exe
+C:\Users\AIRIS TECHNOVATION\Desktop\Food Application\bin\Debug\net8.0\Food Application.deps.json
+C:\Users\AIRIS TECHNOVATION\Desktop\Food Application\bin\Debug\net8.0\Food Application.runtimeconfig.json
+C:\Users\AIRIS TECHNOVATION\Desktop\Food Application\bin\Debug\net8.0\Food Application.dll
+C:\Users\AIRIS TECHNOVATION\Desktop\Food Application\bin\Debug\net8.0\Food Application.pdb
+C:\Users\AIRIS TECHNOVATION\Desktop\Food Application\obj\Debug\net8.0\Food Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\AIRIS TECHNOVATION\Desktop\Food Application\obj\Debug\net8.0\Food Application.AssemblyInfoInputs.cache
+C:\Users\AIRIS TECHNOVATION\Desktop\Food Application\obj\Debug\net8.0\Food Application.AssemblyInfo.cs
+C:\Users\AIRIS TECHNOVATION\Desktop\Food Application\obj\Debug\net8.0\Food Application.csproj.CoreCompileInputs.cache
+C:\Users\AIRIS TECHNOVATION\Desktop\Food Application\obj\Debug\net8.0\Food Application.dll
+C:\Users\AIRIS TECHNOVATION\Desktop\Food Application\obj\Debug\net8.0\refint\Food Application.dll
+C:\Users\AIRIS TECHNOVATION\Desktop\Food Application\obj\Debug\net8.0\Food Application.pdb
+C:\Users\AIRIS TECHNOVATION\Desktop\Food Application\obj\Debug\net8.0\Food Application.genruntimeconfig.cache
+C:\Users\AIRIS TECHNOVATION\Desktop\Food Application\obj\Debug\net8.0\ref\Food Application.dll
+C:\Users\AIRIS TECHNOVATION\OneDrive\CodeLearnersHub\Csharp-Journey\ConsoleAPP\Food Application by Aliyah\bin\Debug\net8.0\Food Application.exe
+C:\Users\AIRIS TECHNOVATION\OneDrive\CodeLearnersHub\Csharp-Journey\ConsoleAPP\Food Application by Aliyah\bin\Debug\net8.0\Food Application.deps.json
+C:\Users\AIRIS TECHNOVATION\OneDrive\CodeLearnersHub\Csharp-Journey\ConsoleAPP\Food Application by Aliyah\bin\Debug\net8.0\Food Application.runtimeconfig.json
+C:\Users\AIRIS TECHNOVATION\OneDrive\CodeLearnersHub\Csharp-Journey\ConsoleAPP\Food Application by Aliyah\bin\Debug\net8.0\Food Application.dll
+C:\Users\AIRIS TECHNOVATION\OneDrive\CodeLearnersHub\Csharp-Journey\ConsoleAPP\Food Application by Aliyah\bin\Debug\net8.0\Food Application.pdb
+C:\Users\AIRIS TECHNOVATION\OneDrive\CodeLearnersHub\Csharp-Journey\ConsoleAPP\Food Application by Aliyah\obj\Debug\net8.0\Food Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\AIRIS TECHNOVATION\OneDrive\CodeLearnersHub\Csharp-Journey\ConsoleAPP\Food Application by Aliyah\obj\Debug\net8.0\Food Application.AssemblyInfoInputs.cache
+C:\Users\AIRIS TECHNOVATION\OneDrive\CodeLearnersHub\Csharp-Journey\ConsoleAPP\Food Application by Aliyah\obj\Debug\net8.0\Food Application.AssemblyInfo.cs
+C:\Users\AIRIS TECHNOVATION\OneDrive\CodeLearnersHub\Csharp-Journey\ConsoleAPP\Food Application by Aliyah\obj\Debug\net8.0\Food Application.csproj.CoreCompileInputs.cache
+C:\Users\AIRIS TECHNOVATION\OneDrive\CodeLearnersHub\Csharp-Journey\ConsoleAPP\Food Application by Aliyah\obj\Debug\net8.0\Food Application.sourcelink.json
+C:\Users\AIRIS TECHNOVATION\OneDrive\CodeLearnersHub\Csharp-Journey\ConsoleAPP\Food Application by Aliyah\obj\Debug\net8.0\Food Application.dll
+C:\Users\AIRIS TECHNOVATION\OneDrive\CodeLearnersHub\Csharp-Journey\ConsoleAPP\Food Application by Aliyah\obj\Debug\net8.0\refint\Food Application.dll
+C:\Users\AIRIS TECHNOVATION\OneDrive\CodeLearnersHub\Csharp-Journey\ConsoleAPP\Food Application by Aliyah\obj\Debug\net8.0\Food Application.pdb
+C:\Users\AIRIS TECHNOVATION\OneDrive\CodeLearnersHub\Csharp-Journey\ConsoleAPP\Food Application by Aliyah\obj\Debug\net8.0\Food Application.genruntimeconfig.cache
+C:\Users\AIRIS TECHNOVATION\OneDrive\CodeLearnersHub\Csharp-Journey\ConsoleAPP\Food Application by Aliyah\obj\Debug\net8.0\ref\Food Application.dll

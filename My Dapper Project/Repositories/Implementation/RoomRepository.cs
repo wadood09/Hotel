@@ -4,7 +4,7 @@ using Microsoft.Data.SqlClient;
 using My_Dapper_Project.Models.Entities;
 using My_Dapper_Project.Repositories.Interface;
 
-namespace My_File_Project.Repositories.Implementation
+namespace My_Dapper_Project.Repositories.Implementation
 {
     public class RoomRepository : IRepository<Room>
     {
@@ -39,6 +39,20 @@ namespace My_File_Project.Repositories.Implementation
             using (IDbConnection dbConnection = new SqlConnection(_connectionString))
             {
                 string query = "Delete from Rooms where Id = @Id";
+                dbConnection.Execute(query, room);
+            }
+        }
+
+        public void Update(Room room)
+        {
+            using (IDbConnection dbConnection = new SqlConnection(_connectionString))
+            {
+                string query = @"Update Rooms
+                Set HotelId = @HotelId,
+                RoomTypeId = @RoomTypeId,
+                Number = @Number,
+                RoomStatus = @RoomStatus,
+                where Id = @Id";
                 dbConnection.Execute(query, room);
             }
         }

@@ -1,0 +1,59 @@
+C:\Users\User\Desktop\Desktop\Food Application Project\bin\Debug\net6.0\Food Application Project.exe
+C:\Users\User\Desktop\Desktop\Food Application Project\bin\Debug\net6.0\Food Application Project.deps.json
+C:\Users\User\Desktop\Desktop\Food Application Project\bin\Debug\net6.0\Food Application Project.runtimeconfig.json
+C:\Users\User\Desktop\Desktop\Food Application Project\bin\Debug\net6.0\Food Application Project.dll
+C:\Users\User\Desktop\Desktop\Food Application Project\bin\Debug\net6.0\Food Application Project.pdb
+C:\Users\User\Desktop\Desktop\Food Application Project\obj\Debug\net6.0\Food Application Project.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\Desktop\Food Application Project\obj\Debug\net6.0\Food Application Project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Desktop\Desktop\Food Application Project\obj\Debug\net6.0\Food Application Project.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\Desktop\Food Application Project\obj\Debug\net6.0\Food Application Project.AssemblyInfo.cs
+C:\Users\User\Desktop\Desktop\Food Application Project\obj\Debug\net6.0\Food Application Project.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\Desktop\Food Application Project\obj\Debug\net6.0\Food Application Project.dll
+C:\Users\User\Desktop\Desktop\Food Application Project\obj\Debug\net6.0\refint\Food Application Project.dll
+C:\Users\User\Desktop\Desktop\Food Application Project\obj\Debug\net6.0\Food Application Project.pdb
+C:\Users\User\Desktop\Desktop\Food Application Project\obj\Debug\net6.0\Food Application Project.genruntimeconfig.cache
+C:\Users\User\Desktop\Desktop\Food Application Project\obj\Debug\net6.0\ref\Food Application Project.dll
+C:\Users\User\Desktop\Desktop\Food Application\bin\Debug\net6.0\Food Application Project.exe
+C:\Users\User\Desktop\Desktop\Food Application\bin\Debug\net6.0\Food Application Project.deps.json
+C:\Users\User\Desktop\Desktop\Food Application\bin\Debug\net6.0\Food Application Project.runtimeconfig.json
+C:\Users\User\Desktop\Desktop\Food Application\bin\Debug\net6.0\Food Application Project.dll
+C:\Users\User\Desktop\Desktop\Food Application\bin\Debug\net6.0\Food Application Project.pdb
+C:\Users\User\Desktop\Desktop\Food Application\obj\Debug\net6.0\Food Application Project.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\Desktop\Food Application\obj\Debug\net6.0\Food Application Project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Desktop\Desktop\Food Application\obj\Debug\net6.0\Food Application Project.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\Desktop\Food Application\obj\Debug\net6.0\Food Application Project.AssemblyInfo.cs
+C:\Users\User\Desktop\Desktop\Food Application\obj\Debug\net6.0\Food Application Project.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\Desktop\Food Application\obj\Debug\net6.0\Food Application Project.dll
+C:\Users\User\Desktop\Desktop\Food Application\obj\Debug\net6.0\refint\Food Application Project.dll
+C:\Users\User\Desktop\Desktop\Food Application\obj\Debug\net6.0\Food Application Project.pdb
+C:\Users\User\Desktop\Desktop\Food Application\obj\Debug\net6.0\Food Application Project.genruntimeconfig.cache
+C:\Users\User\Desktop\Desktop\Food Application\obj\Debug\net6.0\ref\Food Application Project.dll
+C:\Users\User\Desktop\Food Application\obj\Debug\net6.0\Food Application Project.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\Food Application\obj\Debug\net6.0\Food Application Project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Desktop\Food Application\obj\Debug\net6.0\Food Application Project.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\Food Application\obj\Debug\net6.0\Food Application Project.AssemblyInfo.cs
+C:\Users\User\Desktop\Food Application\obj\Debug\net6.0\Food Application Project.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\Food Application\obj\Debug\net6.0\Food Application Project.dll
+C:\Users\User\Desktop\Food Application\obj\Debug\net6.0\refint\Food Application Project.dll
+C:\Users\User\Desktop\Food Application\obj\Debug\net6.0\Food Application Project.pdb
+C:\Users\User\Desktop\Food Application\bin\Debug\net6.0\Food Application Project.exe
+C:\Users\User\Desktop\Food Application\bin\Debug\net6.0\Food Application Project.deps.json
+C:\Users\User\Desktop\Food Application\bin\Debug\net6.0\Food Application Project.runtimeconfig.json
+C:\Users\User\Desktop\Food Application\bin\Debug\net6.0\Food Application Project.dll
+C:\Users\User\Desktop\Food Application\bin\Debug\net6.0\Food Application Project.pdb
+C:\Users\User\Desktop\Food Application\obj\Debug\net6.0\Food Application Project.genruntimeconfig.cache
+C:\Users\User\Desktop\Food Application\obj\Debug\net6.0\ref\Food Application Project.dll
+C:\Users\AIRIS TECHNOVATION\Desktop\Food Application\obj\Debug\net6.0\Food Application Project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\AIRIS TECHNOVATION\Desktop\Food Application\obj\Debug\net6.0\Food Application Project.AssemblyInfoInputs.cache
+C:\Users\AIRIS TECHNOVATION\Desktop\Food Application\obj\Debug\net6.0\Food Application Project.AssemblyInfo.cs
+C:\Users\AIRIS TECHNOVATION\Desktop\Food Application\obj\Debug\net6.0\Food Application Project.csproj.CoreCompileInputs.cache
+C:\Users\AIRIS TECHNOVATION\Desktop\Food Application\obj\Debug\net6.0\Food Application Project.dll
+C:\Users\AIRIS TECHNOVATION\Desktop\Food Application\obj\Debug\net6.0\refint\Food Application Project.dll
+C:\Users\AIRIS TECHNOVATION\Desktop\Food Application\obj\Debug\net6.0\Food Application Project.pdb
+C:\Users\AIRIS TECHNOVATION\Desktop\Food Application\bin\Debug\net6.0\Food Application Project.exe
+C:\Users\AIRIS TECHNOVATION\Desktop\Food Application\bin\Debug\net6.0\Food Application Project.deps.json
+C:\Users\AIRIS TECHNOVATION\Desktop\Food Application\bin\Debug\net6.0\Food Application Project.runtimeconfig.json
+C:\Users\AIRIS TECHNOVATION\Desktop\Food Application\bin\Debug\net6.0\Food Application Project.dll
+C:\Users\AIRIS TECHNOVATION\Desktop\Food Application\bin\Debug\net6.0\Food Application Project.pdb
+C:\Users\AIRIS TECHNOVATION\Desktop\Food Application\obj\Debug\net6.0\Food Application Project.genruntimeconfig.cache
+C:\Users\AIRIS TECHNOVATION\Desktop\Food Application\obj\Debug\net6.0\ref\Food Application Project.dll

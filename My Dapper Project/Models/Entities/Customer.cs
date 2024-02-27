@@ -7,7 +7,7 @@ namespace My_Dapper_Project.Models.Entities
 {
     public class Customer : Auditables
     {
-        public string? UserEmail { get; set; }
-        public static string? LoggedInCustomerId { get; set; }
+        public string UserEmail { get; set; } = default!;
+        public static string LoggedInCustomerId { get; set; } = default!;
     }
 }

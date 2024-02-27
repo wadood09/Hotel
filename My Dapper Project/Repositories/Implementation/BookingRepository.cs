@@ -4,7 +4,7 @@ using Microsoft.Data.SqlClient;
 using My_Dapper_Project.Models.Entities;
 using My_Dapper_Project.Repositories.Interface;
 
-namespace My_File_Project.Repositories.Implementation
+namespace My_Dapper_Project.Repositories.Implementation
 {
     public class BookingRepository : IRepository<Booking>
     {
@@ -18,8 +18,8 @@ namespace My_File_Project.Repositories.Implementation
             using (IDbConnection dbConnection = new SqlConnection(_connectionString))
             {
                 string query = @"Insert into Bookings 
-                (Hotel, HotelId, RoomType, RoomTypeId, IsRoomService, RoomServiceId, RoomNumber, RoomId, CustomerId, CustomerStatus, Nights, StayPeriod, CheckInDate, CheckOutDate, TotalPriceOfStay, Rate, PaidService) 
-                values(@Hotel, @HotelId, @RoomType, @RoomTypeId, @IsRoomService, @RoomServiceId, @RoomNumber, @RoomId, @CustomerId, @CustomerStatus, @Nights, @StayPeriod, @CheckInDate, @CheckOutDate, @TotalPriceOfStay, @Rate, @PaidService)";
+                (Hotel, HotelId, RoomType, RoomTypeId, IsRoomService, RoomService, RoomNumber, RoomId, CustomerId, CustomerStatus, Nights, StayPeriod, CheckInDate, CheckOutDate, TotalPriceOfStay, Rate, PaidService) 
+                values(@Hotel, @HotelId, @RoomType, @RoomTypeId, @IsRoomService, @RoomService, @RoomNumber, @RoomId, @CustomerId, @CustomerStatus, @Nights, @StayPeriod, @CheckInDate, @CheckOutDate, @TotalPriceOfStay, @Rate, @PaidService)";
                 dbConnection.Execute(query, booking);
             }
         }
@@ -53,18 +53,18 @@ namespace My_File_Project.Repositories.Implementation
                 RoomType = @RoomType,
                 RoomTypeId = @RoomTypeId,
                 IsRoomService = @IsRoomService,
-                RoomServiceId = RoomServiceId,
+                RoomService = RoomService,
                 RoomNumber = @RoomNumber,
                 RoomId = @RoomId,
                 CustomerId = @CustomerId,
                 CustomerStatus = @CustomerStatus,
                 Nights = @Nights,
-                StayPeriod = @StayPeriod,
                 CheckInDate = @CheckInDate,
                 CheckOutDate = @CheckOutDate,
                 TotalPriceOfStay = @TotalPriceOfStay,
                 Rate = @Rate,
-                PaidService = @PaidService";
+                PaidService = @PaidService 
+                where Id = @Id";
                 dbConnection.Execute(query, booking);
             }
         }
