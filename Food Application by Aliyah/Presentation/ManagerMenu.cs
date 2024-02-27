@@ -11,6 +11,9 @@ namespace Food_Application_Project.Presentation
 {
     public class ManagerMenu
     {
+        Menu menu = new Menu();
+        CustomerMenu customermenu = new CustomerMenu();
+        SuperAdmin superMenu = new SuperAdmin();
         IFoodManager foodManager = new FoodManager();
         IUserManager userManager = new UserManager();
         IWalletManager walletManager = new WalletManager();
@@ -20,35 +23,34 @@ namespace Food_Application_Project.Presentation
             Console.WriteLine(@"Press 1. To Add Food
                                 Press 2. To view all existing customers
                                 Press 3. To view all foods
-                                Press 4. To view available balance
+                                Press 4. To view orders
                                 Press 5. To log out");
             int choice = int.Parse(Console.ReadLine());
             switch (choice)
             {
                 case 1:
-                AddFood();
-                Manager();
-                break;
+                    AddFood();
+                    Manager();
+                    break;
                 case 2:
-                ViewAllCustomer();
-                Manager();
-                break;
+                    superMenu.ViewAllCustomer();
+                    Manager();
+                    break;
                 case 3:
-                ViewAllFoods();
-                Manager();
-                break;
+                    customermenu.ViewAvailableFoods();
+                    Manager();
+                    break;
                 case 4:
-                ViewAvailableBalance();
-                Manager();
-                break;
+                    superMenu.ViewOrders();
+                    Manager();
+                    break;
                 case 5:
-                Menu menu = new Menu();
-                menu.MainMenu();
-                break;
+                    menu.MainMenu();
+                    break;
                 default:
-                System.Console.WriteLine("Enter the correct number in the above list :");
-                break;
-            } 
+                    System.Console.WriteLine("Enter the correct number in the above list :");
+                    break;
+            }
         }
         public void AddFood()
         {
@@ -56,43 +58,19 @@ namespace Food_Application_Project.Presentation
             string foodName = Console.ReadLine();
             Console.WriteLine("Enter the type of food :");
             string foodType = Console.ReadLine();
-            System.Console.WriteLine("Enter the price of the food :");
+            Console.WriteLine("Enter the price of the food :");
             double price = double.Parse(Console.ReadLine());
             DateTime date = DateTime.Now;
-            var foods = foodManager.CreateFood(foodName,price,foodType);
+            var foods = foodManager.CreateFood(foodName, price, foodType);
             if (foods != null)
             {
                 System.Console.WriteLine("Food added successfully !!!");
             }
-        }
-        public void ViewAllCustomer()
-        {
-            var user = userManager.GetAll();
-            foreach (var item in user)
+            else
             {
-                if (item.URole == "Customer")
-                {
-                    System.Console.WriteLine($"{item.FirstName} {item.Lastname} {item.PhoneNumber} {item.Address} {item.Email} {item.PassWord} {item.URole} :");
+                Console.WriteLine($"Food with name {foodName} already exists!!!");
+            }
+        }
 
-                }
-            }
-        }
-        public void ViewAllFoods()
-        {
-            var foods = foodManager.GetAll();
-            foreach (var item in foods)
-            {
-                System.Console.WriteLine($"{item.FoodName} {item.Price} {item.FoodType}");
-            }
-        }
-        public void ViewAvailableBalance()
-        {
-            var balance = walletManager.GetWallets();
-            foreach (var item in balance)
-            {
-                System.Console.WriteLine($"{item.Amount} {item.Useremail}");
-            }
-        }
-        
     }
 }

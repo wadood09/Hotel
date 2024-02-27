@@ -6,19 +6,24 @@ using Food_Application_Project.Repository.Interface;
 public class FoodManager : IFoodManager
 {
     IFoodRepository foodRepo = new FoodRepository();
-    public FoodManager()
+    public Food CreateFood(string foodName, double price, string foodType)
     {
-        foodRepo.ReadAllFromFile();
+        if (IsExist(foodName, foodType)) return null;
+        var food = new Food(foodName, foodType, price);
+        foodRepo.CreateFood(food);
+        return food;
+
     }
-    
-    public Food CreateFood(string foodName,double price,string foodType)
+
+    private bool IsExist(string foodName, string foodType)
     {
-        var exist =  CreateFood(foodName,price,foodType);
-        if (exist == null)
+        var types = GetAll().Where(food => food.FoodType.ToUpper() == foodType.ToUpper());
+        if (!types.Any()) return false;
+        else
         {
-            return null;
+            var isExist = types.Any(food => food.FoodName.ToUpper() == foodName.ToUpper());
+            return isExist;
         }
-        return exist;
 
     }
 
@@ -45,5 +50,9 @@ public class FoodManager : IFoodManager
     public List<Food> GetAll()
     {
         return foodRepo.GetAll();
+    }
+    public void UpdateList()
+    {
+        foodRepo.ReadAllFromFile();
     }
 }

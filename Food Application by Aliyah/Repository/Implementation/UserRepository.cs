@@ -11,32 +11,6 @@ namespace Food_Application_Project.Repository.Implementation
     {
         FileContext context = new FileContext();
         IWalletRepository walet = new WalletRepository();
-        public UserRepository()
-        {
-            ReadAllFromFile();
-            CheckAndAddSuperAdmin();
-        }
-
-        public void CheckAndAddSuperAdmin()
-        {
-            User admin = new User("Mayokun", "Bello", "08023297064", "Abk", "mayokun@gmail.com", "mayor123")
-            {
-                URole = "SuperAdmin"
-            };
-            
-            var userExist = Get(a => a.Email == admin.Email);
-            if(userExist is null)
-            {
-                FileContext.users.Add(admin);
-                Wallet adminWallet = new Wallet(admin.Email, admin.PhoneNumber);
-                walet.AddWallet(adminWallet);
-                using (var str = new StreamWriter(context.User,true))
-                {
-                   str.WriteLine(admin.ToString());
-                }
-            }
-            
-        }
         
         public User Create(User user)
         {
@@ -48,18 +22,6 @@ namespace Food_Application_Project.Repository.Implementation
             }
             return user;
         }
-
-        public User CreateManager(User user)
-        {
-            FileContext.users.Add(user);
-
-            using (var str = new StreamWriter(context.User,true))
-            {
-                str.WriteLine(user.ToString());
-            }
-            return user;
-        }
-
         
 
         public User Get(Func<User, bool> pred)

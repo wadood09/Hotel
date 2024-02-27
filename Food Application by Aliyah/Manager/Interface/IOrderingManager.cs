@@ -9,9 +9,10 @@ namespace Food_Application_Project.Manager.Interface
 {
     public interface IOrderingManager
     {
-        public Ordering MakeOrder(string foodName, double quantity, string customerWallet, string managerwallet, double totalPrice,DateTime createdAt);
+        public Ordering MakeOrder(int choice, int quantity, string customerWallet, string refNo, double totalPrice,DateTime createdAt);
         public Ordering GetOrdering(string refNo);
         public List<Ordering> GetAllOrder();
+        void UpdateList();
     }
     
 }

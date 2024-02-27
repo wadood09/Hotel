@@ -6,10 +6,25 @@ public class Ordering : Base
     public double Price{get;set;}
     public string RefNo{get;set;}
     public string FoodName{get;set;}
+    public int Quantity{get;set;}
+
+    public Ordering(string buyerAccountNumber, double price, string refNo, string foodName, int quantity)
+    {
+        SellerAccountNumber = "0";
+        BuyerAccountNumber = buyerAccountNumber;
+        Price = price;
+        RefNo = refNo;
+        FoodName = foodName;
+        Quantity = quantity;
+    }
+
+    public Ordering()
+    {
+    }
 
     public override string ToString()
     {
-        return $"{Id}\t{CreatedAt}\t{SellerAccountNumber}\t{BuyerAccountNumber}\t{Price}\t{RefNo}\t{FoodName}";
+        return $"{Id}\t{CreatedAt}\t{SellerAccountNumber}\t{BuyerAccountNumber}\t{Price}\t{RefNo}\t{FoodName}\t{Quantity}";
     }
     public static Ordering ToOrder(string str)
     {
@@ -23,6 +38,7 @@ public class Ordering : Base
             Price = double.Parse(order[4]),
             RefNo = order[5],
             FoodName = order[6],
+            Quantity = int.Parse(order[7])
         };
     }
 }

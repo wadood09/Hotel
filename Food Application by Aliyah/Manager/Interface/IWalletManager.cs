@@ -9,9 +9,9 @@ namespace Food_Application_Project.Manager.Interface
     public interface IWalletManager
     {
         Wallet AddWallet(Wallet wallet);
-        public Wallet CheckWallet(string accountNumber,string email);
+        public Wallet CheckWallet(string accountNumber);
         public Wallet GetWallet(string accountNumber);
         public List<Wallet> GetWallets();
-        public Wallet GetWalletByEmail(string email);
+        void UpdateList();
     }
 }

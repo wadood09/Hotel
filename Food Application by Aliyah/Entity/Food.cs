@@ -4,7 +4,16 @@ namespace Food_Application_Project.Entity
     {
         public string FoodName { get; set; }
         public double Price { get; set; }
-        public string FoodType{get;set;}
+        public string FoodType { get; set; }
+        public Food(string foodName, string foodType, double price)
+        {
+            FoodName = foodName;
+            Price = price;
+            FoodType = foodType;
+        }
+
+        public Food()
+        { }
 
         public override string ToString()
         {

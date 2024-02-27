@@ -75,10 +75,10 @@ static void ToDecimalSystem(int no)
 // Console.WriteLine(currentTime + " " + test);
 
 
-static void Reverse(string str)
+static int Reverse(string str)
 {
-    string s = str.Reverse().ToString();
-    Console.WriteLine(s);
+    Console.WriteLine(str);
+    return 0;
 }
 // string[] digits = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
 
@@ -94,5 +94,4 @@ static void Reverse(string str)
 //     Console.WriteLine(d);
 // }
 
- UnauthorizedAccessException exception = new();
-Console.WriteLine(exception.Message);
+int a = Reverse("wadood");

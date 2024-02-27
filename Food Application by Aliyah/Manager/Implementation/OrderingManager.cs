@@ -1,6 +1,3 @@
-// using System.Collections.Concurrent;
-// using System.ComponentModel;
-// using System.Data.Common;
 using Food_Application_Project.Entity;
 using Food_Application_Project.Manager.Implementation;
 using Food_Application_Project.Manager.Interface;
@@ -12,12 +9,6 @@ public class OrderingManager : IOrderingManager
     IOrderingRepository orderingRepo = new OrderingRepository();
     IWalletManager walletManager = new WalletManager();
     IFoodManager foodManager = new FoodManager();
-    List<Ordering> orderings = new List<Ordering>();
-    public OrderingManager()
-    {
-        orderingRepo.ReadAllFromFile();
-    }
-
     public List<Ordering> GetAllOrder()
     {
         return orderingRepo.GetAll();
@@ -33,11 +24,11 @@ public class OrderingManager : IOrderingManager
         return exist;
     }
 
-    public Ordering MakeOrder(string foodName, double quantity, string customerWallet, string managerwallet, double totalPrice, DateTime createdAt)
+    public Ordering MakeOrder(int choice, int quantity, string customerWallet, string refNo, double totalPrice, DateTime createdAt)
     {
         var customer = walletManager.GetWallet(customerWallet);
-        var manager = walletManager.GetWallet(managerwallet);
-        var food = foodManager.Get(foodName);
+        var manager = walletManager.GetWallet("0");
+        var food = foodManager.GetAll()[--choice];
         if (customer == null)
         {
             return null;
@@ -48,30 +39,22 @@ public class OrderingManager : IOrderingManager
         }
         else
         {
-            Console.WriteLine(customer.Amount);
-            Console.WriteLine(totalPrice);
-
             if (customer.Amount >= totalPrice)
             {
-                if (food.FoodName == foodName)
-                {
-                    customer.Amount -= totalPrice;
-                    manager.Amount += totalPrice;
-                    Ordering ordering = new Ordering();
-                    orderings.Add(ordering);
-                    Console.WriteLine("Payment Successfull !!!");
-                    return ordering;
-                }
-                else
-                {
-                    Console.WriteLine("The portion of food chosen is more than the existing portion");
-                }
+                customer.Amount -= totalPrice;
+                manager.Amount += totalPrice;
+                Ordering ordering = new Ordering(customerWallet, totalPrice, refNo, food.FoodName, quantity);
+                orderingRepo.MakeOrder(ordering);
+                return ordering;
             }
             else
             {
-                Console.WriteLine("Insufficient wallet Balance");
+                return null;
             }
         }
-        return null;
+    }
+    public void UpdateList()
+    {
+        orderingRepo.ReadAllFromFile();
     }
 }

@@ -9,10 +9,6 @@ namespace Food_Application_Project.Repository.Implementation
 {
     public class FoodRepository : IFoodRepository
     {
-        public FoodRepository()
-        {
-            ReadAllFromFile();
-        }
         FileContext context = new FileContext();
         public Food CreateFood(Food food)
         {

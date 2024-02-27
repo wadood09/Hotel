@@ -52,27 +52,42 @@ namespace Food_Application_Project
         {
             try
             {
-                Console.WriteLine("Enter the food name you want to purchase");
-                string foodName = Console.ReadLine();
-                string managerwallet = "0";
+                var food = foodManager.GetAll();
+                if (!food.Any())
+                {
+                    Console.WriteLine("No available foods at the moment!!!\nTry again later");
+                    return;
+                }
+
+                ViewAvailableFoods();
+                Console.WriteLine("Choose the food you want to purchase (i.e enter 1,2,3,...): ");
+                int choice = int.Parse(Console.ReadLine());
+                if (choice < 1 || choice > food.Count)
+                {
+                    Console.WriteLine("Food Chosen does not exists!!!");
+                    return;
+                }
+
                 System.Console.WriteLine("Enter your account number");
                 string customerWallet = Console.ReadLine();
+
                 Console.WriteLine("Enter the quantity of food");
-                double quantity = double.Parse(Console.ReadLine());
+                int quantity = int.Parse(Console.ReadLine());
+
                 DateTime date = DateTime.Now;
 
-                var fd = foodManager.Get(foodName);
-                var foodPrice = fd.Price * quantity;
+                var foodPrice = food[--choice].Price * quantity;
+                string refNo = GenerateRefNo();
 
-                var ordering = orderingManager.MakeOrder(foodName, quantity, customerWallet, managerwallet, foodPrice, date);
+                var ordering = orderingManager.MakeOrder(choice, quantity, customerWallet, refNo, foodPrice, date);
                 if (ordering != null)
                 {
                     Console.WriteLine("Payment Successful !!!!!!!");
-                    Console.WriteLine($"Your Order RefrenceNumber is {GenerateRefNo}");
+                    Console.WriteLine($"Your Order RefrenceNumber is {refNo}");
                 }
                 else
                 {
-                    Console.WriteLine("Payment not successful !!!");
+                    Console.WriteLine("Payment not successful!!!");
                 }
             }
             catch (System.Exception ex)
@@ -90,7 +105,7 @@ namespace Food_Application_Project
             double amount = double.Parse(Console.ReadLine());
             Console.WriteLine("Enter your account number");
             string accountNumber = Console.ReadLine();
-        
+
             var deposit = depositManager.DepositMoney(accountNumber, amount);
             if (deposit != null)
             {
@@ -98,19 +113,17 @@ namespace Food_Application_Project
             }
             else
             {
-                Console.WriteLine("No deposit available");
+                Console.WriteLine("Incorrect Account Number!!!");
             }
         }
         public void CheckWalletBalance()
         {
             Console.WriteLine("Enter your accountNumber");
             string accountNumber = Console.ReadLine();
-            Console.WriteLine("Enter your Email");
-            string email = Console.ReadLine();
-            var wallet = walletManager.GetWalletByEmail(email);
-             if (wallet != null)
+            var wallet = walletManager.GetWallet(accountNumber);
+            if (wallet != null)
             {
-                var checkWallet = walletManager.CheckWallet(accountNumber,email);
+                var checkWallet = walletManager.CheckWallet(accountNumber);
                 Console.WriteLine($"Your available amount in your wallet is {checkWallet.Amount}");
             }
             else
@@ -121,10 +134,42 @@ namespace Food_Application_Project
         public void ViewAvailableFoods()
         {
             var food = foodManager.GetAll();
-            foreach (var foods in food)
+            if (!food.Any())
             {
-                System.Console.WriteLine($"{foods.FoodName} {foods.Price} {foods.FoodType}");
+                Console.WriteLine("No available foods at the moment!!!\nTry again later");
+                return;
             }
+
+            string choice = ViewAllFoodTypess();
+            if (choice == string.Empty) return;
+
+
+            int count = 0;
+            Console.WriteLine("Viewing all available foods: ");
+            System.Console.WriteLine($"FOODNAME    FOODPRICE");
+            foreach (var foods in food.Where(food => food.FoodType.ToUpper() == choice.ToUpper()))
+            {
+                System.Console.WriteLine($"{++count}   {foods.FoodName}    {foods.Price}");
+            }
+        }
+
+        public string ViewAllFoodTypess()
+        {
+            var foods = foodManager.GetAll().Select(food => food.FoodType).Distinct();
+            int count = 0;
+            Console.WriteLine("Viewing all food types: ");
+            foreach (var food in foods)
+            {
+                Console.WriteLine($"{++count}. {food}");
+            }
+            Console.WriteLine("Choose food type (i.e enter 1,2,3,...): ");
+            int choice = int.Parse(Console.ReadLine());
+            if (choice < 1 || choice > foods.Count())
+            {
+                Console.WriteLine("Food Type chosen does not exist!!!");
+                return string.Empty;
+            }
+            return foods.ToList()[--choice];
         }
         public string GenerateAccountNumber()
         {

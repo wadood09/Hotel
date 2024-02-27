@@ -8,11 +8,11 @@ namespace Food_Application_Project
 {
     public class FileContext
     {
-        public string Deposit = @".\foodapp\deposits.txt";
-        public string Food = @".\foodapp\foods.txt";
-        public string Ordering = @".\foodapp\orderings.txt";
-        public string User = @".\foodapp\users.txt";
-        public string Wallet = @".\foodapp\wallets.txt";
+        public string Deposit = "foodApp\\deposits.txt";
+        public string Food = "foodApp\\foods.txt";
+        public string Ordering = "foodApp\\orderings.txt";
+        public string User = "foodApp\\users.txt";
+        public string Wallet = "foodApp\\wallets.txt";
         
 
 

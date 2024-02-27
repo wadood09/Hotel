@@ -11,5 +11,6 @@ namespace Food_Application_Project.Manager.Interface
         public Deposit DepositMoney(string walletAccountNumber,double amount);
         public Deposit Get(string refNo);
         public List<Deposit> GetAll();
+        void UpdateList();
     }
 }

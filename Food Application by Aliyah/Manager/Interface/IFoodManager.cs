@@ -9,5 +9,6 @@ namespace Food_Application_Project.Manager.Interface
         public Food Get(string foodName);
         public List<Food> GetAll();
         public bool DeleteFood(int id);
+        void UpdateList();
     }
 }

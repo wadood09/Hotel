@@ -1,3 +1,2 @@
-1	2/27/2024 10:54:48 AM	Mayokun	Bello	08023297064	Abk	mayokun@gmail.com	mayor123	SuperAdmin
-
-17	2/27/2024 11:05:58 AM	x	x	x	x	x	x	Manager
+2	2/27/2024 1:32:14 PM	Olaniyi	Wadood	99999999	22www	wad	wad	Customer
+3	2/27/2024 4:06:35 PM	Oluwole	Jonathan	22222222	wwwwwww	waq	waq	Manager

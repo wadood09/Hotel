@@ -1,6 +1,8 @@
 using Food_Application_Project.Manager.Interface;
 using Food_Application_Project.Repository.Implementation;
 using Food_Application_Project.Repository.Interface;
+using Food_Application_Project.Entity;
+
 
 namespace Food_Application_Project.Manager.Implementation
 
@@ -9,6 +11,7 @@ namespace Food_Application_Project.Manager.Implementation
     {
         private User? loggedInUser = null;
         IUserRepository userRepo = new UserRepository();
+        IWalletManager walletManager = new WalletManager();
 
 
         public bool Check(string email)
@@ -23,13 +26,29 @@ namespace Food_Application_Project.Manager.Implementation
             return false;
         }
 
-        public User CreateUser(string firstName,string lastName,string phoneNumber,string address, string email, string passWord)
+        public void CheckAndAddSuperAdmin()
+        {
+            User admin = new User("Mayokun", "Bello", "08023297064", "Abk", "mayokun@gmail.com", "mayor123", "SuperAdmin");
+
+            var userExist = Get(a => a.Email == admin.Email);
+            if (userExist is null)
+            {
+                FileContext.users.Add(admin);
+                Wallet adminWallet = new Wallet(admin.Email, admin.PhoneNumber);
+                walletManager.AddWallet(adminWallet);
+            }
+
+        }
+
+        public User Create(string firstName, string lastName, string phoneNumber, string address, string email, string passWord, string role)
         {
             User newUser = null;
             if (!Check(email))
             {
-                newUser = new User(firstName, lastName,phoneNumber,address,email,passWord);
+                newUser = new User(firstName, lastName, phoneNumber, address, email, passWord, role);
                 userRepo.Create(newUser);
+                Wallet newUserWallet = new Wallet(newUser.Email, newUser.PhoneNumber);
+                walletManager.AddWallet(newUserWallet);
             }
             return newUser;
         }
@@ -39,12 +58,17 @@ namespace Food_Application_Project.Manager.Implementation
             return userRepo.GetAll();
         }
 
+        public User Get(Func<User, bool> pred)
+        {
+            return userRepo.Get(pred);
+        }
+
         public User GetUser(string email)
         {
             User userExist = null;
-            foreach(var item in FileContext.users)
+            foreach (var item in FileContext.users)
             {
-                if(item.Email.Equals(email))
+                if (item.Email.Equals(email))
                 {
                     userExist = item;
                 }
@@ -74,13 +98,9 @@ namespace Food_Application_Project.Manager.Implementation
         {
             return loggedInUser;
         }
-
-        public User CreateManager(string firstName, string lastName, string phoneNumber, string address, string email, string passWord, string role)
+        public void UpdateList()
         {
-            var useR = new User(firstName,lastName,phoneNumber,address,email,passWord,role);
-            var manager = userRepo.CreateManager(useR);
-            return manager;
-
+            userRepo.ReadAllFromFile();
         }
     }
 }

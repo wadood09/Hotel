@@ -8,10 +8,6 @@ namespace Food_Application_Project.Repository.Implementation
 {
     public class OrderingRepository : IOrderingRepository
     {
-        public OrderingRepository()
-        {
-            ReadAllFromFile();
-        }
         FileContext context = new FileContext();
         public Ordering Get(Func<Ordering, bool> pred)
         {

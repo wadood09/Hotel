@@ -9,10 +9,6 @@ namespace Food_Application_Project.Repository.Implementation
 {
     public class DepositRepository : IDepositRepository
     {
-        public DepositRepository()
-        {
-            ReadAllFromFile();
-        }
         FileContext context = new FileContext();
 
         public Deposit DepositMoney(Deposit deposit)

@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Food_Application_Project.Entity;
 using Food_Application_Project.Manager.Implementation;
 using Food_Application_Project.Manager.Interface;
@@ -14,58 +11,61 @@ namespace Food_Application_Project.Presentation
     {
         IUserManager userManager = new UserManager();
         IWalletManager walletManager = new WalletManager();
-        IWalletRepository walletRepo = new WalletRepository();
-        IManagerManage managerManager = new ManagerManage();
+        IDepositManager depositManager = new DepositManager();
+        IOrderingManager orderingManager = new OrderingManager();
+        Menu menu = new Menu();
         public void Admin()
         {
-            Console.WriteLine(@"Press 1. To View all Manager
+            Console.WriteLine(@"
+                                Press 1. To View all Manager
                                 Press 2. To View all Customers
                                 Press 3. To Register a Manager
-                                Press 4. To Deposit Into your Account
-                                Press 5. To View all Balance
-                                Press 6. To Log Out
-                                Press 7. To View All Customers Transaction");
+                                Press 4. To View All Orders
+                                Press 0. To Log Out");
             int choice = int.Parse(Console.ReadLine());
 
             switch (choice)
             {
-                case 1: 
-                ViewAllManager();
-                Admin();
-                break;
-                case 2: 
-                ViewAllCustomer();
-                Admin();
-                break;
-                case 3: 
-                RegisterManager();
-                Admin();
-                break;
-                case 4: 
-                DepositAccount();
-                Admin();
-                break;
-                case 5: 
-                ViewAvailableBalance();
-                Admin();
-                break;
-                case 6:
-                Menu menu = new Menu();
-                menu.MainMenu();
-                break;
+                case 1:
+                    ViewAllManager();
+                    Admin();
+                    break;
+                case 2:
+                    ViewAllCustomer();
+                    Admin();
+                    break;
+                case 3:
+                    menu.Create("Manager");
+                    Admin();
+                    break;
+                case 4:
+                    ViewOrders();
+                    Admin();
+                    break;
+                case 0:
+                    menu.MainMenu();
+                    break;
                 default:
-                System.Console.WriteLine("Enter the correct input from the above list :");
-                break;
+                    Console.WriteLine("Enter the correct input from the above list :");
+                    break;
             }
         }
         public void ViewAllManager()
         {
             var manager = userManager.GetAll();
+            if (!manager.Any(b => b.URole == "Manager"))
+            {
+                Console.WriteLine("No manager has been registered!!!");
+                Console.WriteLine("Kindly please register manager in order to view managers!!!");
+                return;
+            }
+            Console.WriteLine("Viewing all managers: ");
+            int count = 0;
             foreach (var item in manager)
             {
                 if (item.URole == "Manager")
                 {
-                    Console.WriteLine($"{item.FirstName} {item.Lastname} {item.PhoneNumber} {item.Address} {item.Email} {item.PassWord} {item.URole}");
+                    Console.WriteLine($"{++count}. {item.FirstName} {item.Lastname} {item.PhoneNumber} {item.Address} {item.Email} {item.PassWord} {item.URole}");
 
                 }
             }
@@ -73,63 +73,39 @@ namespace Food_Application_Project.Presentation
         public void ViewAllCustomer()
         {
             var customer = userManager.GetAll();
+            if (!customer.Any(b => b.URole == "Customer"))
+            {
+                Console.WriteLine("No customer has been registered yet!!!");
+                return;
+            }
+            Console.WriteLine("Viewing all customers: ");
+            int count = 0;
             foreach (var item in customer)
             {
                 if (item.URole == "Customer")
                 {
-                    System.Console.WriteLine($"{item.FirstName} {item.Lastname} {item.PhoneNumber} {item.Address} {item.Email} {item.PassWord} {item.URole}");
-
+                    Console.WriteLine($"{++count}. {item.FirstName} {item.Lastname} {item.PhoneNumber}");
                 }
             }
         }
-        public void RegisterManager()
-        {
-            System.Console.WriteLine("Enter your name");
-            string firstName = Console.ReadLine();
-            System.Console.WriteLine("Enter your lastName");
-            string lastName = Console.ReadLine();
-            System.Console.WriteLine("Enter your PhoneNumber");
-            string phoneNumber = Console.ReadLine();
-            System.Console.WriteLine("Enter your address");
-            string address = Console.ReadLine();
-            System.Console.WriteLine("Enter your Email");
-            string email = Console.ReadLine();
-            System.Console.WriteLine("Enter your PassWord");
-            string passWord = Console.ReadLine();
-            DateTime date = DateTime.Now;
-           
 
-            var users = userManager.CreateManager(firstName, lastName, phoneNumber, address, email, passWord, "Manager");
-            var manager = userManager.GetUser(users.Email);
-            if (manager != null)
-            {
-                Wallet adminWallet = new Wallet(manager.Email, manager.PhoneNumber);
-                walletRepo.AddWallet(adminWallet);
-                Console.WriteLine("Manager Successfully Created :");
-            }
-        }
-        public void DepositAccount()
+        public void ViewOrders()
         {
-            System.Console.WriteLine("Enter your accountDetails :");
-            string managerwallet = "123490";
-            var manager = userManager.GetUser(managerwallet);
-            if (manager != null)
+            var orders = orderingManager.GetAllOrder();
+            if(!orders.Any())
             {
-                System.Console.WriteLine("Account has been Credited");
+                Console.WriteLine("No orders have been made!!!\nTry again later");
+                return;
             }
-            else
+            Console.WriteLine("Viewing all orders: ");
+            int count = 0;
+            foreach (var order in orders)
             {
-                System.Console.WriteLine("Invalid Account Details");
+                var wallet = walletManager.GetWallet(order.BuyerAccountNumber);
+                var user = userManager.GetUser(wallet.Useremail);
+                Console.WriteLine($"{++count}.  NAME: {user.FirstName} {user.Lastname} \nFOODNAME: {order.FoodName} \nFOODPRICE: {order.Price/order.Quantity} \nFOODQUANTITY: {order.Quantity} \nTOTALPRICE: {order.Price} \n TIME ORDERED: {order.CreatedAt}");
+                Console.WriteLine();
             }
-        }
-        public void ViewAvailableBalance()
-        {
-           System.Console.WriteLine("Enter your Account Number: ");
-           string acct = Console.ReadLine();
-           System.Console.WriteLine("Enter your email");
-           string mail = Console.ReadLine();
-           var wall = walletManager.CheckWallet(mail,acct);
-          System.Console.WriteLine($"Your account balance is {wall}");
         }
     }
 }

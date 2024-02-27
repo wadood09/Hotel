@@ -16,32 +16,33 @@ class Menu
     IDepositManager depoMan = new DepositManager();
     IOrderingManager orderMan = new OrderingManager();
     IFoodManager foodManager = new FoodManager();
-    
+
 
     User currentUser = null;
-    
+
 
     public void MainMenu()
-     {
-        
+    {
+
         bool isContinue = true;
         Console.WriteLine("<<<<WELCOME TO MAYOR'S BUKA>>>>");
         while (isContinue)
         {
-            Console.WriteLine("Press 1. To Create a User");
+            Console.WriteLine("Press 1. To Register");
             Console.WriteLine("Press 2. To Login");
             Console.WriteLine("Press 3. To Exit");
             int Input = int.Parse(Console.ReadLine());
             switch (Input)
             {
                 case 1:
-                    Create();
+                    Create("Customer");
                     break;
                 case 2:
                     var currentLoggedIn = userManager.GetLoggedINUser(Login());
-                    
-                    if(currentLoggedIn != null)
+
+                    if (currentLoggedIn != null)
                     {
+                        Console.WriteLine("Login Successfull!!!");
                         if (currentLoggedIn.URole == "Customer")
                         {
                             CustomerMenu customerMenu = new CustomerMenu();
@@ -61,7 +62,6 @@ class Menu
                     else
                     {
                         Console.WriteLine("Account not found");
-                        Login();
                     }
 
                     break;
@@ -75,62 +75,43 @@ class Menu
         }
     }
 
-    private void Create()
+    public void Create(string role)
     {
-        Console.WriteLine("1.Press to register as a Customer\n2.Press to register as a Manager");
-        int choice = int.Parse(Console.ReadLine());
-
-        if (choice == 1)
+        Console.WriteLine("Enter FirstName");
+        string firstName = Console.ReadLine();
+        Console.WriteLine("Enter LastName");
+        string lastName = Console.ReadLine();
+        Console.WriteLine("Enter PhoneNumber");
+        string phoneNumber = Console.ReadLine();
+        Console.WriteLine("Enter Email");
+        string email = Console.ReadLine();
+        System.Console.WriteLine("Enter Password");
+        string passWord = Console.ReadLine();
+        Console.WriteLine("Enter Address");
+        string address = Console.ReadLine();
+        DateTime dateCreated = DateTime.Now;
+        var users = userManager.Create(firstName, lastName, phoneNumber, address, email, passWord, role);
+        Wallet wallet = new Wallet(email, phoneNumber);
+        if (wallet == null)
         {
-                Console.WriteLine("Enter your FirstName");
-                string firstName = Console.ReadLine();
-                Console.WriteLine("Enter your LastName");
-                string lastName = Console.ReadLine();
-                Console.WriteLine("Enter your PhoneNumber");
-                string phoneNumber = Console.ReadLine();
-                Console.WriteLine("Enter your Email");
-                string email = Console.ReadLine();
-                System.Console.WriteLine("Enter your Password");
-                string passWord = Console.ReadLine();
-                Console.WriteLine("Enter your Address");
-                string address = Console.ReadLine();
-                DateTime dateCreated = DateTime.Now;
-                foreach (var roles in Enum.GetValues(typeof(Role)))
-                {
-                    if ((int)roles == 3)
-                    {
-                        break;
-                    }
-                    Console.WriteLine($"Enter {(int)roles}. {roles}");
-                }
-                int role = int.Parse(Console.ReadLine());
-                var users = userManager.CreateUser(firstName,lastName,phoneNumber,address,email,passWord);
-                Wallet wallet = new Wallet(email, phoneNumber);  
-                if(wallet == null)
-                {
-                    Console.WriteLine("You've not created a wallet account!!!");
-                    return;
-                }
-                // string acctNum = wallet.AccountNumber;
-                if (users != null)
-                {
-                    walletManager.AddWallet(wallet);
-                    Console.WriteLine($" {firstName} {lastName} Creation was Sucessful!!! \n Your wallet account no is {wallet.AccountNumber}");
-                }
-                else
-                {
-                    System.Console.WriteLine("Customer already exists");
-                }
-
+            Console.WriteLine("Registration Unsuccessfull!!!");
+            return;
         }
-        else if (choice == 2)
+        if (users != null)
         {
-            System.Console.WriteLine("Sorry you can not register here Kindly meet the Super Admin :");
+            walletManager.AddWallet(wallet);
+            Console.WriteLine($"Registration Successfull");
+            if(role == "Manager") return;
+            Console.WriteLine($"Your wallet account no is {wallet.AccountNumber}");
+        }
+        else
+        {
+            System.Console.WriteLine($"User with email {email} already exists");
         }
     }
     private User Login()
     {
-        
+
         User useR = null;
         Console.Write("Enter your email: ");
         string email = Console.ReadLine();
@@ -142,6 +123,7 @@ class Menu
 
         if (user != null)
         {
+            User.LoggedInUserEmail = email;
             useR = user;
         }
         return useR;
@@ -149,7 +131,7 @@ class Menu
     public string GenerateId()
     {
         Random random = new Random();
-        string num = random.Next(1,10).ToString();
+        string num = random.Next(1, 10).ToString();
         return num;
     }
 }

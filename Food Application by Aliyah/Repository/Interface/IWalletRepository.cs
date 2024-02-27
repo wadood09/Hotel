@@ -8,13 +8,11 @@ namespace Food_Application_Project.Repository.Interface
 {
     public interface IWalletRepository
     {
-        
+
         public Wallet Get(Func<Wallet, bool> pred);
         public List<Wallet> GetAll();
-        public Wallet AddWallet (Wallet wallet);
-        public Wallet GetByEmail(string userEmail);
+        public Wallet AddWallet(Wallet wallet);
         void ReadAllFromFile();
         void RefreshFile();
-        public Wallet UpdateWalletBalance(Wallet wallet,double amount);
     }
 }

@@ -9,11 +9,6 @@ namespace Food_Application_Project.Repository.Implementation
 {
     public class WalletRepository : IWalletRepository
     {
-        public WalletRepository()
-        {
-            ReadAllFromFile();
-        }
-
         FileContext context = new FileContext();
         
         public Wallet AddWallet (Wallet wallet)
@@ -36,11 +31,6 @@ namespace Food_Application_Project.Repository.Implementation
             return FileContext.wallets;
         }
 
-        public Wallet GetByEmail(string userEmail)
-        {
-            var wallet = FileContext.wallets.SingleOrDefault(a => a.Useremail == userEmail);
-            return wallet;
-        }
 
         public void ReadAllFromFile()
         {
@@ -68,20 +58,13 @@ namespace Food_Application_Project.Repository.Implementation
              
         }
 
-        public Wallet UpdateWalletBalance(Wallet wallet, double amount)
-        {
-            var myWallet = Get(a => a.AccountNumber == wallet.AccountNumber);
-            myWallet.Amount = amount;
-            RefreshFile();
-            return wallet;
-        }
 
         public void RefreshFile()
         {
             File.WriteAllText(context.Wallet, string.Empty);
             foreach (var item in FileContext.wallets)
             {
-                using(var str = new StreamWriter(context.Wallet, true))
+                using(var str = new StreamWriter(context.Wallet, false))
                 {
                     str.WriteLine(item.ToString());
                 }
