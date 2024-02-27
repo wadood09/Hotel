@@ -1,0 +1,22 @@
+C:\Users\USER-PC\Desktop\StudentFile Project\bin\Debug\net7.0\StudentFile Project.exe
+C:\Users\USER-PC\Desktop\StudentFile Project\bin\Debug\net7.0\StudentFile Project.deps.json
+C:\Users\USER-PC\Desktop\StudentFile Project\bin\Debug\net7.0\StudentFile Project.runtimeconfig.json
+C:\Users\USER-PC\Desktop\StudentFile Project\bin\Debug\net7.0\StudentFile Project.dll
+C:\Users\USER-PC\Desktop\StudentFile Project\bin\Debug\net7.0\StudentFile Project.pdb
+C:\Users\USER-PC\Desktop\StudentFile Project\bin\Debug\net7.0\Dapper.dll
+C:\Users\USER-PC\Desktop\StudentFile Project\bin\Debug\net7.0\MySql.Data.dll
+C:\Users\USER-PC\Desktop\StudentFile Project\bin\Debug\net7.0\System.Configuration.ConfigurationManager.dll
+C:\Users\USER-PC\Desktop\StudentFile Project\bin\Debug\net7.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\USER-PC\Desktop\StudentFile Project\bin\Debug\net7.0\System.Security.Permissions.dll
+C:\Users\USER-PC\Desktop\StudentFile Project\bin\Debug\net7.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\USER-PC\Desktop\StudentFile Project\obj\Debug\net7.0\StudentFile Project.csproj.AssemblyReference.cache
+C:\Users\USER-PC\Desktop\StudentFile Project\obj\Debug\net7.0\StudentFile Project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\USER-PC\Desktop\StudentFile Project\obj\Debug\net7.0\StudentFile Project.AssemblyInfoInputs.cache
+C:\Users\USER-PC\Desktop\StudentFile Project\obj\Debug\net7.0\StudentFile Project.AssemblyInfo.cs
+C:\Users\USER-PC\Desktop\StudentFile Project\obj\Debug\net7.0\StudentFile Project.csproj.CoreCompileInputs.cache
+C:\Users\USER-PC\Desktop\StudentFile Project\obj\Debug\net7.0\StudentFile Project.csproj.CopyComplete
+C:\Users\USER-PC\Desktop\StudentFile Project\obj\Debug\net7.0\StudentFile Project.dll
+C:\Users\USER-PC\Desktop\StudentFile Project\obj\Debug\net7.0\refint\StudentFile Project.dll
+C:\Users\USER-PC\Desktop\StudentFile Project\obj\Debug\net7.0\StudentFile Project.pdb
+C:\Users\USER-PC\Desktop\StudentFile Project\obj\Debug\net7.0\StudentFile Project.genruntimeconfig.cache
+C:\Users\USER-PC\Desktop\StudentFile Project\obj\Debug\net7.0\ref\StudentFile Project.dll
