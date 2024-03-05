@@ -30,14 +30,13 @@ namespace Food_Application_Project.Manager.Implementation
         {
             User admin = new User("Mayokun", "Bello", "08023297064", "Abk", "mayokun@gmail.com", "mayor123", "SuperAdmin");
 
-            var userExist = Get(a => a.Email == admin.Email);
+            var userExist = GetUser(admin.Email);
             if (userExist is null)
             {
-                FileContext.users.Add(admin);
+                userRepo.Create(admin);
                 Wallet adminWallet = new Wallet(admin.Email, admin.PhoneNumber);
                 walletManager.AddWallet(adminWallet);
             }
-
         }
 
         public User Create(string firstName, string lastName, string phoneNumber, string address, string email, string passWord, string role)
@@ -72,10 +71,6 @@ namespace Food_Application_Project.Manager.Implementation
                 {
                     userExist = item;
                 }
-            }
-            if (userExist == null)
-            {
-                return null;
             }
             return userExist;
         }

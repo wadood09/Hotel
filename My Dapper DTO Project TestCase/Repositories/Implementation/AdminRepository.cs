@@ -1,5 +1,4 @@
 using System.Data;
-using System.Text.Json;
 using Dapper;
 using Microsoft.Data.SqlClient;
 using My_Dapper_DTO_Project_Testcase.Models.Entities;

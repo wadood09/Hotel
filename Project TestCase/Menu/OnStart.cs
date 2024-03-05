@@ -1,71 +1,49 @@
-using Project_TestCase2.Models.Entities;
-using Project_TestCase2.Repositories.Implementation;
-using Project_TestCase2.Repositories.Interface;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using My_File_Project.Context;
+using My_File_Project.Services.Implementation;
+using My_File_Project.Services.Interface;
 
-namespace Project_TestCase2.Menu
+namespace My_File_Project.Menu
 {
     public class OnStart
     {
-        IRoomRepository _roomRepository = new RoomRepository();
-        IRoomTypeRepository _roomTypeRepository = new RoomTypeRepository();
-        IStayRepository _historyRepository = new StayRepository();
-        IRepository<Hotel> _hotelRepository = new HotelRepository();
-
-
-        public void CheckHotelStatus()
+        IAdminService _adminService = new AdminService();
+        IHotelService _hotelService = new HotelService();
+        IRoomService _roomService = new RoomServices();
+        IRoomServicesService _roomServicesService = new RoomServicesService();
+        IRoomTypeService _roomTypeService = new RoomTypeService();
+        IUserService _userService = new UserService();
+        IBookingService _bookingService = new BookingService();
+        ICustomerService _customerService = new CustomerService();
+        public void Check()
         {
-            foreach (Hotel hotel in _hotelRepository.GetAll())
+            if (!Directory.Exists("Files"))
             {
-                foreach (RoomType type in _roomTypeRepository.GetAllByHotelId(hotel.Id))
-                {
-                    if (type.Status == Models.Enums.RoomTypeStatus.Available)
-                    {
-                        hotel.HotelStatus = Models.Enums.HotelStatus.Active; 
-                        break;
-                    }
-                    type.Status = Models.Enums.RoomTypeStatus.Unavailable;
-                }
+                Directory.CreateDirectory("Files");
             }
-        }
-        public void CheckRoomTypeStatus()
-        {
-            foreach (RoomType type in _roomTypeRepository.GetAll())
+            string[] filePaths = new string[] { HotelContext.AdminFile, HotelContext.BookingFile, HotelContext.CustomerFile, HotelContext.HotelFile, HotelContext.RoomFile, HotelContext.RoomServiceFile, HotelContext.RoomTypeFile, HotelContext.UserFile };
+            foreach (string path in filePaths)
             {
-                foreach (Room room in _roomRepository.GetByRoomTypeId(type.Id))
-                {
-                    if (room.RoomStatus == Models.Enums.RoomStatus.Vacant)
-                    {
-                        type.Status = Models.Enums.RoomTypeStatus.Available;
-                        break;
-                    }
-                    type.Status = Models.Enums.RoomTypeStatus.Unavailable;
-                }
+                using (StreamWriter writer = new(path, true)) { }
             }
-        }
+            _adminService.UpdateList();
 
-        public void CustomerStatus()
-        {
-            List<StayHistory> histories = _historyRepository.Get(Customer.LoggedInCustomerId);
-            foreach (StayHistory history in histories)
-            {
-                if (DateTime.Now > history.CheckOutDate)
-                {
-                    history.CustomerStatus = Models.Enums.CustomerStatus.CheckedOut;
-                }
-            }
-        }
+            _bookingService.UpdateList();
 
-        public void RoomStatus()
-        {
-            List<StayHistory> histories = _historyRepository.Get(Customer.LoggedInCustomerId);
-            foreach (StayHistory history in histories)
-            {
-                if (history.CheckInDate > DateTime.Now)
-                {
-                    _roomRepository.GetByRoomNumber(history.RoomNumber, history.RoomTypeId).RoomStatus = Models.Enums.RoomStatus.Occupied;
-                }
-            }
-        }
+            _customerService.UpdateList();
 
+            _hotelService.UpdateList();
+
+            _roomService.UpdateList();
+
+            _roomTypeService.UpdateList();
+
+            _roomServicesService.UpdateList();
+
+            _userService.UpdateList();
+        }
     }
 }

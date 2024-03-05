@@ -1,44 +1,63 @@
-using Project_TestCase2.Context;
-using Project_TestCase2.Models.Entities;
-using Project_TestCase2.Repositories.Interface;
+using System.Text.Json;
+using My_File_Project.Context;
+using My_File_Project.Models.Entities;
+using My_File_Project.Repositories.Interface;
 
-namespace Project_TestCase2.Repositories.Implementation
+namespace My_File_Project.Repositories.Implementation
 {
-    public class RoomRepository : IRoomRepository
+    public class RoomRepository : IRepository<Room>
     {
         public void Add(Room room)
         {
             HotelContext.Rooms.Add(room);
+
+            using (StreamWriter writer = new(HotelContext.RoomFile, true))
+            {
+                writer.WriteLine(JsonSerializer.Serialize(room));
+            }
         }
 
-        public List<Room> GetByRoomTypeId(int roomTypeId)
+        public Room? Get(Func<Room, bool> pred)
         {
-            List<Room> rooms = new();
-            foreach (Room room in HotelContext.Rooms)
-            {
-                if(room.RoomTypeId == roomTypeId)
-                {
-                    rooms.Add(room);
-                }
-            }
-            return rooms;
+            Room? room = HotelContext.Rooms.SingleOrDefault(pred);
+            return room;
         }
 
-        public Room GetByRoomNumber(string roomNumber, int roomTypeId)
+        public List<Room> GetAll()
         {
-            foreach (Room room in HotelContext.Rooms)
+            return HotelContext.Rooms;
+        }
+
+        public List<Room> GetSelected(Func<Room, bool> pred)
+        {
+            return HotelContext.Rooms.Where(pred).ToList();
+        }
+
+        public void RefreshFile()
+        {
+            using (StreamWriter writer = new(HotelContext.RoomFile, false))
             {
-                if(room.Number == roomNumber && room.RoomTypeId == roomTypeId)
+                foreach (Room room in HotelContext.Rooms)
                 {
-                    return room;
+                    writer.WriteLine(JsonSerializer.Serialize(room));
                 }
             }
-            return null;
+        }
+
+        public void RefreshList()
+        {
+            string[] rooms = File.ReadAllLines(HotelContext.RoomFile);
+            foreach (string room in rooms)
+            {
+                HotelContext.Rooms.Add(JsonSerializer.Deserialize<Room>(room)!);
+            }
         }
 
         public void Remove(Room room)
         {
             HotelContext.Rooms.Remove(room);
+
+            RefreshFile();
         }
     }
 }

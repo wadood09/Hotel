@@ -10,7 +10,7 @@ namespace StudentFile_Project.Repositories.Interfaces
     {
         public void Drop(Exam exam);
         public List<Exam> GetAllExam();
-        public Exam GetById(string id);
+        public Exam GetByStudentId(string studentId);
         public void ReadAllFromFile();
         public void RefreshFile();
         public void Remove(string id);

@@ -27,8 +27,8 @@ public class OrderingManager : IOrderingManager
     public Ordering MakeOrder(int choice, int quantity, string customerWallet, string refNo, double totalPrice, DateTime createdAt)
     {
         var customer = walletManager.GetWallet(customerWallet);
-        var manager = walletManager.GetWallet("0");
-        var food = foodManager.GetAll()[--choice];
+        var manager = walletManager.GetWallet("MYK8023297064");
+        var food = foodManager.GetAll()[choice];
         if (customer == null)
         {
             return null;

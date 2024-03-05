@@ -39,17 +39,17 @@ namespace StudentFile_Project.Repositories.Implementations
             return get;
         }
 
-        public Exam GetById(string id)
+        public Exam GetByStudentId(string studentId)
         {
-            foreach (var item in FileContext.examDB)
+            foreach (var exam in FileContext.examDB)
             {
-                if (item.Id == id)
+                if (exam.StudentId == studentId)
                 {
-                    return item;
+                    return exam;
                 }
 
             }
-            return null!;
+            return null;
         }
 
         public void RefreshFile()
@@ -67,7 +67,7 @@ namespace StudentFile_Project.Repositories.Implementations
 
         public void Remove(string id)
         {
-            var get = GetById(id);
+            var get = GetByStudentId(id);
             FileContext.examDB.Remove(get);
             RefreshFile();
         }

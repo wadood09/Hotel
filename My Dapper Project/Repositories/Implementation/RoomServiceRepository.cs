@@ -15,7 +15,7 @@ namespace My_Dapper_Project.Repositories.Implementation
         }
         public void Add(RoomService service)
         {
-            using (IDbConnection dbConnection = new SqlConnection(_connectionString))
+            using (IDbConnection dbConnection = HotelContext.Connection())
             {
                 string query = @"Insert into RoomServices 
                 (HotelId, Name, Price) 
@@ -26,7 +26,7 @@ namespace My_Dapper_Project.Repositories.Implementation
 
         public IEnumerable<RoomService> GetAll()
         {
-            using (IDbConnection dbConnection = new SqlConnection(_connectionString))
+            using (IDbConnection dbConnection = HotelContext.Connection())
             {
                 string query = "Select * from RoomServices";
 
@@ -36,7 +36,7 @@ namespace My_Dapper_Project.Repositories.Implementation
 
         public void Remove(RoomService service)
         {
-            using (IDbConnection dbConnection = new SqlConnection(_connectionString))
+            using (IDbConnection dbConnection = HotelContext.Connection())
             {
                 string query = "Delete from RoomServices where Id = @Id";
                 dbConnection.Execute(query, service);
@@ -45,7 +45,7 @@ namespace My_Dapper_Project.Repositories.Implementation
 
         public void Update(RoomService service)
         {
-            using (IDbConnection dbConnection = new SqlConnection(_connectionString))
+            using (IDbConnection dbConnection = HotelContext.Connection())
             {
                 string query = @"Update RoomServices
                 Set Name = @Name,

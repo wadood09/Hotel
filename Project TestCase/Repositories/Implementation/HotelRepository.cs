@@ -1,61 +1,63 @@
-using Project_TestCase2.Context;
-using Project_TestCase2.Models.Entities;
-using Project_TestCase2.Repositories.Interface;
+using System.Text.Json;
+using My_File_Project.Context;
+using My_File_Project.Models.Entities;
+using My_File_Project.Repositories.Interface;
 
-namespace Project_TestCase2.Repositories.Implementation
+namespace My_File_Project.Repositories.Implementation
 {
     public class HotelRepository : IRepository<Hotel>
     {
         public void Add(Hotel hotel)
         {
             HotelContext.Hotels.Add(hotel);
+
+            using (StreamWriter writer = new(HotelContext.HotelFile, true))
+            {
+                writer.WriteLine(JsonSerializer.Serialize(hotel));
+            }
+        }
+
+        public Hotel? Get(Func<Hotel, bool> pred)
+        {
+            Hotel? hotel = HotelContext.Hotels.SingleOrDefault(pred);
+            return hotel;
         }
 
         public List<Hotel> GetAll()
         {
-            return HotelContext.Hotels.OrderBy(b => b.Ratings).ToList();
+            return HotelContext.Hotels.OrderByDescending(hotel => hotel.Ratings).ToList();
         }
 
-        public Hotel GetById(int id)
+        public List<Hotel> GetSelected(Func<Hotel, bool> pred)
         {
-            foreach (Hotel hotel in HotelContext.Hotels)
-            {
-                if(hotel.Id == id)
-                {
-                    return hotel;
-                }
-            }
-            return null;
+            return HotelContext.Hotels.Where(pred).OrderByDescending(hotel => hotel.Ratings).ToList();
         }
 
-        public Hotel GetByName(string name)
+        public void RefreshFile()
         {
-            foreach (Hotel hotel in HotelContext.Hotels)
+            using (StreamWriter writer = new(HotelContext.HotelFile, false))
             {
-                if(hotel.Name.ToLower() == name.ToLower())
+                foreach (Hotel hotel in HotelContext.Hotels)
                 {
-                    return hotel;
+                    writer.WriteLine(JsonSerializer.Serialize(hotel));
                 }
             }
-            return null;
         }
 
-        public List<Hotel> GetList(int id)
+        public void RefreshList()
         {
-            List<Hotel> hotels = new();
-            foreach (Hotel hotel in HotelContext.Hotels)
+            string[] hotels = File.ReadAllLines(HotelContext.HotelFile);
+            foreach (string hotel in hotels)
             {
-                if(hotel.AdminId == id)
-                {
-                    hotels.Add(hotel);
-                }
+                HotelContext.Hotels.Add(JsonSerializer.Deserialize<Hotel>(hotel)!);
             }
-            return hotels;
         }
 
         public void Remove(Hotel hotel)
         {
             HotelContext.Hotels.Remove(hotel);
+
+            RefreshFile();
         }
     }
 }

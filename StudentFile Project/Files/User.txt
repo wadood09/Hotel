@@ -1,0 +1,1 @@
+{"UserName":"Jonatee","Email":"admin@gmail.com","FirstName":"Jonathan","LastName":"Oluwole","PassWord":"admin","Age":35,"Gender":1,"Role":"SUPERADMIN","Id":"7d76b"}

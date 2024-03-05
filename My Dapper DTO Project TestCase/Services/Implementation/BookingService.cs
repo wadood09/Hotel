@@ -58,16 +58,6 @@ namespace My_Dapper_DTO_Project_Testcase.Services.Implementation
             repository.Remove(booking);
         }
 
-        public void UpdateFile()
-        {
-            repository.RefreshFile();
-        }
-
-        public void UpdateList()
-        {
-            repository.RefreshList();
-        }
-
         public bool ShouldIncreaseStayPeriod(int days, Booking booking)
         {
             DateTime checkOutDate = booking.StayPeriod.End.AddDays(days);
@@ -106,6 +96,41 @@ namespace My_Dapper_DTO_Project_Testcase.Services.Implementation
         public List<Booking> GetAll()
         {
             return repository.GetAll();
+        }
+
+        BookingResponseModel? IBookingService.Get(Func<Booking, bool> pred)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Booking? Get(Func<Booking, bool> pred, string serv)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<BookingResponseModel> IBookingService.GetSelected(Func<Booking, bool> pred)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Booking> GetSelected(Func<Booking, bool> pred, string serv)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<BookingResponseModel> IBookingService.GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Booking> GetAll(string serv)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update()
+        {
+            throw new NotImplementedException();
         }
     }
 }

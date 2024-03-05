@@ -1,8 +1,9 @@
-namespace Project_TestCase2.Models.Enums
+namespace My_File_Project.Models.Enums
 {
     public enum RoomStatus
     {
         Occupied = 1,
+        Booked,
         Vacant,
     }
 }

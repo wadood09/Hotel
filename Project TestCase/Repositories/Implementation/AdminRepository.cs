@@ -1,14 +1,26 @@
-using Project_TestCase2.Context;
-using Project_TestCase2.Models.Entities;
-using Project_TestCase2.Repositories.Interface;
+using System.Text.Json;
+using My_File_Project.Context;
+using My_File_Project.Models.Entities;
+using My_File_Project.Repositories.Interface;
 
-namespace Project_TestCase2.Repositories.Implementation
+namespace My_File_Project.Repositories.Implementation
 {
     public class AdminRepository : IRepository<Admin>
     {
         public void Add(Admin admin)
         {
             HotelContext.Admins.Add(admin);
+
+            using (StreamWriter writer = new(HotelContext.AdminFile, true))
+            {
+                writer.WriteLine(JsonSerializer.Serialize(admin));
+            }
+        }
+
+        public Admin? Get(Func<Admin, bool> pred)
+        {
+            Admin? admin = HotelContext.Admins.SingleOrDefault(pred);
+            return admin;
         }
 
         public List<Admin> GetAll()
@@ -16,38 +28,36 @@ namespace Project_TestCase2.Repositories.Implementation
             return HotelContext.Admins;
         }
 
-        public Admin GetById(int id)
+        public List<Admin> GetSelected(Func<Admin, bool> pred)
         {
-            foreach (Admin admin in HotelContext.Admins)
-            {
-                if(admin.Id == id)
-                {
-                    return admin;
-                }
-            }
-            return null;
+            return HotelContext.Admins.Where(pred).ToList();
         }
 
-        public Admin GetByName(string email)
+        public void RefreshFile()
         {
-            foreach (Admin admin in HotelContext.Admins)
+            using (StreamWriter writer = new(HotelContext.AdminFile, false))
             {
-                if(admin.Email == email)
+                foreach (Admin admin in HotelContext.Admins)
                 {
-                    return admin;
+                    writer.WriteLine(JsonSerializer.Serialize(admin));
                 }
             }
-            return null;
         }
 
-        public List<Admin> GetList(int id)
+        public void RefreshList()
         {
-            throw new NotImplementedException();
+            string[] admins = File.ReadAllLines(HotelContext.AdminFile);
+            foreach (string admin in admins)
+            {
+                HotelContext.Admins.Add(JsonSerializer.Deserialize<Admin>(admin)!);
+            }
         }
 
         public void Remove(Admin admin)
         {
             HotelContext.Admins.Remove(admin);
+
+            RefreshFile();
         }
     }
 }

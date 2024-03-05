@@ -11,5 +11,6 @@ namespace My_Dapper_DTO_Project_Testcase.Repositories.Interface
         void Remove(T value);
         void Update(T value);
         IEnumerable<T> GetAll();
+        // IEnumerable<T> GetAll();
     }
 }

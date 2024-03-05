@@ -11,6 +11,7 @@ namespace My_Dapper_DTO_Project_Testcase.Services.Implementation
 {
     public class UserService : IUserService
     {
+        
         IRepository<User> repository = new UserRepository();
         IRepository<Admin> adminRepo = new AdminRepository();
         IRepository<Customer> customerRepo = new CustomerRepository();

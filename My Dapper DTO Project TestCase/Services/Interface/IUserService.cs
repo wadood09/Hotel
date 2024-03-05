@@ -11,7 +11,9 @@ namespace My_Dapper_DTO_Project_Testcase.Services.Interface
     {
         UserResponseModel? CreateUser(UserRequestModel model);
         UserResponseModel? Get(Func<User, bool> pred);
+        User? Get(Func<User, bool> pred, string serv);
         List<UserResponseModel> GetSelected(Func<User, bool> pred);
+        List<User> GetSelected(Func<User, bool> pred, string serv);
         void Delete(User user);
         (bool, List<UserResponseModel>) Login(string email, string password);
         void Update();

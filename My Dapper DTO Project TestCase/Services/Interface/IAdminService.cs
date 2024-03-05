@@ -7,8 +7,10 @@ namespace My_Dapper_DTO_Project_Testcase.Services.Interface
     {
         void CreateAdmin(AdminResquestModel admin);
         AdminResponseModel? Get(Func<Admin, bool> pred);
+        Admin? Get(Func<Admin, bool> pred, string serv);
         List<AdminResponseModel> GetSelected(Func<Admin, bool> pred);
+        List<Admin> GetSelected(Func<Admin, bool> pred, string serv);
         bool IsDeleted(Admin admin);
-        void Update(Admin admin);
+        void Update(AdminResponseModel model);
     }
 }

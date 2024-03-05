@@ -11,6 +11,7 @@ namespace StudentFile_Project.Repositories.Interfaces
     {
         public void Drop (Student student);   
         public Student GetByemail(string email);
+        public Student GetById(string id);
         public List<Student> GetAll(); 
         public void RemoveStudent(string email);
         public void ReadAllFromFile();

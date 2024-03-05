@@ -99,7 +99,6 @@ class Menu
         }
         if (users != null)
         {
-            walletManager.AddWallet(wallet);
             Console.WriteLine($"Registration Successfull");
             if(role == "Manager") return;
             Console.WriteLine($"Your wallet account no is {wallet.AccountNumber}");

@@ -11,7 +11,9 @@ namespace My_Dapper_DTO_Project_Testcase.Services.Interface
     {
         void CreateRoomService(RoomServiceRequestModel model);
         RoomServiceResponseModel? Get(Func<RoomService, bool> pred);
+        RoomService? Get(Func<RoomService, bool> pred, string serv);
         List<RoomServiceResponseModel> GetSelected(Func<RoomService, bool> pred);
+        List<RoomService> GetSelected(Func<RoomService, bool> pred, string serv);
         void Delete(RoomService service);
         bool IsExist(string name, string? hotelId);
         RoomServiceResponseModel? IsExist(int num, string hotelId);

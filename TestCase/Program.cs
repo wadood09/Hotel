@@ -95,3 +95,18 @@ static int Reverse(string str)
 // }
 
 int a = Reverse("wadood");
+// int count = 0;
+// while (count < 10)
+// {
+//     Console.Beep(900, 500);
+//     count++;
+// }
+
+
+// int beep = 10;
+// for(int i = 1; i <= beep; i++) 
+// {
+//     Console.Beep();
+// }
+
+let 

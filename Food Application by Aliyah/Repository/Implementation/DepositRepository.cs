@@ -14,10 +14,15 @@ namespace Food_Application_Project.Repository.Implementation
         public Deposit DepositMoney(Deposit deposit)
         {
             FileContext.deposits.Add(deposit);
+
+            using (var str = new StreamWriter(context.Deposit, true))
+            {
+                str.WriteLine(deposit.ToString());
+            }
             return deposit;
         }
 
-        
+
         public List<Deposit> GetAll()
         {
             return FileContext.deposits;
@@ -28,35 +33,28 @@ namespace Food_Application_Project.Repository.Implementation
         {
             try
             {
-                var fileExist = File.Exists(context.Deposit);
-                if(fileExist)
+
+                var deposit = File.ReadAllLines(context.Deposit);
+                foreach (var item in deposit)
                 {
-                    var deposit = File.ReadAllLines(context.Deposit);
-                    foreach (var item in deposit)
-                    {
-                        FileContext.deposits.Add(Deposit.ToDeposit(item));
-                    }  
+                    FileContext.deposits.Add(Deposit.ToDeposit(item));
                 }
-                else
-                {
-                    File.Create(context.Deposit);
-                }  
             }
-            catch(System.IO.IOException ex)
+            catch (System.IO.IOException ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
             return;
-            
+
         }
 
         public void RefreshFile()
         {
-            using(var str = new StreamWriter(context.Deposit, false))
+            using (var str = new StreamWriter(context.Deposit, false))
             {
                 foreach (var item in FileContext.deposits)
                 {
@@ -68,7 +66,7 @@ namespace Food_Application_Project.Repository.Implementation
         public Deposit Get(Func<Deposit, bool> pred)
         {
             return FileContext.deposits.SingleOrDefault(pred);
-            
+
         }
     }
 }

@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using My_Dapper_DTO_Project_Testcase.Models.Entities;
 using My_Dapper_DTO_Project_Testcase.Models.Enums;
 

@@ -1,23 +1,17 @@
-using Project_TestCase2.Models.Enums;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using My_File_Project.Models.Enums;
 
-namespace Project_TestCase2.Models.Entities
+namespace My_File_Project.Models.Entities
 {
     public class RoomType : Auditables
     {
-        static int RoomTypeCount = 0;
-        public int HotelId {get; set;}
-        public string Name {get; set;}
-        public int Amount {get; set;}
+        public string? HotelId {get; set;}
+        public string? Name {get; set;}
+        public int AmountOfRooms {get; set;}
         public double Price {get; set;}
-        public RoomTypeStatus Status {get; set;}
-        public RoomType(int hotelId, string name, int amount, double price)
-        {
-            Id = ++RoomTypeCount;
-            HotelId = hotelId;
-            Name = name;
-            Amount = amount;
-            Price = price;
-            Status = RoomTypeStatus.Available;
-        }
+        public Status Status {get; set;} = Status.Inactive;
     }
 }

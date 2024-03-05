@@ -31,9 +31,9 @@ namespace StudentFile_Project.Services.Implementations
             return _examRepo.GetAllExam();
         }
 
-        public Exam GetById(string id)
+        public Exam GetByStudentId(string studentId)
         {
-            return _examRepo.GetById(id);
+            return _examRepo.GetByStudentId(studentId);
         }
 
         public void IsDeleted(string id)

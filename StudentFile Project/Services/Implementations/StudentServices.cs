@@ -34,6 +34,10 @@ namespace StudentFile_Project.Services.Implementations
         {
             return _studentRepo.GetByemail(email);
         }
+        public Student GetById(string id)
+        {
+            return _studentRepo.GetById(id);
+        }
 
         public void IsDeleted(string email)
         {

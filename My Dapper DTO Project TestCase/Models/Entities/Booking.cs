@@ -1,7 +1,6 @@
 using System.Text;
-using My_Dapper_DTO_Project_Testcase.Entities;
+using My_Dapper_DTO_Project_Testcase.Helper.Extensions;
 using My_Dapper_DTO_Project_Testcase.Models.Enums;
-using My_Dapper_DTO_Project_Testcase.Models.Extensions;
 
 namespace My_Dapper_DTO_Project_Testcase.Models.Entities
 {

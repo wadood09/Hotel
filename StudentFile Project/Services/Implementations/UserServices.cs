@@ -48,13 +48,17 @@ namespace StudentFile_Project.Services.Implementations
             
             
         }
+        public void CheckAndAddSuperAdmin()
+        {
+            Create("admin@gmail.com","Jonatee","Jonathan","Oluwole","admin",35,"SUPERADMIN",Gender.Male);
+        }
         public bool IsExist(string email)
         {
             if(GetByEmail(email) is null)
             {
-                  return true;
+                  return false;
             }
-            return false;
+            return true;
         }
         public  User IsLoggedIn(string email,string passWord)
         {

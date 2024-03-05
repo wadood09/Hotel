@@ -12,15 +12,5 @@ namespace My_Dapper_DTO_Project_Testcase.Models.Entities
         public string? Password { get; set; }
         public string? Role { get; set; }
         public static string? LoggedInUserEmail { get; set; }
-
-        public static implicit operator User(UserResponseModel v)
-        {
-            return new User()
-            {
-                FirstName = v.FirstName,
-                LastName = v.LastName,
-                Dob = v.
-            }
-        }
     }
 }

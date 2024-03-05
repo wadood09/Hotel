@@ -12,6 +12,7 @@ namespace Food_Application_Project
     public class CustomerMenu
     {
         IFoodManager foodManager = new FoodManager();
+        Menu menu = new Menu();
         IOrderingManager orderingManager = new OrderingManager();
         IDepositManager depositManager = new DepositManager();
         IWalletManager walletManager = new WalletManager();
@@ -39,7 +40,6 @@ namespace Food_Application_Project
                     Customer(email);
                     break;
                 case 5:
-                    Menu menu = new Menu();
                     menu.MainMenu();
                     break;
                 default:

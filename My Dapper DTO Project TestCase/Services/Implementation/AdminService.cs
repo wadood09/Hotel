@@ -8,7 +8,7 @@ using My_Dapper_DTO_Project_Testcase.Models.Enums;
 using My_Dapper_DTO_Project_Testcase.Repositories.Implementation;
 using My_Dapper_DTO_Project_Testcase.Repositories.Interface;
 using My_Dapper_DTO_Project_Testcase.Services.Interface;
-using My_Dapper_DTO_Project_TestCase.Models.Exceptions;
+using My_Dapper_DTO_Project_TestCase.Helper.Exceptions;
 
 namespace My_Dapper_DTO_Project_Testcase.Services.Implementation
 {
@@ -70,15 +70,19 @@ namespace My_Dapper_DTO_Project_Testcase.Services.Implementation
                             bool isDeleted = hotelService.IsDeleted(hotel);
                             if (!isDeleted) throw new InvalidConditionException();
                         }
-                        User user = userService.Get(user => user.Email == admin.UserEmail && user.Role == "ADMIN")!;
+                        User user = userService.Get(user => user.Email == admin.UserEmail && user.Role == "ADMIN", "service")!;
                         userService.Delete(user);
                         repository.Remove(admin);
                         transaction.Commit();
                         return true;
                     }
-                    catch (InvalidConditionException exception)
+                    catch (InvalidConditionException)
                     {
-                        Console.WriteLine(exception.Message);
+                        transaction.Rollback();
+                        return false;
+                    }
+                    catch (Exception)
+                    {
                         transaction.Rollback();
                         return false;
                     }
@@ -87,9 +91,20 @@ namespace My_Dapper_DTO_Project_Testcase.Services.Implementation
 
         }
 
-        public void Update(Admin admin)
+        public void Update(AdminResponseModel model)
         {
+            Admin admin = Get(admin => admin.Id == model.Id, "servce")!;
             repository.Update(admin);
+        }
+
+        public Admin? Get(Func<Admin, bool> pred, string serv)
+        {
+            return repository.GetAll().SingleOrDefault(pred);
+        }
+
+        public List<Admin> GetSelected(Func<Admin, bool> pred, string serv)
+        {
+            return repository.GetAll().Where(pred).ToList();
         }
     }
 }

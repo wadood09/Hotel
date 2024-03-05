@@ -1,57 +1,63 @@
-using Project_TestCase2.Context;
-using Project_TestCase2.Models.Entities;
-using Project_TestCase2.Repositories.Interface;
+using System.Text.Json;
+using My_File_Project.Context;
+using My_File_Project.Models.Entities;
+using My_File_Project.Repositories.Interface;
 
-namespace Project_TestCase2.Repositories.Implementation
+namespace My_File_Project.Repositories.Implementation
 {
-    public class RoomServiceRepository : IRoomServiceRepository
+    public class RoomServiceRepository : IRepository<RoomService>
     {
         public void Add(RoomService roomService)
         {
             HotelContext.RoomServices.Add(roomService);
+
+            using (StreamWriter writer = new(HotelContext.RoomServiceFile, true))
+            {
+                writer.WriteLine(JsonSerializer.Serialize(roomService));
+            }
         }
 
-        public List<RoomService> GetByCustomerId(int customerId)
+        public RoomService? Get(Func<RoomService, bool> pred)
         {
-            List<RoomService> roomServices = new();
-            foreach (RoomService roomService in HotelContext.RoomServices)
-            {
-                if(roomService.CustomerId == customerId)
-                {
-                    roomServices.Add(roomService);
-                }
-            }
-            return roomServices;
+            RoomService? roomService = HotelContext.RoomServices.SingleOrDefault(pred);
+            return roomService;
         }
 
-        public List<RoomService> GetByHotelId(int hotelId)
+        public List<RoomService> GetAll()
         {
-            List<RoomService> roomServices = new();
-            foreach (RoomService roomService in HotelContext.RoomServices)
-            {
-                if(roomService.HotelId == hotelId)
-                {
-                    roomServices.Add(roomService);
-                }
-            }
-            return roomServices;
+            return HotelContext.RoomServices;
         }
 
-        public RoomService GetByName(string name, int hotelId)
+        public List<RoomService> GetSelected(Func<RoomService, bool> pred)
         {
-            foreach (RoomService roomService in HotelContext.RoomServices)
+            return HotelContext.RoomServices.Where(pred).ToList();
+        }
+
+        public void RefreshFile()
+        {
+            using (StreamWriter writer = new(HotelContext.RoomServiceFile, false))
             {
-                if(roomService.Name.ToLower() == name.ToLower() && roomService.HotelId == hotelId)
+                foreach (RoomService roomService in HotelContext.RoomServices)
                 {
-                    return roomService;
+                    writer.WriteLine(JsonSerializer.Serialize(roomService));
                 }
             }
-            return null;
+        }
+
+        public void RefreshList()
+        {
+            string[] roomServices = File.ReadAllLines(HotelContext.RoomServiceFile);
+            foreach (string roomService in roomServices)
+            {
+                HotelContext.RoomServices.Add(JsonSerializer.Deserialize<RoomService>(roomService)!);
+            }
         }
 
         public void Remove(RoomService roomService)
         {
             HotelContext.RoomServices.Remove(roomService);
+
+            RefreshFile();
         }
     }
 }

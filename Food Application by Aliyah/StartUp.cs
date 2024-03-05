@@ -29,12 +29,15 @@ namespace Food_Application
 
             var user = Path.Combine("foodApp", "users.txt");
             if (!File.Exists(user)) File.Create(user);
-            else userManager.UpdateList();
+            else
+            {
+                userManager.CheckAndAddSuperAdmin();
+                userManager.UpdateList();
+            }
 
             var wallet = Path.Combine("foodApp", "wallets.txt");
             if (!File.Exists(wallet)) File.Create(wallet);
             else walletManager.UpdateList();
-            userManager.CheckAndAddSuperAdmin();
         }
     }
 }

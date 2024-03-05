@@ -23,7 +23,7 @@ namespace Food_Application_Project.Repository.Implementation
         {
             FileContext.orderings.Add(ordering);
 
-            using (var str = new StreamWriter(context.Ordering))
+            using (var str = new StreamWriter(context.Ordering, true))
             {
                 str.WriteLine(ordering.ToString());
             }
@@ -34,35 +34,27 @@ namespace Food_Application_Project.Repository.Implementation
         {
             try
             {
-                var fileExist = File.Exists(context.Ordering);
-                if(fileExist)
+                var ordering = File.ReadAllLines(context.Ordering);
+                foreach (var item in ordering)
                 {
-                    var ordering = File.ReadAllLines(context.Ordering);
-                    foreach (var item in ordering)
-                    {
-                        FileContext.orderings.Add(Ordering.ToOrder(item));
-                    }  
-                }
-                else
-                {
-                    File.Create(context.Ordering);
+                    FileContext.orderings.Add(Ordering.ToOrder(item));
                 }
             }
-            catch(System.IO.IOException ex)
+            catch (System.IO.IOException ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
             return;
-            
+
         }
 
         public void RefreshFile()
         {
-            using(var str = new StreamWriter(context.Ordering, false))
+            using (var str = new StreamWriter(context.Ordering, false))
             {
                 foreach (var item in FileContext.orderings)
                 {

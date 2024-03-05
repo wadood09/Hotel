@@ -14,10 +14,10 @@ namespace StudentFile_Project.Context
         public static List<Admin> AdminDb = new List<Admin>();
 
 
-        public string StudentFile = @"C:\Users\USER-PC\Desktop\StudentFile Project\Files\Student.txt";
-        public string ExamFile = @"C:\Users\USER-PC\Desktop\StudentFile Project\Files\Exam.txt";
-        public string UserFile = @"C:\Users\USER-PC\Desktop\StudentFile Project\Files\User.txt";
-        public string AdminFile = @"C:\Users\USER-PC\Desktop\StudentFile Project\Files\Admin.txt";
+        public string StudentFile = @"Files\Student.txt";
+        public string ExamFile = @"Files\Exam.txt";
+        public string UserFile = @"Files\User.txt";
+        public string AdminFile = @"Files\Admin.txt";
 
 
 

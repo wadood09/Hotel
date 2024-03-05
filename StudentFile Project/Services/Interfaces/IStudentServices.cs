@@ -10,6 +10,7 @@ namespace StudentFile_Project.Services.Interfaces
     {
         Student Create(string email);
         Student GetByEmail(string email);
+        Student GetById(string id);
         List<Student> GetAll();
         void IsDeleted(string id);
         void Update();

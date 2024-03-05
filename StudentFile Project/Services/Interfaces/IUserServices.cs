@@ -13,6 +13,7 @@ namespace StudentFile_Project.Services.Interfaces
         User GetByEmail(string email);
         List<User> GetAll();
         void IsDeleted(string id);
+        public void CheckAndAddSuperAdmin();
         public  User IsLoggedIn(string email,string password);
         void Update();
         void ReadAllFromFile();

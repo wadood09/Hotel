@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using My_Dapper_DTO_Project_Testcase.Helper.Extensions;
 using My_Dapper_DTO_Project_Testcase.Models.Entities;
 using My_Dapper_DTO_Project_Testcase.Models.Enums;
-using My_Dapper_DTO_Project_Testcase.Models.Extensions;
 
 namespace My_Dapper_DTO_Project_Testcase.DTO
 {

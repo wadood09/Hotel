@@ -1,0 +1,31 @@
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\bin\Debug\net6.0\appsettings.json
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\bin\Debug\net6.0\MVC Introduction.staticwebassets.runtime.json
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\bin\Debug\net6.0\MVC Introduction.exe
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\bin\Debug\net6.0\MVC Introduction.deps.json
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\bin\Debug\net6.0\MVC Introduction.runtimeconfig.json
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\bin\Debug\net6.0\MVC Introduction.dll
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\bin\Debug\net6.0\MVC Introduction.pdb
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\obj\Debug\net6.0\MVC Introduction.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\obj\Debug\net6.0\MVC Introduction.AssemblyInfoInputs.cache
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\obj\Debug\net6.0\MVC Introduction.AssemblyInfo.cs
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\obj\Debug\net6.0\MVC Introduction.csproj.CoreCompileInputs.cache
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\obj\Debug\net6.0\MVC Introduction.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\obj\Debug\net6.0\MVC Introduction.RazorAssemblyInfo.cache
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\obj\Debug\net6.0\MVC Introduction.RazorAssemblyInfo.cs
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\obj\Debug\net6.0\MVC Introduction.sourcelink.json
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\obj\Debug\net6.0\staticwebassets\msbuild.MVC Introduction.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\obj\Debug\net6.0\staticwebassets\msbuild.build.MVC Introduction.props
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.MVC Introduction.props
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.MVC Introduction.props
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\obj\Debug\net6.0\staticwebassets.pack.json
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\obj\Debug\net6.0\scopedcss\bundle\MVC Introduction.styles.css
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\obj\Debug\net6.0\scopedcss\projectbundle\MVC Introduction.bundle.scp.css
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\obj\Debug\net6.0\MVC Introduction.dll
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\obj\Debug\net6.0\refint\MVC Introduction.dll
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\obj\Debug\net6.0\MVC Introduction.pdb
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\obj\Debug\net6.0\MVC Introduction.genruntimeconfig.cache
+C:\Users\WADOOD\OneDrive\Desktop\MVC Introduction\obj\Debug\net6.0\ref\MVC Introduction.dll

@@ -11,6 +11,7 @@ namespace StudentFile_Project.Menu
     public class MainMenu
     {
         IUserServices _userServ = new UserServices();
+        IAdminServices _adminServ = new AdminServices();
         StudentMenu Studmenu = new StudentMenu();
         AdminMenu AdMenu = new AdminMenu();
         public void Main()
@@ -26,17 +27,17 @@ namespace StudentFile_Project.Menu
                 switch (userInput)
                 {
                     case "1":
-                    Register("STUDENT");
-                    break;
+                        Register("STUDENT");
+                        break;
                     case "2":
-                    Login();
-                    break;
+                        Login();
+                        break;
                     case "0":
-                    isContinue = false;
-                    break;
+                        isContinue = false;
+                        break;
                     default:
-                    Console.WriteLine("Invalid Input");
-                    break;
+                        Console.WriteLine("Invalid Input");
+                        break;
                 }
             }
         }
@@ -56,15 +57,15 @@ namespace StudentFile_Project.Menu
             int age = int.Parse(Console.ReadLine()!);
             Console.WriteLine("Enter Gender (1:Male 2:Female)");
             int gender = int.Parse(Console.ReadLine()!);
-             var form = _userServ.Create(email,userName,firstName,lastName,passWord,age,role,(Gender)gender);
-             if(form is not null)
-             {
+            var form = _userServ.Create(email, userName, firstName, lastName, passWord, age, role, (Gender)gender);
+            if (form is not null)
+            {
                 Console.WriteLine("Registration Successful");
-             }
-             else
-             {
+            }
+            else
+            {
                 Console.WriteLine("User with the email already exists");
-             }
+            }
 
         }
         private void Login()
@@ -73,24 +74,97 @@ namespace StudentFile_Project.Menu
             string email = Console.ReadLine()!;
             Console.WriteLine("Enter your Password");
             string passWord = Console.ReadLine()!;
-             var log = _userServ.IsLoggedIn(email,passWord);
-             if(log is not null)
-             {
+            var log = _userServ.IsLoggedIn(email, passWord);
+            if (log is not null)
+            {
                 Console.WriteLine("Login Successful");
-                if(log.Role == "STUDENT")
-                 {
+                if (log.Role == "STUDENT")
+                {
                     Studmenu.MenuStudent();
-                 }
-                 else
-                 {
+                }
+                else if (log.Role == "ADMIN")
+                {
                     AdMenu.MenuAdmin();
-                 }
-             }
-             else
-             {
+                }
+                else
+                {
+                    SuperMenu();
+                }
+            }
+            else
+            {
                 Console.WriteLine("Invalid Login Credentials");
-             }
+            }
 
         }
+
+        public void SuperMenu()
+        {
+            bool isContinue = true;
+            while (isContinue)
+            {
+                Console.WriteLine("SuperMenu");
+                Console.WriteLine("1:Register Admin");
+                Console.WriteLine("2:View All Admins");
+                Console.WriteLine("3:Remove Admin");
+                Console.WriteLine("0:LogOut");
+                string userInput = Console.ReadLine()!;
+                switch (userInput)
+                {
+                    case "1":
+                        Register("ADMIN");
+                        break;
+                    case "2":
+                        ViewAdmins();
+                        break;
+                    case "3":
+                        RemoveAdmin();
+                        break;
+                    case "0":
+                        isContinue = false;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid Input");
+                        break;
+                }
+            }
+        }
+
+        private void ViewAdmins()
+        {
+            var getAll = _adminServ.GetAll();
+            if (getAll.Count == 1)
+            {
+                Console.WriteLine("No Admin has Been Registered");
+            }
+            else
+            {
+                int count = 0;
+                Console.WriteLine("Viewing All Admins");
+                var admins = _userServ.GetAll().Where(user => user.Role == "ADMIN");
+                Console.WriteLine($"NAME".PadRight(20) + $"USERNAME".PadRight(20) + $"GENDER".PadRight(20) + $"AGE".PadRight(20));
+                foreach (var admin in admins)
+                {
+                    Console.WriteLine($"{++count}:{admin.FirstName} {admin.LastName}".PadRight(20) + $"{admin.UserName}".PadRight(20) + $"{admin.Gender}".PadRight(20) + $"{admin.Age}".PadRight(20));
+                }
+            }
+        }
+        private void RemoveAdmin()
+        {
+            ViewAdmins();
+            Console.WriteLine("Choose Admin to be Removed (i.e enter 1,2,3,...)");
+            int count = int.Parse(Console.ReadLine()!);
+            if (count < 1 || count > _adminServ.GetAll().Count)
+            {
+                Console.WriteLine("Admin Chosen does not exist");
+            }
+            else
+            {
+                _adminServ.IsDeleted(_adminServ.GetAll()[--count].Id);
+                Console.WriteLine("Successfully deleted Admin");
+            }
+
+        }
+
     }
 }

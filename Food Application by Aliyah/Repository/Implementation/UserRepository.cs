@@ -11,22 +11,22 @@ namespace Food_Application_Project.Repository.Implementation
     {
         FileContext context = new FileContext();
         IWalletRepository walet = new WalletRepository();
-        
+
         public User Create(User user)
         {
             FileContext.users.Add(user);
 
-            using (var str = new StreamWriter(context.User,true))
+            using (var str = new StreamWriter(context.User, true))
             {
                 str.WriteLine(user.ToString());
             }
             return user;
         }
-        
+
 
         public User Get(Func<User, bool> pred)
         {
-            return FileContext.users.FirstOrDefault(pred);
+            return FileContext.users.SingleOrDefault(pred);
         }
 
         public List<User> GetAll()
@@ -44,36 +44,28 @@ namespace Food_Application_Project.Repository.Implementation
         {
             try
             {
-                var fileExist = File.Exists(context.User);
-                if(fileExist)
+                var user = File.ReadAllLines(context.User);
+                foreach (var item in user)
                 {
-                    var user = File.ReadAllLines(context.User);
-                    foreach (var item in user)
-                    {
-                        FileContext.users.Add(User.ToUser(item));
-                    }  
+                    FileContext.users.Add(User.ToUser(item));
                 }
-                else
-                {
-                    File.Create(context.User);
-                } 
             }
-            catch(IOException ex)
+            catch (IOException ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
             return;
-                 
+
         }
 
         public void RefreshFile()
         {
             // File.WriteAllText(context.User, string.Empty);
-            using(var str = new StreamWriter(context.User, false))
+            using (var str = new StreamWriter(context.User, false))
             {
                 foreach (var item in FileContext.users)
                 {

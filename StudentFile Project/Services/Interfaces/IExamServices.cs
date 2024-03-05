@@ -9,7 +9,7 @@ namespace StudentFile_Project.Services.Interfaces
     public interface IExamServices
     {
         Exam Create(double score,string grade,double percentage);
-        Exam GetById(string id);
+        public Exam GetByStudentId(string studentId);
         List<Exam> GetAll();
         bool IsExamDone();
         void IsDeleted(string id);

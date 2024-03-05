@@ -21,7 +21,7 @@ namespace Food_Application_Project.Manager.Implementation
         }
         public Wallet CheckWallet(string accountNumber)
         {
-            var exist = FileContext.wallets.SingleOrDefault(a => a.AccountNumber == accountNumber && a.Useremail == User.LoggedInUserEmail);
+            var exist = GetWallets().SingleOrDefault(a => a.AccountNumber == accountNumber && a.Useremail == User.LoggedInUserEmail);
             return exist;
         }
 

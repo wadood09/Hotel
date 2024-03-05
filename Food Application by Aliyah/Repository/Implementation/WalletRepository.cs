@@ -10,11 +10,11 @@ namespace Food_Application_Project.Repository.Implementation
     public class WalletRepository : IWalletRepository
     {
         FileContext context = new FileContext();
-        
-        public Wallet AddWallet (Wallet wallet)
+
+        public Wallet AddWallet(Wallet wallet)
         {
             FileContext.wallets.Add(wallet);
-            using(var str = new StreamWriter(context.Wallet, true))
+            using (var str = new StreamWriter(context.Wallet, true))
             {
                 str.WriteLine(wallet.ToString());
             }
@@ -36,39 +36,31 @@ namespace Food_Application_Project.Repository.Implementation
         {
             try
             {
-                var fileExist = File.Exists(context.Wallet);
-                if(fileExist)
+                var wallet = File.ReadAllLines(context.Wallet);
+                foreach (var item in wallet)
                 {
-                    var wallet = File.ReadAllLines(context.Wallet);
-                    foreach (var item in wallet)
-                    {
-                        FileContext.wallets.Add(Wallet.ToWallet(item));
-                    }  
-                }
-                else
-                {
-                    File.Create(context.Wallet);
+                    FileContext.wallets.Add(Wallet.ToWallet(item));
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
             return;
-             
+
         }
 
 
         public void RefreshFile()
         {
-            File.WriteAllText(context.Wallet, string.Empty);
-            foreach (var item in FileContext.wallets)
+            using (var str = new StreamWriter(context.Wallet, false))
             {
-                using(var str = new StreamWriter(context.Wallet, false))
+                foreach (var item in FileContext.wallets)
                 {
                     str.WriteLine(item.ToString());
                 }
             }
+
         }
     }
 }

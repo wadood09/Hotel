@@ -14,7 +14,7 @@ namespace Food_Application_Project.Repository.Implementation
         {
             FileContext.foods.Add(food);
 
-            using (var str = new StreamWriter(context.Food))
+            using (var str = new StreamWriter(context.Food, true))
             {
                 str.WriteLine(food.ToString());
             }
@@ -41,35 +41,27 @@ namespace Food_Application_Project.Repository.Implementation
         {
             try
             {
-                var fileExist = File.Exists(context.Food);
-                if(fileExist)
+                var food = File.ReadAllLines(context.Food);
+                foreach (var item in food)
                 {
-                    var food = File.ReadAllLines(context.Food);
-                    foreach (var item in food)
-                    {
-                        FileContext.foods.Add(Food.ToFood(item));
-                    }  
+                    FileContext.foods.Add(Food.ToFood(item));
                 }
-                else
-                {
-                    File.Create(context.Food);
-                } 
             }
-            catch(System.IO.IOException ex)
+            catch (System.IO.IOException ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
             return;
-            
+
         }
 
         public void Refreshfile()
         {
-            using(var str = new StreamWriter(context.Food, false))
+            using (var str = new StreamWriter(context.Food, false))
             {
                 foreach (var item in FileContext.foods)
                 {

@@ -41,6 +41,17 @@ namespace StudentFile_Project.Repositories.Implementations
             }
             return null;
         }
+        public Student GetById(string id)
+        {
+            foreach (var item in FileContext.StudentDB)
+            {
+                if(item.Id == id)
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
 
         public void ReadAllFromFile()
         {

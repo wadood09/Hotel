@@ -1,14 +1,26 @@
-using Project_TestCase2.Context;
-using Project_TestCase2.Models.Entities;
-using Project_TestCase2.Repositories.Interface;
+using System.Text.Json;
+using My_File_Project.Context;
+using My_File_Project.Models.Entities;
+using My_File_Project.Repositories.Interface;
 
-namespace Project_TestCase2.Repositories.Implementation
+namespace My_File_Project.Repositories.Implementation
 {
     public class CustomerRepository : IRepository<Customer>
     {
         public void Add(Customer customer)
         {
             HotelContext.Customers.Add(customer);
+
+            using (StreamWriter writer = new(HotelContext.CustomerFile, true))
+            {
+                writer.WriteLine(JsonSerializer.Serialize(customer));
+            }
+        }
+
+        public Customer? Get(Func<Customer, bool> pred)
+        {
+            Customer? customer = HotelContext.Customers.SingleOrDefault(pred);
+            return customer;
         }
 
         public List<Customer> GetAll()
@@ -16,46 +28,36 @@ namespace Project_TestCase2.Repositories.Implementation
             return HotelContext.Customers;
         }
 
-        public Customer GetById(int id)
+        public List<Customer> GetSelected(Func<Customer, bool> pred)
         {
-            foreach (Customer customer in HotelContext.Customers)
-            {
-                if(customer.Id == id)
-                {
-                    return customer;
-                }
-            }
-            return null;
+            return HotelContext.Customers.Where(pred).ToList();
         }
 
-        public Customer GetByName(string email)
+        public void RefreshFile()
         {
-            foreach (Customer customer in HotelContext.Customers)
+            using (StreamWriter writer = new(HotelContext.CustomerFile, false))
             {
-                if(customer.Email == email)
+                foreach (Customer customer in HotelContext.Customers)
                 {
-                    return customer;
+                    writer.WriteLine(JsonSerializer.Serialize(customer));
                 }
             }
-            return null;
         }
 
-        public List<Customer> GetList(int id)
+        public void RefreshList()
         {
-            List<Customer> customers = new();
-            foreach (Customer customer in HotelContext.Customers)
+            string[] customers = File.ReadAllLines(HotelContext.CustomerFile);
+            foreach (string customer in customers)
             {
-                if(customer.Id == id)
-                {
-                    customers.Add(customer);
-                }
+                HotelContext.Customers.Add(JsonSerializer.Deserialize<Customer>(customer)!);
             }
-            return customers;
         }
 
         public void Remove(Customer customer)
         {
             HotelContext.Customers.Remove(customer);
+
+            RefreshFile();
         }
     }
 }

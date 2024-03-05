@@ -1,30 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\USER-PC\\Desktop\\StudentFile Project\\StudentFile Project.csproj": {}
+    "C:\\Users\\WADOOD\\OneDrive\\Desktop\\StudentFile Project\\StudentFile Project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\USER-PC\\Desktop\\StudentFile Project\\StudentFile Project.csproj": {
+    "C:\\Users\\WADOOD\\OneDrive\\Desktop\\StudentFile Project\\StudentFile Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\USER-PC\\Desktop\\StudentFile Project\\StudentFile Project.csproj",
+        "projectUniqueName": "C:\\Users\\WADOOD\\OneDrive\\Desktop\\StudentFile Project\\StudentFile Project.csproj",
         "projectName": "StudentFile Project",
-        "projectPath": "C:\\Users\\USER-PC\\Desktop\\StudentFile Project\\StudentFile Project.csproj",
-        "packagesPath": "C:\\Users\\USER-PC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\USER-PC\\Desktop\\StudentFile Project\\obj\\",
+        "projectPath": "C:\\Users\\WADOOD\\OneDrive\\Desktop\\StudentFile Project\\StudentFile Project.csproj",
+        "packagesPath": "C:\\Users\\WADOOD\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\WADOOD\\OneDrive\\Desktop\\StudentFile Project\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\USER-PC\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\WADOOD\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net7.0"
+          "net6.0"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0": {
-            "targetAlias": "net7.0",
+          "net6.0": {
+            "targetAlias": "net6.0",
             "projectReferences": {}
           }
         },
@@ -35,8 +35,8 @@
         }
       },
       "frameworks": {
-        "net7.0": {
-          "targetAlias": "net7.0",
+        "net6.0": {
+          "targetAlias": "net6.0",
           "dependencies": {
             "Dapper": {
               "target": "Package",
@@ -53,8 +53,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -63,7 +62,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.312\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

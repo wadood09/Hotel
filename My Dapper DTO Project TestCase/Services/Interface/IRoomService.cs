@@ -13,7 +13,9 @@ namespace My_Dapper_DTO_Project_Testcase.Services.Interface
         RoomResponseModel? BookRoom(DatePeriod period, string roomTypeId);
         void CreateRoom(Room room);
         RoomResponseModel? Get(Func<Room, bool> pred);
+        Room? Get(Func<Room, bool> pred, string serv);
         List<RoomResponseModel> GetSelected(Func<Room, bool> pred);
+        List<Room> GetSelected(Func<Room, bool> pred, string serv);
         bool IsDeleted(Room room);
         bool IsExist(string num, string roomTypeId);
         void Update();

@@ -36,14 +36,10 @@ namespace StudentFile_Project.Services.Implementations
 
         public void IsDeleted(string id)
         {
-
-
             var getAdmin = _adminRepo.GetById(id);
             var getUser = _userRepo.GetbyEmail(getAdmin.UserEmail);
             _userRepo.Remove(getUser.Id);
             _adminRepo.Remove(id);
-
-
         }
 
         public void ReadAllFromFile()

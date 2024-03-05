@@ -1,7 +1,0 @@
-{"HotelId":"7f190","Name":"Lobby store snacks and drinks","Price":50000,"Id":"87660"}
-{"HotelId":"7f190","Name":"24/7 service","Price":100000,"Id":"6653b"}
-{"HotelId":"7f190","Name":"Breakfast in bed","Price":70000,"Id":"0b88c"}
-{"HotelId":"7f190","Name":"Full Dinner Service","Price":30000,"Id":"60554"}
-{"HotelId":"15623","Name":"Breakfast in bed","Price":50000,"Id":"1c540"}
-{"HotelId":"15623","Name":"Lobby snacks and drinks","Price":30000,"Id":"10975"}
-{"HotelId":"15623","Name":"24/7 service","Price":120000,"Id":"943c0"}

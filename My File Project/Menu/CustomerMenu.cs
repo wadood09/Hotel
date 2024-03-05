@@ -155,7 +155,7 @@ namespace My_File_Project.Menu
             Console.Write("Enter amount to be deposited: ");
             double amount = new();
             generalMenu.EnterChoice(ref amount);
-            
+
             user!.Wallet += (decimal)amount;
             Console.WriteLine($"You have successfully deposited N{amount:n} into your account!!!");
             _userService.UpdateFile();
