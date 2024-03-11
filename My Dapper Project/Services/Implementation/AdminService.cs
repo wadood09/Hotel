@@ -1,4 +1,3 @@
-
 using My_Dapper_Project.Models.Entities;
 using My_Dapper_Project.Models.Enums;
 using My_Dapper_Project.Repositories.Implementation;
@@ -9,53 +8,38 @@ namespace My_Dapper_Project.Services.Implementation
 {
     public class AdminService : IAdminService
     {
-        private static string _connectionString = default!;
-        public AdminService(string connectionString)
-        {
-            _connectionString = connectionString;
-        }
-        IRepository<Admin> repository = new AdminRepository(_connectionString);
+        IRepository<Admin> repository = new AdminRepository();
         IHotelService hotelService = new HotelService();
         IUserService userService = new UserService();
-        public void CreateAdmin(Admin model)
+        public void CreateAdmin(string userEmail)
         {
-            Admin admin = new()
+            var admin = new Admin
             {
-                UserEmail = model.UserEmail
+                UserEmail = userEmail
             };
             repository.Add(admin);
         }
 
         public Admin? Get(Func<Admin, bool> pred)
         {
-            Admin? admin = repository.GetAll().SingleOrDefault(pred);
-            if (admin is null) return null;
-            Admin model = new()
-            {
-                UserEmail = admin.UserEmail,
-                Id = admin.Id
-            };
-            return model;
+            return repository.GetAll().SingleOrDefault(pred);
         }
+
         public List<Admin> GetSelected(Func<Admin, bool> pred)
         {
-            return repository.GetAll().Where(pred).Select(admin => new Admin()
-            {
-                UserEmail = admin.UserEmail,
-                Id = admin.Id
-            }).ToList();
+            return repository.GetAll().Where(pred).ToList();
         }
 
         public bool IsDeleted(Admin admin)
         {
             List<Hotel> hotels = hotelService.GetSelected(hotel => hotel.AdminId == admin.Id);
             bool isActive = hotels.Any(hotel => hotel.HotelStatus == Status.Active);
-            if (isActive) return false;
-
+            if(isActive) return false;
+            
             foreach (Hotel hotel in hotels)
             {
                 bool isDeleted = hotelService.IsDeleted(hotel);
-                if (!isDeleted) return false;
+                if(!isDeleted) return false;
             }
 
             User user = userService.Get(user => user.Email == admin.UserEmail && user.Role == "ADMIN")!;
@@ -64,14 +48,9 @@ namespace My_Dapper_Project.Services.Implementation
             return true;
         }
 
-        public void UpdateFile()
+        public void Update(Admin admin)
         {
-            repository.RefreshFile();
-        }
-
-        public void UpdateList()
-        {
-            repository.RefreshList();
+            repository.Update(admin);
         }
     }
 }

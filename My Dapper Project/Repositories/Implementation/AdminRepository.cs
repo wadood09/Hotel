@@ -1,7 +1,5 @@
 using System.Data;
-using System.Text.Json;
 using Dapper;
-using Microsoft.Data.SqlClient;
 using My_Dapper_Project.Context;
 using My_Dapper_Project.Models.Entities;
 using My_Dapper_Project.Repositories.Interface;

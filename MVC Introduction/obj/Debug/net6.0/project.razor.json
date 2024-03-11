@@ -18384,8 +18384,18 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\WADOOD\\OneDrive\\Desktop\\MVC Introduction\\Views\\Body\\FAQ.cshtml",
+      "TargetPath": "Views\\Body\\FAQ.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\WADOOD\\OneDrive\\Desktop\\MVC Introduction\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
       "TargetPath": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\WADOOD\\OneDrive\\Desktop\\MVC Introduction\\Views\\Home\\Tutorial.cshtml",
+      "TargetPath": "Views\\Home\\Tutorial.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -18406,6 +18416,11 @@
     {
       "FilePath": "c:\\Users\\WADOOD\\OneDrive\\Desktop\\MVC Introduction\\Views\\Shared\\Error.cshtml",
       "TargetPath": "Views\\Shared\\Error.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\WADOOD\\OneDrive\\Desktop\\MVC Introduction\\Views\\Course\\CourseList.cshtml",
+      "TargetPath": "Views\\Course\\CourseList.cshtml",
       "FileKind": "mvc"
     }
   ],

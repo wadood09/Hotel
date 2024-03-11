@@ -18,7 +18,6 @@ C:\Users\WADOOD\OneDrive\Desktop\TestCase\bin\Debug\net6.0\TestCase.deps.json
 C:\Users\WADOOD\OneDrive\Desktop\TestCase\bin\Debug\net6.0\TestCase.runtimeconfig.json
 C:\Users\WADOOD\OneDrive\Desktop\TestCase\bin\Debug\net6.0\TestCase.dll
 C:\Users\WADOOD\OneDrive\Desktop\TestCase\bin\Debug\net6.0\TestCase.pdb
-C:\Users\WADOOD\OneDrive\Desktop\TestCase\obj\Debug\net6.0\TestCase.csproj.AssemblyReference.cache
 C:\Users\WADOOD\OneDrive\Desktop\TestCase\obj\Debug\net6.0\TestCase.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\WADOOD\OneDrive\Desktop\TestCase\obj\Debug\net6.0\TestCase.AssemblyInfoInputs.cache
 C:\Users\WADOOD\OneDrive\Desktop\TestCase\obj\Debug\net6.0\TestCase.AssemblyInfo.cs
@@ -28,3 +27,4 @@ C:\Users\WADOOD\OneDrive\Desktop\TestCase\obj\Debug\net6.0\refint\TestCase.dll
 C:\Users\WADOOD\OneDrive\Desktop\TestCase\obj\Debug\net6.0\TestCase.pdb
 C:\Users\WADOOD\OneDrive\Desktop\TestCase\obj\Debug\net6.0\TestCase.genruntimeconfig.cache
 C:\Users\WADOOD\OneDrive\Desktop\TestCase\obj\Debug\net6.0\ref\TestCase.dll
+C:\Users\WADOOD\OneDrive\Desktop\TestCase\obj\Debug\net6.0\TestCase.sourcelink.json

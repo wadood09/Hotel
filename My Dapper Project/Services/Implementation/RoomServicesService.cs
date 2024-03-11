@@ -8,11 +8,11 @@ namespace My_Dapper_Project.Services.Implementation
     public class RoomServicesService : IRoomServicesService
     {
         IRepository<RoomService> repository = new RoomServiceRepository();
-        public void CreateRoomService(string hotelId, string name, double price)
+        public void CreateRoomService(int typeId, string name, double price)
         {
-            RoomService service = new()
+            var service = new RoomService
             {
-                HotelId = hotelId,
+                RoomTypeId = typeId,
                 Name = name,
                 Price = price
             };
@@ -21,12 +21,12 @@ namespace My_Dapper_Project.Services.Implementation
 
         public RoomService? Get(Func<RoomService, bool> pred)
         {
-            return repository.Get(pred);
+            return repository.GetAll().SingleOrDefault(pred);
         }
 
         public List<RoomService> GetSelected(Func<RoomService, bool> pred)
         {
-            return repository.GetSelected(pred);
+            return repository.GetAll().Where(pred).ToList();
         }
 
         public void Delete(RoomService service)
@@ -34,27 +34,22 @@ namespace My_Dapper_Project.Services.Implementation
             repository.Remove(service);
         }
 
-        public bool IsExist(string name, string? hotelId)
+        public bool IsExist(string name, int typeId)
         {
-            bool service = repository.Get(service => service.Name!.ToUpper() == name.ToUpper() && service.HotelId == hotelId) is not null;
+            bool service = Get(service => service.Name!.ToUpper() == name.ToUpper() && service.RoomTypeId == typeId) is not null;
             return service;
         }
 
-        public RoomService? IsExist(int num, string hotelId)
+        public RoomService? IsExist(int num, int typeId)
         {
-            List<RoomService> service = repository.GetSelected(service => service.HotelId == hotelId);
+            List<RoomService> service = GetSelected(service => service.RoomTypeId == typeId);
             if(num > service.Count) return null;
             return service[--num];
         }
 
-        public void UpdateFile()
+        public void Update(RoomService roomService)
         {
-            repository.RefreshFile();
-        }
-
-        public void UpdateList()
-        {
-            repository.RefreshList();
+            repository.Update(roomService);
         }
     }
 }

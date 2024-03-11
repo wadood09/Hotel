@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using My_Dapper_Project.Models.Entities;
 
 namespace My_Dapper_Project.Services.Interface
@@ -12,8 +9,7 @@ namespace My_Dapper_Project.Services.Interface
         User? Get(Func<User, bool> pred);
         List<User> GetSelected(Func<User, bool> pred);
         void Delete(User user);
-        (bool, List<User>) Login(string email, string password);
-        void UpdateFile();
-        void UpdateList();
+        User? Login(string email, string password);
+        void Update(User user);
     }
 }

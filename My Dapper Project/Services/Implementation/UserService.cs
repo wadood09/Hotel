@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using My_Dapper_Project.Models.Entities;
 using My_Dapper_Project.Repositories.Implementation;
 using My_Dapper_Project.Repositories.Interface;
@@ -19,7 +16,7 @@ namespace My_Dapper_Project.Services.Implementation
         {
             if (IsExist(email, role)) return null;
 
-            User user = new()
+            var user = new User
             {
                 FirstName = firstName,
                 LastName = lastName,
@@ -29,6 +26,7 @@ namespace My_Dapper_Project.Services.Implementation
                 Role = role
             };
 
+            repository.Add(user);
             if (role == "ADMIN")
             {
                 Admin admin = new()
@@ -45,20 +43,18 @@ namespace My_Dapper_Project.Services.Implementation
                 };
                 customerRepo.Add(customer);
             }
-            
-            repository.Add(user);
             return user;
         }
 
 
         public User? Get(Func<User, bool> pred)
         {
-            return repository.Get(pred);
+            return repository.GetAll().SingleOrDefault(pred);
         }
 
         public List<User> GetSelected(Func<User, bool> pred)
         {
-            return repository.GetSelected(pred);
+            return repository.GetAll().Where(pred).ToList();
         }
 
         public void Delete(User user)
@@ -68,24 +64,18 @@ namespace My_Dapper_Project.Services.Implementation
 
         public bool IsExist(string email, string role)
         {
-            bool isExist = repository.GetAll().SingleOrDefault(user => user.Email == email && user.Role == role) is not null;
+            bool isExist = repository.GetAll().Any(user => user.Email == email && user.Role == role);
             return isExist;
         }
 
-        public (bool, List<User>) Login(string email, string password)
+        public User? Login(string email, string password)
         {
-            List<User> user = repository.GetAll().Where(user => user.Email == email && user.Password == password).ToList();
-            return(user.Any(), user);
+            return Get(user => user.Email == email && user.Password == password);
         }
 
-        public void UpdateFile()
+        public void Update(User user)
         {
-            repository.RefreshFile();
-        }
-
-        public void UpdateList()
-        {
-            repository.RefreshList();
+            repository.Update(user);
         }
     }
 }

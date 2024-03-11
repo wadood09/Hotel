@@ -94,14 +94,16 @@ static int Reverse(string str)
 //     Console.WriteLine(d);
 // }
 
-int a = Reverse("wadood");
 // int count = 0;
 // while (count < 10)
 // {
 //     Console.Beep(900, 500);
 //     count++;
 // }
-
+int a = 9;
+int b = 3;
+Swap(ref a, ref b);
+Console.WriteLine(a+ " "+b);
 
 // int beep = 10;
 // for(int i = 1; i <= beep; i++) 
@@ -109,4 +111,10 @@ int a = Reverse("wadood");
 //     Console.Beep();
 // }
 
-let 
+static void Swap(ref int a, ref int b)
+{
+    if (a > b)
+    {
+        (b, a) = (a, b);
+    }
+}

@@ -11,17 +11,15 @@ namespace My_Dapper_Project.Services.Implementation
         IRepository<Hotel> repository = new HotelRepository();
         IRoomTypeService typeService = new RoomTypeService();
         IRoomServicesService servicesService = new RoomServicesService();
-        public Hotel? CreateHotel(string name, bool hasRoomService, double checkOutFee, List<string> roomTypes, List<double> roomPrices, List<int> roomAmount, List<List<string>> roomNumbers, List<string> roomServices, List<double> servicePrices)
+        public Hotel? CreateHotel(string name, List<string> roomTypes, List<double> roomPrices, List<int> roomAmount, List<List<string>> roomNumbers, List<string> roomServices, List<double> servicePrices)
         {
             if (IsExist(name)) return null;
 
-            Hotel hotel = new()
+            var hotel = new Hotel
             {
                 Name = name,
-                HasRoomService = hasRoomService,
                 AdminId = Admin.LoggedInAdminId,
                 Ratings = 0,
-                EarlyCheckOutFee = checkOutFee
             };
 
             for (int i = 0; i < roomTypes.Count; i++)
@@ -29,12 +27,9 @@ namespace My_Dapper_Project.Services.Implementation
                 typeService.CreateRoomType(hotel.Id, roomTypes[i], roomAmount[i], roomPrices[i], roomNumbers[i]);
             }
 
-            if (hasRoomService)
+            for (int i = 0; i < roomServices.Count; i++)
             {
-                for (int i = 0; i < roomServices.Count; i++)
-                {
-                    servicesService.CreateRoomService(hotel.Id, roomServices[i], servicePrices[i]);
-                }
+                servicesService.CreateRoomService(hotel.Id, roomServices[i], servicePrices[i]);
             }
             repository.Add(hotel);
             return hotel;
@@ -48,23 +43,14 @@ namespace My_Dapper_Project.Services.Implementation
 
         public Hotel? Get(Func<Hotel, bool> pred)
         {
-            return repository.Get(pred);
+            return repository.GetAll().SingleOrDefault(pred);
         }
 
         public List<Hotel> GetSelected(Func<Hotel, bool> pred)
         {
-            return repository.GetSelected(pred);
+            return repository.GetAll().Where(pred).ToList();
         }
 
-        public void UpdateFile()
-        {
-            repository.RefreshFile();
-        }
-
-        public void UpdateList()
-        {
-            repository.RefreshList();
-        }
 
         public bool IsDeleted(Hotel hotel)
         {
@@ -76,25 +62,25 @@ namespace My_Dapper_Project.Services.Implementation
                 if (!isDeleted) return false;
             }
 
-            List<RoomService> services = servicesService.GetSelected(service => service.HotelId == hotel.Id);
-            foreach (RoomService service in services)
-            {
-                servicesService.Delete(service);
-            }
             repository.Remove(hotel);
             return true;
         }
 
         public List<Hotel> GetAll()
         {
-            return repository.GetAll();
+            return repository.GetAll().ToList();
         }
 
         public Hotel? IsExist(int pos)
         {
-            List<Hotel> hotels = repository.GetAll();
+            List<Hotel> hotels = GetAll();
             if (pos > hotels.Count || pos == 0) return null;
             else return hotels[--pos];
+        }
+
+        public void Update(Hotel hotel)
+        {
+            repository.Update(hotel);
         }
     }
 }

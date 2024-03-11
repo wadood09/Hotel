@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace My_Dapper_Project.Context
 {
@@ -13,7 +9,7 @@ namespace My_Dapper_Project.Context
 
         public static IDbConnection Connection()
         {
-            var connection = new SqlConnection(_connectionString);
+            var connection = new MySqlConnection(_connectionString);
             return connection;
         }
     }

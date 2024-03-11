@@ -8,7 +8,6 @@ namespace My_Dapper_Project.Services.Interface
         Admin? Get(Func<Admin, bool> pred);
         List<Admin> GetSelected(Func<Admin, bool> pred);
         bool IsDeleted(Admin admin);
-        void UpdateFile();
-        void UpdateList();
+        void Update(Admin admin);
     }
 }

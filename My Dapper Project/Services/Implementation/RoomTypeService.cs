@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using My_Dapper_Project.Models.Entities;
 using My_Dapper_Project.Models.Enums;
 using My_Dapper_Project.Repositories.Implementation;
@@ -15,9 +11,9 @@ namespace My_Dapper_Project.Services.Implementation
         IRepository<RoomType> repository = new RoomTypeRepository();
         IRoomService roomService = new RoomServices();
 
-        public void CreateRoomType(string hotelId, string name, int amountOfRooms, double price, List<string> roomNumbers)
+        public void CreateRoomType(int hotelId, string name, int amountOfRooms, double price, List<string> roomNumbers)
         {
-            RoomType type = new()
+            var type = new RoomType
             {
                 HotelId = hotelId,
                 Name = name,
@@ -27,19 +23,19 @@ namespace My_Dapper_Project.Services.Implementation
 
             for (int i = 0; i < roomNumbers.Count; i++)
             {
-                roomService.CreateRoom(type.HotelId, type.Id, roomNumbers[i]);
+                roomService.CreateRoom(type.Id, roomNumbers[i]);
             }
             repository.Add(type);
         }
 
         public RoomType? Get(Func<RoomType, bool> pred)
         {
-            return repository.Get(pred);
+            return repository.GetAll().SingleOrDefault(pred);
         }
 
         public List<RoomType> GetSelected(Func<RoomType, bool> pred)
         {
-            return repository.GetSelected(pred);
+            return repository.GetAll().Where(pred).ToList();
         }
 
         public bool IsDeleted(RoomType type)
@@ -55,27 +51,22 @@ namespace My_Dapper_Project.Services.Implementation
             return true;
         }
 
-        public bool IsExist(string roomType, string hotelId)
+        public bool IsExist(string roomType, int hotelId)
         {
-            bool isExist = repository.Get(type => type.Name!.ToUpper() == roomType.ToUpper() && type.HotelId == hotelId) is not null;
+            bool isExist = Get(type => type.Name!.ToUpper() == roomType.ToUpper() && type.HotelId == hotelId) is not null;
             return isExist;
         }
 
-        public RoomType? IsExist(int number, string hotelId)
+        public RoomType? IsExist(int number, int hotelId)
         {
-            List<RoomType> types = repository.GetSelected(type => type.HotelId == hotelId);
+            List<RoomType> types = GetSelected(type => type.HotelId == hotelId);
             if (number > types.Count || number == 0) return null;
             else return types[--number];
         }
 
-        public void UpdateFile()
+        public void Update(RoomType roomType)
         {
-            repository.RefreshFile();
-        }
-
-        public void UpdateList()
-        {
-            repository.RefreshList();
+            repository.Update(roomType);
         }
     }
 }

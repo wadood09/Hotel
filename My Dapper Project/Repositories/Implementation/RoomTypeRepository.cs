@@ -1,6 +1,6 @@
 using System.Data;
 using Dapper;
-using Microsoft.Data.SqlClient;
+using My_Dapper_Project.Context;
 using My_Dapper_Project.Models.Entities;
 using My_Dapper_Project.Repositories.Interface;
 
@@ -8,11 +8,6 @@ namespace My_Dapper_Project.Repositories.Implementation
 {
     public class RoomTypeRepository : IRepository<RoomType>
     {
-        private readonly string _connectionString;
-        public RoomTypeRepository(string connectionString)
-        {
-            _connectionString = connectionString;
-        }
         public void Add(RoomType type)
         {
             using (IDbConnection dbConnection = HotelContext.Connection())
@@ -22,6 +17,11 @@ namespace My_Dapper_Project.Repositories.Implementation
                 values(@HotelId, @Name, @AmountOfRooms, @Price, @Status)";
                 dbConnection.Execute(query, type);
             }
+        }
+
+        public IDbConnection Connection()
+        {
+            return HotelContext.Connection();
         }
 
         public IEnumerable<RoomType> GetAll()

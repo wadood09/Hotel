@@ -1,6 +1,6 @@
 using System.Data;
 using Dapper;
-using Microsoft.Data.SqlClient;
+using My_Dapper_Project.Context;
 using My_Dapper_Project.Models.Entities;
 using My_Dapper_Project.Repositories.Interface;
 
@@ -8,20 +8,20 @@ namespace My_Dapper_Project.Repositories.Implementation
 {
     public class RoomRepository : IRepository<Room>
     {
-        private readonly string _connectionString;
-        public RoomRepository(string connectionString)
-        {
-            _connectionString = connectionString;
-        }
         public void Add(Room room)
         {
             using (IDbConnection dbConnection = HotelContext.Connection())
             {
                 string query = @"Insert into Rooms 
-                (HotelId, RoomTypeId, Number, RoomStatus) 
-                values(@HotelId, @RoomTypeId, @Number, @RoomStatus)";
+                (RoomTypeId, RoomNumber, RoomStatus) 
+                values(@RoomTypeId, @RoomNumber, @RoomStatus)";
                 dbConnection.Execute(query, room);
             }
+        }
+
+        public IDbConnection Connection()
+        {
+            return HotelContext.Connection();
         }
 
         public IEnumerable<Room> GetAll()
@@ -48,10 +48,9 @@ namespace My_Dapper_Project.Repositories.Implementation
             using (IDbConnection dbConnection = HotelContext.Connection())
             {
                 string query = @"Update Rooms
-                Set HotelId = @HotelId,
-                RoomTypeId = @RoomTypeId,
-                Number = @Number,
-                RoomStatus = @RoomStatus,
+                Set RoomTypeId = @RoomTypeId,
+                RoomNumber = @RoomNumber,
+                RoomStatus = @RoomStatus
                 where Id = @Id";
                 dbConnection.Execute(query, room);
             }

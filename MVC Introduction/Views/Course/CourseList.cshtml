@@ -1,0 +1,15 @@
+@{
+    ViewData["Title"] = "Course List";
+}
+@model List<Course>;
+
+<div class="text-center">
+    <h3>@ViewData["Title"]</h3>
+    <ul>
+        @foreach (var course in Model)
+        {
+            <li>@course.Name</li>
+            <p>@course.Content</p>
+        }
+    </ul>
+</div>

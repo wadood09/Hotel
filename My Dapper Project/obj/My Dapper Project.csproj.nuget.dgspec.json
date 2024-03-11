@@ -14,7 +14,8 @@
         "outputPath": "c:\\Users\\WADOOD\\OneDrive\\Desktop\\My Dapper Project\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\WADOOD\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\WADOOD\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -32,6 +33,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -42,9 +48,9 @@
               "target": "Package",
               "version": "[2.1.28, )"
             },
-            "Microsoft.Data.SqlClient": {
+            "MySql.Data": {
               "target": "Package",
-              "version": "[5.1.5, )"
+              "version": "[8.3.0, )"
             }
           },
           "imports": [
@@ -53,7 +59,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -62,7 +69,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

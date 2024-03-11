@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using My_Dapper_Project.Entities;
 using My_Dapper_Project.Models.Entities;
 using My_Dapper_Project.Models.Enums;
@@ -14,9 +10,9 @@ namespace My_Dapper_Project.Services.Implementation
     public class BookingService : IBookingService
     {
         IRepository<Booking> repository = new BookingRepository();
-        public void CreateBooking(string hotelName, string hotelId, string roomType, string roomTypeId, bool isRoomService, RoomService? roomService, string roomNumber, string roomId, Status status, int nights, DatePeriod stayPeriod, double price, bool paidService)
+        public void CreateBooking(string hotelName, int hotelId, string roomType, int roomTypeId, bool isRoomService, RoomService? roomService, string roomNumber, int roomId, Status status, int nights, DatePeriod stayPeriod, double price, bool paidService)
         {
-            Booking booking = new()
+            var booking = new Booking
             {
                 Hotel = hotelName,
                 HotelId = hotelId,
@@ -29,7 +25,8 @@ namespace My_Dapper_Project.Services.Implementation
                 CustomerID = Customer.LoggedInCustomerId,
                 CustomerStatus = status,
                 Nights = nights,
-                StayPeriod = stayPeriod,
+                CheckInDate = stayPeriod.Start,
+                CheckOutDate = stayPeriod.End,
                 TotalPriceOfStay = price,
                 PaidService = paidService
             };
@@ -38,12 +35,12 @@ namespace My_Dapper_Project.Services.Implementation
 
         public Booking? Get(Func<Booking, bool> pred)
         {
-            return repository.Get(pred);
+            return repository.GetAll().SingleOrDefault(pred);
         }
 
         public List<Booking> GetSelected(Func<Booking, bool> pred)
         {
-            return repository.GetSelected(pred);
+            return repository.GetAll().Where(pred).ToList();
         }
 
         public void Delete(Booking booking)
@@ -51,54 +48,44 @@ namespace My_Dapper_Project.Services.Implementation
             repository.Remove(booking);
         }
 
-        public void UpdateFile()
-        {
-            repository.RefreshFile();
-        }
-
-        public void UpdateList()
-        {
-            repository.RefreshList();
-        }
 
         public bool ShouldIncreaseStayPeriod(int days, Booking booking)
         {
-            DateTime checkOutDate = booking.StayPeriod.End.AddDays(days);
-            List<Booking> bookings = repository.GetSelected(bookin => bookin.RoomId == booking.RoomId);
-            foreach (Booking booking1 in bookings)
-            {
-                if (booking1 == booking) continue;
-                if (booking1.StayPeriod.WithInRange(checkOutDate))
-                {
-                    return false;
-                }
-            }
-            return true;
+            DateTime newCheckOutDate = booking.CheckOutDate.AddDays(days);
+            bool shouldIncreaseStayPeriod = new();
+            List<Booking> bookings = GetSelected(bookin => bookin.RoomId == booking.RoomId);
+
+            shouldIncreaseStayPeriod = bookings.SkipWhile(bookin => bookin.Id == booking.Id).
+            Select(booking => new DatePeriod(booking.CheckInDate, booking.CheckOutDate))
+            .All(stayPeriod => !stayPeriod.WithInRange(newCheckOutDate));
+            return shouldIncreaseStayPeriod;
         }
 
-        public bool ShouldChangeCheckInTime(int days, Booking booking, out DatePeriod newPeriod)
+        public bool ShouldChangeCheckInTime(int days, Booking booking, out DateTime newCheckInDate, out DateTime newCheckOutDate)
         {
-            DateTime newCheckInDate = DateTime.Today.AddDays(days);
-            DateTime newCheckOutDate = newCheckInDate.AddDays(booking.Nights);
-            newPeriod = new(newCheckInDate, newCheckOutDate);
+            newCheckInDate = DateTime.Today.AddDays(days);
+            newCheckOutDate = newCheckInDate.AddDays(booking.Nights);
+            DatePeriod newPeriod = new(newCheckInDate, newCheckOutDate);
 
-            if (newCheckInDate >= booking.StayPeriod.End) return false;
+            if (newCheckInDate >= booking.CheckOutDate) return false;
 
-            List<Booking> bookings = repository.GetSelected(bookin => bookin.RoomId == booking.RoomId);
-            foreach (Booking booking1 in bookings)
-            {
-                if(booking == booking1) continue;
-                if (booking.StayPeriod.Intersects(newPeriod))
-                {
-                    return false;
-                }
-            }
-            return true;
+            List<Booking> bookings = GetSelected(bookin => bookin.RoomId == booking.RoomId);
+            bool shouldChangeCheckInTime = new();
+
+            shouldChangeCheckInTime = bookings.SkipWhile(bookin => bookin.Id == booking.Id).
+            Select(booking => new DatePeriod(booking.CheckInDate, booking.CheckOutDate))
+            .All(stayPeriod => !stayPeriod.Intersects(newPeriod));
+            return shouldChangeCheckInTime;
         }
 
         public List<Booking> GetAll()
         {
-            return repository.GetAll();
+            return repository.GetAll().ToList();
+        }
+
+        public void Update(Booking booking)
+        {
+            repository.Update(booking);
         }
     }
 }
